@@ -1,0 +1,42 @@
+/* App shell: sidebar, nav, topbar, drawer, layout columns */
+.sidebar{width:var(--sidebar-width);min-width:var(--sidebar-width);background:var(--surface-page);border-right:1px solid var(--border-default);flex-direction:column;height:100%;display:flex;overflow-y:auto}
+.sidebar__brandrow{width:100%;height:var(--topbar-height);border-bottom:1px solid var(--border-default);flex:none}
+.sidebar__brand{width:var(--topbar-height);height:var(--topbar-height);background:var(--primary);place-items:center;display:grid}
+.sidebar__brand img{display:block}
+.sidebar__sections{flex-direction:column;display:flex}
+.nav-group{border-bottom:1px solid var(--border-default)}
+.nav-header{width:100%;min-height:var(--sp-16);justify-content:space-between;align-items:center;gap:var(--sp-3);padding:var(--sp-3) var(--sp-5);text-align:left;color:var(--text-primary);transition:background var(--dur-fast) var(--ease);background:0 0;border:0;display:flex}
+.nav-header:hover{background:var(--surface-inset)}
+.nav-header__label{font:700 var(--fs-3xs)/1.2 var(--font-title);letter-spacing:-.01em}
+.nav-header__chevron{width:14px;height:14px;color:var(--text-tertiary);transition:transform var(--dur-med) var(--ease-out);place-items:center;display:grid;transform:rotate(90deg)}
+.nav-header__chevron--closed{transform:rotate(0)}
+.nav-header--active{background:var(--primary)}
+.nav-header--active:hover{background:var(--primary-hover)}
+.nav-header--active .nav-header__label,.nav-header--active .nav-header__chevron{color:var(--primary-contrast)}
+.nav-children-wrap{max-height:0;transition:max-height var(--dur-med) var(--ease-out);overflow:hidden}
+.nav-children-wrap.open{max-height:240px}
+.nav-children{padding:0 0 var(--sp-6);min-height:0;margin:0;list-style:none;overflow:hidden}
+.nav-child{min-height:var(--sp-8);padding:var(--sp-1) var(--sp-5) var(--sp-1) var(--sp-10);color:var(--text-secondary);font:400 var(--fs-4xs)/1.43 var(--font-body);transition:color var(--dur-fast) var(--ease);align-items:center;display:flex}
+.nav-child:hover{color:var(--text-primary)}
+.nav-child--active{color:var(--primary)}
+.layout{height:100%;display:flex}
+.layout__sidebar{flex:0 0 var(--sidebar-width);height:100%;position:sticky;top:0}
+.layout__main{background:var(--surface-page);flex:auto;min-width:0;height:100%;overflow:hidden auto}
+.topbar{z-index:10;height:var(--topbar-height);align-items:center;gap:var(--sp-4);padding:0 var(--sp-6);background:color-mix(in srgb, var(--surface-page) 88%, transparent);-webkit-backdrop-filter:saturate(180%)blur(8px);backdrop-filter:saturate(180%)blur(8px);border-bottom:1px solid var(--border-default);display:flex;position:sticky;top:0}
+.topbar__spacer{flex:auto}
+.topbar__label{color:var(--text-tertiary);white-space:nowrap}
+.topbar__theme{border:1px solid var(--border-strong);color:var(--text-secondary);border-radius:var(--radius-pill);padding:var(--sp-1) var(--sp-3);font:500 12px/1 var(--font-label);letter-spacing:.06em;text-transform:uppercase;transition:border-color var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);background:0 0}
+.topbar__theme:hover{border-color:var(--primary);color:var(--primary)}
+.topbar__menu{width:40px;height:40px;margin-left:calc(var(--sp-2) * -1);background:0 0;border:0;flex-direction:column;justify-content:center;gap:4px;padding:0 8px;display:none}
+.topbar__menu span{background:var(--text-primary);height:2px;transition:transform var(--dur-med) var(--ease);border-radius:2px;display:block}
+.content{width:100%}
+.drawer{z-index:100;pointer-events:none;visibility:hidden;position:fixed;inset:0}
+.drawer--open{pointer-events:auto;visibility:visible}
+.drawer__scrim{opacity:0;transition:opacity var(--dur-med) var(--ease);background:#060c1080;position:absolute;inset:0}
+.drawer--open .drawer__scrim{opacity:1}
+.drawer__panel{width:100%;transition:transform var(--dur-med) var(--ease-out);position:absolute;inset:0;transform:translate(-100%);box-shadow:0 12px 32px #060c102e}
+.drawer__panel .sidebar{width:100%;min-width:0}
+.drawer__close{z-index:1;width:var(--topbar-height);height:var(--topbar-height);color:var(--text-primary);background:0 0;border:0;place-items:center;display:grid;position:absolute;top:0;right:0}
+.drawer--open .drawer__panel{transform:translate(0)}
+@media (width<=900px){.layout__sidebar{display:none}.topbar__menu{display:flex}}
+@media (width<=480px){.topbar{padding:0 var(--sp-4)}.topbar__theme{display:none}}

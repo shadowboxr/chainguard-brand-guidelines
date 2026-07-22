@@ -1,0 +1,25 @@
+/* Design tokens: color, type, spacing (4px grid), resets, type-scale helpers */
+:root{--neutral-0:#fff;--neutral-50:#fbfbff;--neutral-100:#e7e8e8;--neutral-200:#d0d2d3;--neutral-300:#b7babc;--neutral-400:#9ea2a4;--neutral-500:#7a7e81;--neutral-600:#565c60;--neutral-700:#3d4449;--neutral-800:#192228;--neutral-900:#0d161c;--neutral-950:#060c10;--blurple-50:#f8f6fe;--blurple-100:#f1ecfe;--blurple-200:#c8b6f6;--blurple-300:#c0a8fd;--blurple-400:#9d7af6;--blurple-500:#6226fb;--blurple-600:#4104dd;--blurple-800:#3200af;--blurple-900:#14003d;--blurple-950:#090119;--fuchsia-500:#fd2bf2;--aqua-500:#2bbafd;--lime-500:#04bd13;--solar-500:#fd3964;--amber-500:#f8c222;--orange-500:#f85722;--surface-page:var(--neutral-50);--surface-card:var(--neutral-0);--surface-inset:var(--blurple-50);--surface-raised:var(--neutral-0);--border-default:var(--neutral-100);--border-strong:var(--neutral-200);--border-divider:var(--neutral-100);--text-primary:var(--neutral-900);--text-secondary:var(--neutral-600);--text-tertiary:var(--neutral-500);--text-placeholder:var(--neutral-300);--text-disabled:var(--neutral-300);--text-inverse:var(--neutral-0);--primary:var(--blurple-500);--primary-hover:var(--blurple-600);--primary-contrast:var(--neutral-0);--font-title:"Gellix", system-ui, -apple-system, sans-serif;--font-body:"Gellix", system-ui, -apple-system, sans-serif;--font-label:"Roobert SemiMono", ui-monospace, "SF Mono", Menlo, monospace;--fs-4xs:14px;--fs-3xs:16px;--fs-2xs:18px;--fs-xs:24px;--fs-sm:32px;--fs-md:40px;--fs-lg:48px;--fs-xl:64px;--fs-2xl:72px;--fs-3xl:96px;--fs-4xl:120px;--sp-1:4px;--sp-2:8px;--sp-3:12px;--sp-4:16px;--sp-5:20px;--sp-6:24px;--sp-8:32px;--sp-10:40px;--sp-12:48px;--sp-16:64px;--sp-20:80px;--sp-24:96px;--sidebar-width:300px;--topbar-height:64px;--radius-xs:4px;--radius-sm:8px;--radius-md:12px;--radius-lg:16px;--radius-pill:9999px;--ease:cubic-bezier(.2, .7, .2, 1);--ease-out:cubic-bezier(.16, 1, .3, 1);--dur-fast:.12s;--dur-med:.22s}
+:root[data-theme=dark]{--surface-page:var(--neutral-900);--surface-card:var(--neutral-800);--surface-inset:var(--neutral-950);--surface-raised:var(--neutral-700);--border-default:var(--neutral-700);--border-strong:var(--neutral-600);--border-divider:var(--neutral-800);--text-primary:var(--neutral-0);--text-secondary:var(--neutral-300);--text-tertiary:var(--neutral-400);--text-placeholder:var(--neutral-500);--text-disabled:var(--neutral-600);--text-inverse:var(--neutral-900);--primary:var(--blurple-400);--primary-hover:var(--blurple-300);--primary-contrast:var(--neutral-900)}
+*,:before,:after{box-sizing:border-box}
+html,body,#root{height:100%}
+body{background:var(--surface-page);color:var(--text-primary);font-family:var(--font-body);font-size:var(--fs-3xs);-webkit-font-smoothing:antialiased;text-rendering:optimizelegibility;margin:0;line-height:1.5}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;font-family:inherit}
+::selection{background:var(--blurple-100);color:var(--blurple-900)}
+:root[data-theme=dark] ::selection{background:var(--blurple-800);color:var(--blurple-100)}
+.t-display-lg{font:700 var(--fs-4xl)/1 var(--font-title);letter-spacing:-.03em}
+.t-display{font:700 var(--fs-3xl)/1 var(--font-title);letter-spacing:-.03em}
+.t-hero-lg{font:700 var(--fs-2xl)/1 var(--font-title);letter-spacing:-.03em}
+.t-hero{font:700 var(--fs-xl)/1 var(--font-title);letter-spacing:-.03em}
+.t-hero-sm{font:700 var(--fs-lg)/1 var(--font-title);letter-spacing:-.03em}
+.t-section{font:700 var(--fs-md)/1.2 var(--font-title);letter-spacing:-.03em}
+.t-subsection{font:700 var(--fs-sm)/1.25 var(--font-title);letter-spacing:-.03em}
+.t-card{font:700 var(--fs-xs)/1.33 var(--font-title);letter-spacing:-.03em}
+.t-body-lg{font:400 var(--fs-2xs)/1.33 var(--font-body)}
+.t-body{font:400 var(--fs-3xs)/1.5 var(--font-body)}
+.t-body-sm{font:400 var(--fs-4xs)/1.43 var(--font-body)}
+.t-label{font:500 var(--fs-4xs)/1.43 var(--font-label);letter-spacing:.06em;text-transform:uppercase}
+.t-label-lg{font:500 var(--fs-2xs)/1.78 var(--font-label);letter-spacing:.06em;text-transform:uppercase}
+@media (width<=900px){:root{--fs-4xl:72px;--fs-3xl:72px;--fs-2xl:72px;--fs-xl:48px;--fs-lg:40px;--fs-md:40px;--fs-sm:32px;--fs-xs:24px}}
+@media (width<=600px){:root{--fs-4xl:48px;--fs-3xl:48px;--fs-2xl:48px;--fs-xl:40px;--fs-lg:32px;--fs-md:32px;--fs-sm:24px;--fs-xs:18px}}
