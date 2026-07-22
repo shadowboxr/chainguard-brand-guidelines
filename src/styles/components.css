@@ -50,7 +50,7 @@
 .fvalue__term{font:500 var(--fs-3xs) / 1.4 var(--font-title);color:var(--text-primary)}
 .fvalue__desc{font:400 var(--fs-3xs) / 1.6 var(--font-body);color:var(--text-secondary);text-wrap:pretty;margin:0}
 .fvalue__media{gap:var(--sp-6);grid-template-columns:repeat(2,minmax(0,1fr));display:grid}
-.fvalue__img{aspect-ratio:16/9;background:var(--border-strong)}
+.fvalue__img{aspect-ratio:16/9;background:var(--surface-inset);border:1px solid var(--border-default)}
 .fcards{gap:var(--sp-8);grid-template-columns:repeat(2,minmax(0,1fr));display:grid}
 .fcard{gap:var(--sp-4);flex-direction:column;display:flex}
 .fcard__img{aspect-ratio:16/9;background:var(--surface-inset);border:1px solid var(--border-default)}
@@ -220,7 +220,7 @@
 .tirl{overflow:hidden}
 .tirl__track{overflow:visible;scroll-snap-type:none;scroll-behavior:auto;transition:transform .45s var(--ease-out);will-change:transform}
 .tirl__slide{position:relative;display:grid;place-items:center;gap:var(--sp-2);user-select:none}
-.tirl__ph{font:500 var(--fs-sm)/1 var(--font-label);letter-spacing:.12em;color:var(--text-placeholder)}
+
 .tspec__row[data-font="robotomono"] .tspec__text{font-family:"Roboto Mono"}
 .tspec__text--mono{font:500 16px/1.5 var(--font-label);letter-spacing:.96px;text-transform:uppercase}
 .typo-fonts{display:flex;flex-direction:column;gap:var(--sp-6)}

@@ -107,9 +107,7 @@ export default function Carousel() {
       >
         <div className="tirl__track" ref={trackRef}>
           {SLIDES.map((i) => (
-            <div className="tirl__slide" key={i}>
-              <span className="tirl__ph">{(i < 9 ? "0" : "") + (i + 1)}</span>
-            </div>
+            <div className="tirl__slide" key={i} />
           ))}
         </div>
       </div>
