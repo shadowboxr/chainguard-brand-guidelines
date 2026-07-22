@@ -110,7 +110,7 @@ export default function DocPage({ sections: S, toc: P, ids: M, title: H }) {
                   <button
                     type="button"
                     data-tocid={t.id}
-                    className={"toc__link" + (active === t.id ? " toc__link--active" : "")}
+                    className={"toc__link" + (t.sub ? " toc__link--sub" : "") + (active === t.id ? " toc__link--active" : "")}
                     onClick={() => onTocClick(t.id)}
                   >
                     {t.label}

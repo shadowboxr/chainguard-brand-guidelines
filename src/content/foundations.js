@@ -73,6 +73,8 @@ export const SECTIONS = [
 ];
 
 export const TOC = SECTIONS.flatMap((e) =>
-  e.layout === "stacked" ? e.subs.map((e) => ({ id: e.id, label: e.label })) : [{ id: e.id, label: e.label }]
+  e.layout === "stacked"
+    ? [{ id: e.id, label: e.label }, ...e.subs.map((s) => ({ id: s.id, label: s.label, sub: true }))]
+    : [{ id: e.id, label: e.label }]
 );
 export const IDS = TOC.map((e) => e.id);

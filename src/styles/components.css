@@ -72,6 +72,7 @@
 .toc__indicator{background:var(--primary);width:2px;height:16px;transition:top var(--dur-med) var(--ease-out);position:absolute;top:0;left:-2px}
 .toc__item{display:block}
 .toc__link{text-align:left;min-height:24px;font:500 12px / 1.5 var(--font-label);letter-spacing:.06em;text-transform:uppercase;color:var(--text-disabled);transition:color var(--dur-fast) var(--ease);background:0 0;border:0;padding:0;display:block}
+.toc__link--sub{padding-left:var(--sp-4)}
 .toc__link:hover{color:var(--text-secondary)}
 .toc__link--active{color:var(--primary)}
 @media (width<=1120px){.toc{display:none}}

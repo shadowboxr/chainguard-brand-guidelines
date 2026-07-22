@@ -12,10 +12,10 @@ export const SECTIONS = [
 
 export const TOC = [
   { id: "color", label: "Color" },
-  { id: "scales", label: "Scales" },
-  { id: "themes", label: "Themes" },
-  { id: "print", label: "Print" },
-  { id: "accessibility", label: "Accessibility" },
+  { id: "scales", label: "Scales", sub: true },
+  { id: "themes", label: "Themes", sub: true },
+  { id: "print", label: "Print", sub: true },
+  { id: "accessibility", label: "Accessibility", sub: true },
   { id: "typography", label: "Typography" },
   { id: "design-elements", label: "Design elements" },
   { id: "data-visualization", label: "Data visualization" },
