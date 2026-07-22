@@ -3,6 +3,7 @@ import { NAV } from "./content/nav.js";
 import Layout from "./components/Layout.jsx";
 import Foundations from "./pages/Foundations.jsx";
 import VisualBrand from "./pages/VisualBrand.jsx";
+import Assets from "./pages/Assets.jsx";
 import Stub from "./pages/Stub.jsx";
 import { Doc, Placeholder } from "./pages/Doc.jsx";
 
@@ -22,6 +23,8 @@ export default function App() {
                     <Foundations />
                   ) : section.id === "visual-brand" ? (
                     <VisualBrand />
+                  ) : section.id === "assets" ? (
+                    <Assets />
                   ) : (
                     <Stub title={section.label} />
                   )

@@ -5,6 +5,9 @@ import ColorExtra from "./visual-brand/ColorExtra.jsx";
 import Typography from "./visual-brand/Typography.jsx";
 import DesignElements from "./visual-brand/DesignElements.jsx";
 import DataViz from "./visual-brand/DataViz.jsx";
+import Carousel from "./visual-brand/Carousel.jsx";
+import MisuseGrid from "./assets/MisuseGrid.jsx";
+import LogoVariants from "./assets/LogoVariants.jsx";
 
 export default function Blocks({ blocks }) {
   return (
@@ -22,6 +25,46 @@ export default function Blocks({ blocks }) {
           <DesignElements key={i} />
         ) : block.type === "dataviz" ? (
           <DataViz key={i} />
+        ) : block.type === "logovariants" ? (
+          <LogoVariants key={i} />
+        ) : block.type === "misuses" ? (
+          <MisuseGrid key={i} />
+        ) : block.type === "carousel" ? (
+          <Carousel key={i} />
+        ) : block.type === "subhead" ? (
+          <h3 className="cpal-h3 fanchor" id={block.id} key={i}>
+            {block.label}
+          </h3>
+        ) : block.type === "note" ? (
+          <div className="cpal-note" key={i}>
+            <span className="cpal-note__icon">*</span>
+            <p>{block.text}</p>
+          </div>
+        ) : block.type === "media" ? (
+          <div className="cxph" key={i} />
+        ) : block.type === "mediacards" ? (
+          <div className="amediacards" key={i}>
+            {block.items.map((it, k) => (
+              <div className="amediacard" key={k}>
+                <div className="cxph" />
+                {it.caption && <p className="fsplit__desc">{it.caption}</p>}
+              </div>
+            ))}
+          </div>
+        ) : block.type === "split" ? (
+          <div className="fsplit" key={i}>
+            {block.rows.map((r, k) => (
+              <div className="fsplit__row" key={k}>
+                <div className={"fsplit__side" + (r.desc ? " fsplit__side--tall" : "")}>
+                  <h4 className="fsplit__label">{r.label}</h4>
+                  {r.desc && <p className="fsplit__desc">{r.desc}</p>}
+                </div>
+                <div className="fsplit__main">
+                  {r.media ? <div className="fsplit__media" /> : <p className="fsplit__body">{r.body}</p>}
+                </div>
+              </div>
+            ))}
+          </div>
         ) : block.type === "p" ? (
           <p className="ftext" key={i}>
             {block.text}

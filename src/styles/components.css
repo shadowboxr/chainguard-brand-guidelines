@@ -233,3 +233,33 @@
 .cxph::after,.fsplit__media::after,.tirl__slide::after{content:"In progress";font:500 10px/1.5 var(--font-label);letter-spacing:.6px;text-transform:uppercase;color:var(--text-tertiary)}
 .fcard__img,.fvalue__img{display:grid;place-items:center}
 .fcard__img::after,.fvalue__img::after{content:"In progress";font:500 10px/1.5 var(--font-label);letter-spacing:.6px;text-transform:uppercase;color:var(--text-tertiary)}
+
+/* Assets page — logo variants */
+.alogo{display:flex;flex-direction:column;gap:var(--sp-4);margin-top:var(--sp-4)}
+.alogo__main{height:400px;display:grid;place-items:center;padding:29px 23px;background:var(--surface-card);border:1px solid var(--border-default)}
+.alogo__lockup{width:482px;max-width:80%;height:auto;color:var(--blurple-500)}
+.alogo__variants{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--sp-4)}
+.alogo__variant{aspect-ratio:355/199.5;display:grid;place-items:center;border:1px solid var(--border-default)}
+.alogo__variant--ink{background:#f1ecfe}
+.alogo__variant--dark{background:#6226fb}
+.alogo__mark{width:193px;max-width:56%;height:auto}
+.alogo__mark--ink{color:#0d161c}
+.alogo__mark--white{color:#fff}
+
+/* Assets page — misuses grid */
+.amisuses{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--sp-4);margin-top:var(--sp-4)}
+.amisuse{display:flex;flex-direction:column;gap:var(--sp-4)}
+.amisuse__box{position:relative;aspect-ratio:355/199.5;display:grid;place-items:center;overflow:hidden;padding:14px 11px;background:var(--surface-inset);border:1px solid var(--border-default)}
+.amisuse__logo{position:relative;z-index:1;width:70%;height:auto;color:var(--blurple-500)}
+.amisuse__logo--rotate{transform:rotate(-15deg)}
+.amisuse__logo--recolor{color:var(--fuchsia-500)}
+.amisuse__logo--effects{filter:drop-shadow(0 4px 10px rgba(98,38,251,.55))}
+.amisuse__strike{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none}
+.amisuse__cap{flex:1 1 0;display:flex;align-items:center;margin:0;padding:var(--sp-3);background:var(--surface-card);border:1px solid var(--border-default);font:500 8px/1.5 var(--font-label);letter-spacing:.48px;text-transform:uppercase;color:var(--text-primary)}
+@media (width<=640px){.amisuses{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* Assets page — media card pair (Linky examples) */
+.amediacards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--sp-6);margin-top:var(--sp-4)}
+.amediacard{display:flex;flex-direction:column;gap:var(--sp-4)}
+.amediacard .cxph{min-height:190px}
+@media (width<=640px){.amediacards{grid-template-columns:1fr}}
