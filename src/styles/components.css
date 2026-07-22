@@ -157,6 +157,7 @@
 .typo{display:flex;flex-direction:column;gap:var(--sp-16)}
 .typo .cpal-h3{margin:0}
 .tcard{display:flex;flex-direction:column;gap:var(--sp-6);padding:var(--sp-6);background:var(--surface-card);border:1px solid var(--border-default)}
+.tcard--group{margin-top:var(--sp-10)}
 .tcard__head{display:flex;align-items:center;justify-content:space-between;gap:var(--sp-4)}
 .tcard__name{margin:0;font:700 24px/1.2 var(--font-title);letter-spacing:-.72px;color:var(--text-primary)}
 .tcard__desc{margin:0;font:400 14px/1.5 var(--font-body);color:var(--text-secondary);text-wrap:pretty}

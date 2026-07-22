@@ -265,8 +265,8 @@ export default function Typography() {
         <h4 className="tirl__title">Gellix IRL</h4>
         <Carousel />
 
-        {/* Roobert SemiMono */}
-        <div className="tcard">
+        {/* Roobert SemiMono — 64px break separates it from the Gellix group */}
+        <div className="tcard tcard--group">
           <div className="tcard__head">
             <span className="tcard__name">Roobert Semimono</span>
             <span className="cpal-cat__list">Web font alternative: Roboto Mono</span>
