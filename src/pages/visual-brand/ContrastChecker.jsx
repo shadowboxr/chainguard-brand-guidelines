@@ -36,11 +36,10 @@ function contrast(a, b) {
   const la = lum(a), lb = lum(b);
   return (Math.max(la, lb) + 0.05) / (Math.min(la, lb) + 0.05);
 }
-function tierOf(r) {
-  if (r >= 7) return "AAA 7:1";
-  if (r >= 4.5) return "AA 4.5:1";
-  if (r >= 3) return "AA 3:1";
-  return null;
+// Tier label + the full (unrounded) ratio, e.g. "AAA 8.94:1".
+function wcag(r) {
+  const tier = r >= 7 ? "AAA" : "AA"; // only >=3 pairs are shown
+  return tier + " " + r.toFixed(2) + ":1";
 }
 function rgbOf(hex) {
   return [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16)).join(" ");
@@ -74,7 +73,7 @@ export default function ContrastChecker() {
     return cands
       .map((c) => ({ ...c, ratio: contrast(bg.hex, c.hex) }))
       .filter((c) => c.ratio >= 3)
-      .map((c) => ({ ...c, tier: tierOf(c.ratio) }));
+      .map((c) => ({ ...c, wcag: wcag(c.ratio) }));
   }, [color, bg]);
 
   return (
@@ -184,46 +183,49 @@ function Carousel({ bg, passing }) {
 
   return (
     <div className="cc-carousel">
-      <button type="button" className="cc-arw cc-arw--prev" aria-label="Previous" onClick={() => go(-1)} disabled={!len}>
-        <Chev />
-      </button>
-      <div className="cc-view" ref={viewRef}>
-        <div
-          className="cc-track"
-          ref={trackRef}
-          style={{ transform: `translateX(${offset}px)`, transition: anim ? "transform .4s var(--ease-out)" : "none" }}
-          onTransitionEnd={onEnd}
-        >
-          {items.map((c, i) => {
-            const isCurrent = i === vi;
-            return (
-              <div
-                key={i}
-                className={"cc-chip" + (isCurrent ? " is-current" : "")}
-                style={{ background: bg.hex, color: c.hex }}
-              >
-                Chainguard
-              </div>
-            );
-          })}
+      <div className="cc-strip">
+        <button type="button" className="cc-arw cc-arw--prev" aria-label="Previous" onClick={() => go(-1)} disabled={!len}>
+          <Chev />
+        </button>
+        <div className="cc-view" ref={viewRef}>
+          <div
+            className="cc-track"
+            ref={trackRef}
+            style={{ transform: `translateX(${offset}px)`, transition: anim ? "transform .4s var(--ease-out)" : "none" }}
+            onTransitionEnd={onEnd}
+          >
+            {items.map((c, i) => {
+              const isCurrent = i === vi;
+              return (
+                <div
+                  key={i}
+                  className={"cc-chip" + (isCurrent ? " is-current" : "")}
+                  style={{ background: bg.hex, color: c.hex }}
+                >
+                  Chainguard
+                </div>
+              );
+            })}
+          </div>
         </div>
+        <button type="button" className="cc-arw cc-arw--next" aria-label="Next" onClick={() => go(1)} disabled={!len}>
+          <Chev />
+        </button>
+        <div className="cc-frame" aria-hidden="true" />
       </div>
-      <button type="button" className="cc-arw cc-arw--next" aria-label="Next" onClick={() => go(1)} disabled={!len}>
-        <Chev />
-      </button>
 
       <div className="cc-info">
         <div className="cc-info__row">
           <span className="cc-info__key">Background:</span>
           <span className="cc-swatch" style={{ background: bg.hex }} />
           <span className="cc-info__name">{bg.name + " " + bg.step}</span>
-          <span className="cc-info__wcag">{current ? "WCAG: " + current.tier : "—"}</span>
+          <span className="cc-info__wcag">{current ? "WCAG: " + current.wcag : "—"}</span>
         </div>
         <div className="cc-info__row cc-info__row--text">
           <span className="cc-info__key">Text:</span>
           <span className="cc-swatch" style={{ background: current ? current.hex : "transparent" }} />
           <span className="cc-info__name">{current ? current.name + " " + current.step : "—"}</span>
-          <span className="cc-info__wcag">{current ? "WCAG: " + current.tier : "—"}</span>
+          <span className="cc-info__wcag">{current ? "WCAG: " + current.wcag : "—"}</span>
         </div>
       </div>
     </div>

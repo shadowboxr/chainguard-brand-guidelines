@@ -274,7 +274,7 @@
 .fblocks>.cpal-h3.fanchor:first-child{margin-top:0}
 
 /* Accessibility contrast checker */
-.cc{display:flex;flex-direction:column;gap:var(--sp-8);margin-top:var(--sp-4);padding:var(--sp-6);background:var(--surface-card);border:1px solid var(--border-default)}
+.cc{display:flex;flex-direction:column;gap:var(--sp-8);margin-top:var(--sp-4);padding:var(--sp-6) var(--sp-6) 0;background:var(--surface-card);border:1px solid var(--border-default)}
 .cc__top{display:flex;align-items:center;justify-content:space-between;gap:var(--sp-4)}
 .cc__title{font:500 12px/1 var(--font-label);letter-spacing:.72px;text-transform:uppercase;color:var(--text-tertiary)}
 .cc-dot{width:8px;height:8px;flex:none;border:1px solid var(--border-default)}
@@ -290,10 +290,13 @@
 .cc-drop-opt:hover{background:var(--surface-inset);color:var(--text-primary)}
 /* carousel */
 .cc-carousel{position:relative;display:flex;flex-direction:column;gap:var(--sp-8)}
+/* full-bleed strip: cancels the card padding so chips run off the card edges */
+.cc-strip{position:relative;margin:0 calc(-1 * var(--sp-6))}
 .cc-view{position:relative;overflow:hidden;height:70px}
 .cc-track{display:flex;gap:56px;height:100%;align-items:center;will-change:transform}
-.cc-chip{flex:0 0 152px;height:54px;display:grid;place-items:center;font:700 16px/1 var(--font-title);letter-spacing:-.02em;transition:transform var(--dur-med) var(--ease-out),box-shadow var(--dur-med) var(--ease-out)}
-.cc-chip.is-current{transform:translateY(-6px);box-shadow:0 10px 28px rgba(13,22,28,.18)}
+.cc-chip{flex:0 0 152px;height:54px;display:grid;place-items:center;font:700 16px/1 var(--font-title);letter-spacing:-.02em}
+/* bordered box around the centered item (no shadow, no lift) */
+.cc-frame{position:absolute;left:50%;top:0;transform:translateX(-50%);width:220px;height:70px;border:1px solid var(--border-default);pointer-events:none;z-index:3}
 .cc-arw{position:absolute;top:0;z-index:5;display:grid;place-items:center;width:28px;height:70px;padding:0;background:var(--surface-card);border:1px solid var(--border-default);color:var(--text-primary);cursor:pointer;transition:border-color var(--dur-fast) var(--ease),color var(--dur-fast) var(--ease)}
 .cc-arw:hover{border-color:var(--primary);color:var(--primary)}
 .cc-arw[disabled]{opacity:.35;cursor:default}
@@ -307,9 +310,11 @@
 .cc-swatch{width:8px;height:8px;flex:none;border:1px solid var(--border-default)}
 /* scale (background shuffle) */
 .cc-bar{position:relative;display:flex;height:150px;border:1px solid var(--border-default)}
-.cc-seg{position:relative;flex:1 1 0;min-width:0;cursor:pointer;transition:flex-grow .45s var(--ease-out),transform var(--dur-fast) var(--ease),box-shadow var(--dur-fast) var(--ease)}
+/* segments peek up on hover by growing taller from the bottom, so the column
+   stays filled with color (no white gap underneath the lifted segment). */
+.cc-seg{position:relative;flex:1 1 0;min-width:0;height:100%;cursor:pointer;transition:flex-grow .45s var(--ease-out),height var(--dur-fast) var(--ease),top var(--dur-fast) var(--ease)}
 .cc-seg--current{flex-grow:var(--n1)}
-.cc-seg:not(.cc-seg--current):hover{transform:translateY(-8px);z-index:2;box-shadow:0 8px 18px rgba(13,22,28,.16)}
+.cc-seg:not(.cc-seg--current):hover{top:-8px;height:calc(100% + 8px);z-index:2}
 .cc-seg__num{position:absolute;top:14px;left:12px;font:500 12px/1.25 var(--font-label);letter-spacing:.02em}
 .cc-seg__vals{position:absolute;bottom:16px;left:14px;display:flex;flex-direction:column;align-items:flex-start;gap:2px}
 .cc-row{display:block;margin:0 0 0 -3px;padding:1px 3px;background:0 0;border:0;border-radius:3px;color:inherit;font:500 12px/1.6 var(--font-label);letter-spacing:.02em;text-align:left;cursor:pointer;white-space:nowrap;transition:background var(--dur-fast) var(--ease)}
