@@ -1,72 +1,57 @@
 # Chainguard Brand Guidelines
 
-A self-contained, single-file brand guidelines site. All CSS, JavaScript, and
-fonts are inlined into `index.html` — there is **no build step, no dependencies,
-and no network requests** at runtime. It works offline by opening the file
-directly in a browser.
+The Chainguard brand guidelines site — a Vite + React app that builds to a
+single, self-contained `dist/index.html`. All JS, CSS, and fonts are inlined
+into that one file, so the built output has **no external requests** and works
+offline (open it directly, or serve it anywhere static).
 
-## Contents
+> **Editing:** always edit `src/` and rebuild. Never hand-edit the built file.
+> See [CLAUDE.md](./CLAUDE.md) for the project map and conventions.
 
-| File          | Purpose                                                                 |
-| ------------- | ----------------------------------------------------------------------- |
-| `index.html`  | The entire site (React app + styles + fonts, all inlined).              |
-| `404.html`    | Identical copy of `index.html`. Lets deep links / refresh work on GitHub Pages (see **Routing** below). |
-| `_redirects`  | SPA fallback rule for Netlify / Cloudflare Pages.                       |
-| `.nojekyll`   | Tells GitHub Pages to serve files as-is (no Jekyll processing).         |
-
-## View locally
-
-Just open the file — no server needed:
+## Develop
 
 ```bash
-open index.html
+npm install      # install dependencies
+npm run dev      # local dev server with hot reload
 ```
 
-Or serve it (any static server works):
+## Build
 
 ```bash
-python3 -m http.server 8000   # then visit http://localhost:8000
+npm run build    # emits a single self-contained dist/index.html
+npm run preview  # preview the built file
 ```
 
-Use the **Dark** toggle in the top bar to switch themes. Navigate with the left
-sidebar (Foundation / Visual Brand / …) and the "On this page" rail on the right.
+`dist/index.html` is the portable, offline copy — one file, everything inlined,
+openable via `file://`. It is generated output (gitignored); don't commit it.
 
-## Routing (read before deploying)
+## Structure
 
-The app uses **client-side routing with real paths** (e.g. `/visual-brand`), not
-hash URLs. That means:
+```
+index.html            Vite entry shell (mounts src/main.jsx)
+src/
+  main.jsx            entry — StrictMode + HashRouter + <App/>
+  App.jsx             route definitions
+  content/            all copy/data (nav, foundations, visual-brand)
+  components/         shell components (sidebar, layout, ...)
+  pages/              page layouts + the visual-brand blocks
+  styles/             tokens.css, layout.css, components.css, fonts.css
+  assets/fonts/       the 9 inlined .woff2 files
+```
 
-- Clicking links inside the app always works.
-- Opening or refreshing a deep link (e.g. `.../visual-brand`) requires the host
-  to serve `index.html` for unknown paths. The included `404.html` and
-  `_redirects` handle this.
-- Because routes are **absolute** (`/foundations`), the site must be served from
-  the **domain root**, not a sub-path.
+## Routing
+
+The app uses **hash routing** (e.g. `#/visual-brand`). The server only ever
+serves `/`, so deep links and refreshes work with no rewrite rules or SPA
+fallback config.
 
 ## Deploy
 
-### Easiest — Netlify / Vercel / Cloudflare Pages
-Drag this folder onto the host's dashboard (or connect the repo). Served at root
-with the `_redirects` fallback, everything works with zero config.
+Hosted on **Vercel**, which builds on push to `main`:
 
-### GitHub Pages
-Works cleanly when served from the **root** of a domain:
+- Framework: **Vite**
+- Build command: `npm run build`
+- Output directory: `dist`
 
-- **User/org site:** put these files in a repo named `<username>.github.io`.
-  Enable Pages → served at `https://<username>.github.io/` ✅
-- **Custom domain:** any repo + a custom domain (served at root) ✅
-- **Project page** (`https://<username>.github.io/<repo>/`): the site loads, but
-  the absolute-path routing does **not** work at a sub-path. Use one of the
-  root options above, or a host from the "Easiest" section.
-
-To enable Pages: **Settings → Pages → Source: Deploy from a branch → `main` / root.**
-
-## Editing
-
-`index.html` is a compiled bundle (minified). Content and styles are edited by
-targeted find-and-replace within the file rather than by hand. If you change
-`index.html`, copy it over `404.html` so the fallback stays in sync:
-
-```bash
-cp index.html 404.html
-```
+These are pinned in [`vercel.json`](./vercel.json), so a fresh clone deploys
+with no dashboard configuration.
