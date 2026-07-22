@@ -1,3 +1,5 @@
+import ContrastChecker from "./ContrastChecker.jsx";
+
 function TRow({ label, desc }) {
   return (
     <div className="fsplit__row">
@@ -53,7 +55,7 @@ export default function ColorExtra() {
       <section className="cxsec">
         <h3 id="accessibility" className="cpal-h3 fanchor">Accessibility</h3>
         <p className="cxintro">Our goal is to make our brand accessible to everyone, regardless of ability or device. We follow WCAG AA standards. Use the approved text and background color combinations below to maintain accessible contrast.</p>
-        <div className="cxph"></div>
+        <ContrastChecker />
       </section>
     </div>
   );
