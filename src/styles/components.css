@@ -254,7 +254,7 @@
 .amisuse{display:flex;flex-direction:column;gap:var(--sp-4)}
 .amisuse__box{position:relative;aspect-ratio:355/199.5;display:grid;place-items:center;overflow:hidden;padding:14px 11px;background:var(--surface-inset);border:1px solid var(--border-default)}
 .amisuse__logo{position:relative;z-index:1;width:70%;height:auto;color:var(--blurple-500)}
-.amisuse__logo--rotate{transform:rotate(-15deg)}
+.amisuse__logo--rotate{transform:rotate(-13deg) scale(1.12,1.6)}
 .amisuse__logo--recolor{color:var(--fuchsia-500)}
 .amisuse__logo--effects{filter:drop-shadow(0 4px 10px rgba(98,38,251,.55))}
 .amisuse__strike{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none}
