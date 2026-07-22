@@ -91,6 +91,7 @@
 .cpal{display:flex;flex-direction:column;gap:var(--sp-16)}
 .cpal-sw{position:relative;box-sizing:border-box;display:flex;flex-direction:column;justify-content:space-between;gap:var(--sp-4);padding:29px 23px;border:1px solid var(--border-default);color:#fff;cursor:pointer;overflow:hidden}
 .cpal-sw.is-dark{color:var(--neutral-900)}
+.cpal-sw--hero{aspect-ratio:16/9;height:auto}
 .cpal-name{font:500 10px/1.5 var(--font-label);letter-spacing:.6px;text-transform:uppercase}
 .cpal-rows{display:flex;flex-direction:column;align-items:flex-start;gap:2px}
 .cpal-row{display:block;margin:0 0 0 -3px;padding:1px 3px;background:transparent;border:0;border-radius:3px;color:inherit;font:500 10px/1.6 var(--font-label);letter-spacing:.6px;text-transform:uppercase;text-align:left;cursor:pointer;transition:background var(--dur-fast) var(--ease)}

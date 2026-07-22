@@ -40,11 +40,11 @@ const CATS = [
   },
 ];
 
-function Swatch({ c }) {
+function Swatch({ c, hero }) {
   return (
     <div
-      className={"cpal-sw" + (c.dark ? " is-dark" : "")}
-      style={{ background: c.fill, height: c.h + "px" }}
+      className={"cpal-sw" + (c.dark ? " is-dark" : "") + (hero ? " cpal-sw--hero" : "")}
+      style={hero ? { background: c.fill } : { background: c.fill, height: c.h + "px" }}
       data-copy={c.hex}
       data-label="HEX"
     >
@@ -129,7 +129,7 @@ export default function ColorPalette() {
 
   return (
     <div className="cpal" onMouseMove={onMouseMove} onMouseLeave={onMouseLeave} onClick={onClick}>
-      <Swatch c={{ name: "Blurple", fill: "var(--blurple-500)", h: 300, hex: "#6226FB", rows: blurple.rows }} />
+      <Swatch c={{ name: "Blurple", fill: "var(--blurple-500)", h: 300, hex: "#6226FB", rows: blurple.rows }} hero />
       <section className="cpal-body">
         <h3 className="cpal-h3">We have four color categories:</h3>
         <div className="cpal-cats">
