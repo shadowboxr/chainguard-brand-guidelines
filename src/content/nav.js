@@ -31,5 +31,6 @@ export const NAV = [
       { label: "Templates and tools", path: "/assets", hash: "templates" },
     ],
   },
-  { id: "media-kit", label: "Media Kit", path: "/media-kit" },
+  // External CTA — links out to the marketing site for now.
+  { id: "media-kit", label: "Media Kit", href: "https://www.chainguard.dev" },
 ];

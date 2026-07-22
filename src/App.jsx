@@ -41,7 +41,8 @@ export default function App() {
                     key={child.path}
                   />
                 );
-          } else {
+          } else if (section.path) {
+            // External sections (section.href) have no internal route.
             routes.push(<Route path={section.path} element={<Stub title={section.label} />} key={section.path} />);
           }
           return routes;
