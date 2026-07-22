@@ -186,7 +186,7 @@
 .tdl svg{flex:none;color:var(--text-tertiary);transition:color var(--dur-fast) var(--ease)}
 .tdl:hover{color:var(--primary);border-color:var(--primary)}
 .tdl:hover svg{color:var(--primary)}
-.tirl__title{margin:var(--sp-4) 0 0;font:700 24px/1.2 var(--font-title);letter-spacing:-.72px;color:var(--text-primary)}
+.tirl__title{margin:0;font:700 24px/1.2 var(--font-title);letter-spacing:-.72px;color:var(--text-primary)}
 .tirl{position:relative}
 .tirl__track{display:flex;gap:var(--sp-6);overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none}
 .tirl__track::-webkit-scrollbar{display:none}

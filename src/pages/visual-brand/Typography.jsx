@@ -246,39 +246,42 @@ export default function Typography() {
       <section className="typo-fonts">
         <h3 id="fonts" className="cpal-h3 fanchor">Fonts</h3>
         <p className="cxintro">Our primary font is Gellix, and we use Roobert SemiMono as a secondary accent. To maintain a consistent look, we also have Google font alternatives for use on Docs and slides.</p>
+        {/* Gellix — info card, specimen card, and IRL carousel are separate blocks */}
         <div className="tcard">
           <div className="tcard__head">
             <span className="tcard__name">Gellix</span>
             <span className="cpal-cat__list">Web font alternative: Poppins</span>
           </div>
           <p className="tcard__desc">Gellix is our primary typeface: modern, friendly, and built for clarity. Its geometric forms and balanced proportions make it just as effective in dense technical content as it is in bold, expressive headlines. We use Gellix across every Chainguard touchpoint to maintain consistency and confidence. Heavier weights bring impact to headlines and key statements, while lighter weights create breathing room in longer-form content.</p>
-          <div className="tspec">
-            <TSpecRow row={HEADING_ROW} registerClose={registerClose} closeOthers={closeOthers} />
-            <TSpecRow row={BODY_ROW} registerClose={registerClose} closeOthers={closeOthers} />
-            <div className="tspec__dl">
-              <TDL href="#" label="Download Gellix Family" noop onNoop={onNoop} />
-              <TDL href="https://fonts.google.com/specimen/Poppins" label="Download Poppins" />
-            </div>
-          </div>
-          <h4 className="tirl__title">Gellix IRL</h4>
-          <Carousel />
         </div>
+        <div className="tspec">
+          <TSpecRow row={HEADING_ROW} registerClose={registerClose} closeOthers={closeOthers} />
+          <TSpecRow row={BODY_ROW} registerClose={registerClose} closeOthers={closeOthers} />
+          <div className="tspec__dl">
+            <TDL href="#" label="Download Gellix Family" noop onNoop={onNoop} />
+            <TDL href="https://fonts.google.com/specimen/Poppins" label="Download Poppins" />
+          </div>
+        </div>
+        <h4 className="tirl__title">Gellix IRL</h4>
+        <Carousel />
+
+        {/* Roobert SemiMono */}
         <div className="tcard">
           <div className="tcard__head">
             <span className="tcard__name">Roobert Semimono</span>
             <span className="cpal-cat__list">Web font alternative: Roboto Mono</span>
           </div>
           <p className="tcard__desc">Roobert SemiMono is our secondary typeface; technical, precise, and unmistakably Chainguard. Its semi-monospaced design nods to engineering environments, creating a bridge between clarity and code. We use Roobert SemiMono to highlight technical details, product interfaces, and type accents (like eyebrow text).</p>
-          <div className="tspec">
-            <TSpecRow row={MONO_ROW} registerClose={registerClose} closeOthers={closeOthers} />
-            <div className="tspec__dl">
-              <TDL href="#" label="Download Roobert SemiMono" noop onNoop={onNoop} />
-              <TDL href="https://fonts.google.com/specimen/Roboto+Mono" label="Download Roboto Mono" />
-            </div>
-          </div>
-          <h4 className="tirl__title">Roobert SemiMono IRL</h4>
-          <Carousel />
         </div>
+        <div className="tspec">
+          <TSpecRow row={MONO_ROW} registerClose={registerClose} closeOthers={closeOthers} />
+          <div className="tspec__dl">
+            <TDL href="#" label="Download Roobert SemiMono" noop onNoop={onNoop} />
+            <TDL href="https://fonts.google.com/specimen/Roboto+Mono" label="Download Roboto Mono" />
+          </div>
+        </div>
+        <h4 className="tirl__title">Roobert SemiMono IRL</h4>
+        <Carousel />
       </section>
       <XSec id="hierarchy" title="Hierarchy" intro="Our bold, modern primary typeface is an important and recognizable element of our brand system. We use Gellix Bold at scale to display headlines with impact and personality, supported by smaller Gellix Regular for body copy.">
         <div className="cpal-note">
