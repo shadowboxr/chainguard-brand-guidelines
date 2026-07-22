@@ -1,9 +1,8 @@
 # Chainguard Brand Guidelines
 
-The Chainguard brand guidelines site — a Vite + React app that builds to a
-single, self-contained `dist/index.html`. All JS, CSS, and fonts are inlined
-into that one file, so the built output has **no external requests** and works
-offline (open it directly, or serve it anywhere static).
+The Chainguard brand guidelines site — a Vite + React app. `npm run build`
+emits a small `dist/index.html` plus hashed, cacheable assets (JS, CSS, and the
+woff2 fonts) under `dist/assets/`. Vercel builds and serves `dist/` on push.
 
 > **Editing:** always edit `src/` and rebuild. Never hand-edit the built file.
 > See [CLAUDE.md](./CLAUDE.md) for the project map and conventions.
@@ -18,12 +17,12 @@ npm run dev      # local dev server with hot reload
 ## Build
 
 ```bash
-npm run build    # emits a single self-contained dist/index.html
-npm run preview  # preview the built file
+npm run build    # emits dist/ (index.html + hashed assets)
+npm run preview  # preview the built site
 ```
 
-`dist/index.html` is the portable, offline copy — one file, everything inlined,
-openable via `file://`. It is generated output (gitignored); don't commit it.
+`dist/` is generated output (gitignored); don't commit it. The fonts are served
+as separate cacheable files under `dist/assets/`, not inlined.
 
 ## Structure
 

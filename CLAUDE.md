@@ -1,9 +1,9 @@
 # Chainguard Brand Guidelines
 
-A single-file Chainguard brand guidelines site, built with Vite + React and
-hash-based routing. `npm run build` inlines all JS, CSS, and fonts into one
-self-contained `dist/index.html` (no external requests, works over `file://`).
-Vercel builds this on push and serves `dist/`.
+The Chainguard brand guidelines site, built with Vite + React and hash-based
+routing. `npm run build` emits `dist/` — a small `index.html` plus hashed,
+cacheable assets (JS, CSS, and the woff2 fonts) under `dist/assets/`. Vercel
+builds this on push and serves `dist/`.
 
 ## The one hard rule
 
@@ -40,8 +40,8 @@ Vite entry shell (`<div id="root">` + the module script) — the real app lives 
 
 - `npm install` — install dependencies
 - `npm run dev` — local dev server with HMR
-- `npm run build` — produce the single-file `dist/index.html`
-- `npm run preview` — preview the built file
+- `npm run build` — produce the built site in `dist/`
+- `npm run preview` — preview the built site
 
 **Run `npm run build` as a check before finishing any task** — the build must
-succeed and emit a single self-contained `dist/index.html`.
+succeed and emit `dist/` (index.html + assets).
