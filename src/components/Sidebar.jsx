@@ -98,10 +98,8 @@ export default function Sidebar({ onNavigate }) {
                 className="nav-header nav-header--cta"
               >
                 <span className="nav-header__label">{section.label}</span>
-                <span className="nav-header__ext" aria-hidden="true">
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                    <path d="M4 10 10 4M5.25 4H10v4.75" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
+                <span className="nav-header__chevron nav-header__chevron--closed">
+                  <Chevron />
                 </span>
               </a>
             </div>
