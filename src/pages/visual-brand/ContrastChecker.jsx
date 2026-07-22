@@ -46,7 +46,7 @@ function rgbOf(hex) {
   return [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16)).join(" ");
 }
 
-const PITCH = 176; // chip width (152) + gap (24)
+const PITCH = 208; // chip width (152) + gap (56)
 const CHIP_W = 152;
 
 export default function ContrastChecker() {
@@ -202,7 +202,7 @@ function Carousel({ bg, passing }) {
                 className={"cc-chip" + (isCurrent ? " is-current" : "")}
                 style={{ background: bg.hex, color: c.hex }}
               >
-                OPEN SOURCE
+                Chainguard
               </div>
             );
           })}
