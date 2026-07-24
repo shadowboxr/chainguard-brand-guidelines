@@ -17,12 +17,13 @@ const SIZES = [
   { label: "Extra small", cols: 32 },
 ];
 
-// Core weight >> accent weight so cores dominate; blurple weights >> secondary
-// so blurple stays primary overall.
+// coreW keeps blurple primary; accentTotal is the hue's TOTAL accent weight
+// (split evenly across its tiers) and is equal for every hue, so no hue's
+// accents overpower another's regardless of how many tiers it has.
 const HUES = [
-  { key: "blurple", label: "Blurple", dot: "#6226FB", core: "b0", accents: ["b1", "b2", "b3", "b4"], coreW: 5, accentW: 1.2 },
-  { key: "fuchsia", label: "Fuchsia", dot: "#FD2BF2", core: "f0", accents: ["f1", "f2"], coreW: 4, accentW: 0.7 },
-  { key: "aqua", label: "Aqua", dot: "#2BBAFD", core: "a0", accents: ["a1", "a2"], coreW: 4, accentW: 0.7 },
+  { key: "blurple", label: "Blurple", dot: "#6226FB", core: "b0", accents: ["b1", "b2", "b3", "b4"], coreW: 6, accentTotal: 2 },
+  { key: "fuchsia", label: "Fuchsia", dot: "#FD2BF2", core: "f0", accents: ["f1", "f2"], coreW: 4, accentTotal: 2 },
+  { key: "aqua", label: "Aqua", dot: "#2BBAFD", core: "a0", accents: ["a1", "a2"], coreW: 4, accentTotal: 2 },
 ];
 
 const EMPTY_RATE = 0.5;
@@ -37,7 +38,7 @@ function genCells(count, activeHues, coreOnly, emptyRate = EMPTY_RATE) {
   const sw = [];
   active.forEach((h) => {
     sw.push({ token: h.core, w: h.coreW });
-    if (!coreOnly) h.accents.forEach((a) => sw.push({ token: a, w: h.accentW }));
+    if (!coreOnly) h.accents.forEach((a) => sw.push({ token: a, w: h.accentTotal / h.accents.length }));
   });
 
   // One guaranteed core per active hue (so Fuchsia / Aqua cores always show).
