@@ -33,6 +33,7 @@ const EMPTY_RATE = 0.5;
 // blurple primary, then shuffles positions.
 function genCells(count, activeHues, coreOnly, emptyRate = EMPTY_RATE) {
   const active = HUES.filter((h) => activeHues[h.key]);
+  if (active.length === 0) return new Array(count).fill(null); // nothing selected
   const filled = Math.min(count, Math.max(active.length, Math.round(count * (1 - emptyRate))));
 
   const sw = [];
@@ -107,7 +108,6 @@ export default function BuildingBlocks() {
   useEffect(() => { regen(); }, [regen]);
 
   const toggle = (key) => {
-    if (key === "blurple") return; // blurple is the always-on base
     setActive((a) => ({ ...a, [key]: !a[key] }));
   };
 
