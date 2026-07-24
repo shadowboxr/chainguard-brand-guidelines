@@ -488,8 +488,10 @@
   .osheet__backdrop{display:block;position:fixed;inset:0;z-index:999;background:rgba(13,22,28,.32);opacity:0;pointer-events:none;transition:opacity .25s var(--ease)}
   .osheet.is-open .osheet__backdrop{opacity:1;pointer-events:auto}
 
-  .osheet__panel{display:flex;flex-direction:column;position:fixed;left:0;right:0;bottom:0;z-index:1000;max-height:90vh;background:var(--surface-card);border-top:1px solid var(--border-default);box-shadow:0 -10px 30px rgba(13,22,28,.22);transform:translateY(101%);transition:transform .28s var(--ease-out)}
-  .osheet.is-open .osheet__panel{transform:translateY(0)}
+  /* Shadow only while open — otherwise the upward shadow bleeds into the
+     viewport bottom once the panel is slid off-screen. */
+  .osheet__panel{display:flex;flex-direction:column;position:fixed;left:0;right:0;bottom:0;z-index:1000;max-height:90vh;background:var(--surface-card);border-top:1px solid var(--border-default);transform:translateY(101%);transition:transform .28s var(--ease-out)}
+  .osheet.is-open .osheet__panel{transform:translateY(0);box-shadow:0 -10px 30px rgba(13,22,28,.22)}
 
   .osheet__head{display:flex;align-items:center;justify-content:space-between;padding:var(--sp-4) var(--sp-5);border-bottom:1px solid var(--border-default)}
   .osheet__title{font:500 11px/1 var(--font-label);letter-spacing:.06em;text-transform:uppercase;color:var(--text-primary)}
