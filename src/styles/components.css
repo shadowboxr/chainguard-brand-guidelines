@@ -166,15 +166,14 @@
 .cxph__label{color:var(--text-tertiary)}
 @media(max-width:640px){.fsplit__row{flex-direction:column;gap:var(--sp-4)}.fsplit__side{width:auto}}
 
-/* Color themes — Light mode palette strip (Figma 54:3415). Decorative only.
-   Bars are collapsed to a thin band and grow to 50% of the box height on hover.
-   Colors are literal light-mode hex (set inline), so the strip never follows
-   the site's dark/light theme. */
-.ctheme{position:relative;aspect-ratio:16/9;display:flex;align-items:flex-start;overflow:hidden;background:#fff;border:1px solid #e7e8e8}
-.ctheme__bar{flex:1 1 0;min-width:0;height:8%;transition:height .55s var(--ease-out)}
-@media (hover:hover){.ctheme:hover .ctheme__bar{height:50%}}
-/* No hover on touch: show the open state so the palette is still visible. */
-@media (hover:none){.ctheme__bar{height:50%}}
+/* Color themes — Light mode palette strip (Figma 54:3415). Same hover behavior
+   as the color scales: 32 equal full-height bars, collapsed (equal) at rest;
+   hovering a bar expands it to ~50% of the width (flex-grow 31 vs the 31 others)
+   while the rest compress. Decorative only — no hex/labels. Colors are literal
+   light-mode hex (inline) so the strip never follows the site's dark/light theme. */
+.ctheme{aspect-ratio:16/9;display:flex;overflow:hidden;background:#fff;border:1px solid #e7e8e8}
+.ctheme__bar{flex:1 1 0;min-width:0;transition:flex-grow .45s var(--ease-out)}
+@media (hover:hover){.ctheme:hover .ctheme__bar:hover{flex-grow:31}}
 @media (prefers-reduced-motion:reduce){.ctheme__bar{transition:none}}
 .typo{display:flex;flex-direction:column;gap:var(--sp-16)}
 .typo .cpal-h3{margin:0}
