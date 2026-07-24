@@ -32,8 +32,8 @@ const PRESETS = [
     feel: "Secure / Resolved",
     cls: "cur-block--confident",
     css:
-      "animation: confident-blink 1.05s steps(1, end) infinite;\n\n" +
-      "@keyframes confident-blink {\n  0%, 66% { opacity: 1; }\n  66.01%, 100% { opacity: 0; }\n}",
+      "animation: confident-blink 1.5s steps(1, end) infinite;\n\n" +
+      "@keyframes confident-blink {\n  0%, 80% { opacity: 1; }\n  80.01%, 100% { opacity: 0; }\n}",
   },
   {
     key: "alert",
@@ -41,8 +41,8 @@ const PRESETS = [
     feel: "Protective / Responsive",
     cls: "cur-block--alert",
     css:
-      "animation: alert-blink 1.05s steps(1, end) infinite;\n\n" +
-      "@keyframes alert-blink {\n  0%, 12%, 22%, 34% { opacity: 1; }\n  13%, 21%, 35%, 100% { opacity: 0; }\n}",
+      "animation: alert-blink 1.2s steps(1, end) infinite;\n\n" +
+      "@keyframes alert-blink {\n  0%, 16%, 32% { opacity: 1; }\n  8%, 24%, 40%, 100% { opacity: 0; }\n}",
   },
 ];
 
