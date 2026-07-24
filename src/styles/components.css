@@ -430,3 +430,50 @@
 /* Scale the cursor diagram down on small cards so the corner controls have room */
 @media (width<=600px){.cur{--cu:15px}}
 @media (width<=400px){.cur{--cu:11px}}
+
+/* ---- Mobile "Options" bottom sheet (Building blocks, Patterns, The Cursor) ---- */
+/* Desktop: the sheet chrome is fully hidden; blocks use their overlay controls. */
+.osheet__trigger,.osheet__backdrop,.osheet__panel{display:none}
+
+@media (width<=600px){
+  /* Hide the scattered overlay controls — the sheet takes over. */
+  .bblocks .bblocks__top,.bblocks .bblocks__bottom,
+  .cur .cur-tl,.cur .cur-tr,.cur .cur-bl,.cur .cur-br{display:none}
+
+  /* Trigger pinned to the bottom-right of the card. */
+  .osheet__trigger{display:inline-flex;align-items:center;gap:6px;position:absolute;bottom:var(--sp-4);right:var(--sp-4);z-index:6;padding:9px 11px;background:var(--surface-card);border:1px solid var(--border-default);font:500 10px/1 var(--font-label);letter-spacing:.06em;text-transform:uppercase;color:var(--text-primary);cursor:pointer}
+  .osheet__gear{display:inline-flex;color:var(--text-tertiary)}
+  .osheet__gear svg{display:block}
+
+  /* Backdrop + panel anchor to the viewport (a true bottom sheet), so a short
+     16:9 card can't clip them and in-sheet dropdowns have room to open. */
+  .osheet__backdrop{display:block;position:fixed;inset:0;z-index:999;background:rgba(13,22,28,.32);opacity:0;pointer-events:none;transition:opacity .25s var(--ease)}
+  .osheet.is-open .osheet__backdrop{opacity:1;pointer-events:auto}
+
+  .osheet__panel{display:flex;flex-direction:column;position:fixed;left:0;right:0;bottom:0;z-index:1000;max-height:90vh;background:var(--surface-card);border-top:1px solid var(--border-default);box-shadow:0 -10px 30px rgba(13,22,28,.22);transform:translateY(101%);transition:transform .28s var(--ease-out)}
+  .osheet.is-open .osheet__panel{transform:translateY(0)}
+
+  .osheet__head{display:flex;align-items:center;justify-content:space-between;padding:var(--sp-4) var(--sp-5);border-bottom:1px solid var(--border-default)}
+  .osheet__title{font:500 11px/1 var(--font-label);letter-spacing:.06em;text-transform:uppercase;color:var(--text-primary)}
+  .osheet__close{display:inline-flex;padding:6px;margin:-6px;background:0 0;border:0;color:var(--text-tertiary);cursor:pointer}
+  .osheet__close svg{display:block}
+
+  /* overflow stays visible so in-sheet dropdown menus (absolute) aren't clipped;
+     content is only a handful of short rows so it never needs to scroll. */
+  .osheet__body{display:flex;flex-direction:column;gap:var(--sp-4);padding:var(--sp-5);overflow:visible;padding-bottom:max(var(--sp-5),env(safe-area-inset-bottom))}
+  .osheet__field{display:flex;align-items:center;gap:var(--sp-4);justify-content:space-between;min-height:32px}
+  .osheet__field--wide{flex-wrap:wrap;align-items:flex-start}
+  .osheet__lbl{font:500 10px/1 var(--font-label);letter-spacing:.06em;text-transform:uppercase;color:var(--text-tertiary);flex:none}
+  .osheet__val{font:500 10px/1 var(--font-label);letter-spacing:.06em;text-transform:uppercase;color:var(--text-primary)}
+  .osheet__toggles{display:flex;flex-wrap:wrap;gap:var(--sp-2);justify-content:flex-end;flex:1 1 auto}
+
+  /* The panel hugs the viewport bottom, so in-sheet menus open upward; the
+     triggers are right-aligned in their rows, so the menus right-align too
+     (keeps wide options like "Extra small" inside the viewport). */
+  .osheet__body .cc-drop-menu{top:auto;bottom:calc(100% + 4px);left:auto;right:0}
+
+  /* In-sheet control sizing: give the slider and buttons full width. */
+  .osheet__field .bb-density{flex:1 1 100%;min-width:0;max-width:none}
+  .osheet__field .bb-btn,.osheet__field .cur-copy{flex:1 1 100%;justify-content:center;padding:12px}
+  .osheet__field--wide .osheet__lbl{margin-top:9px}
+}

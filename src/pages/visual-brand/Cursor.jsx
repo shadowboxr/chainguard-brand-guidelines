@@ -1,4 +1,5 @@
 import { useRef, useState, useCallback, useEffect } from "react";
+import OptionsSheet from "./OptionsSheet.jsx";
 
 /* "The cursor" — interactive blinking-cursor demo (Figma 51:668).
    Pick a color (top-left) and an animation preset (bottom-left); the feel label
@@ -117,6 +118,15 @@ export default function Cursor() {
     copyT.current = window.setTimeout(() => setCopied(false), 1200);
   }, [color, preset]);
 
+  // Defined once, rendered twice (desktop corners + mobile sheet); shared state.
+  const colorDrop = <Dropdown value={color} options={COLORS} onPick={setColorIdx} dot />;
+  const presetDrop = <Dropdown value={preset} options={PRESETS} onPick={setPresetIdx} />;
+  const copyBtn = (
+    <button type="button" className={"cur-copy" + (copied ? " is-copied" : "")} onClick={copyCss}>
+      {copied ? "Copied" : "Copy CSS"}
+    </button>
+  );
+
   return (
     <div className="cur">
       <div className="cur-grid" aria-hidden="true">
@@ -134,18 +144,28 @@ export default function Cursor() {
       {/* keyed so the blink animation restarts cleanly when the preset changes */}
       <div key={preset.key} className={"cur-block " + preset.cls} style={{ background: color.hex }} />
 
-      <div className="cur-tl">
-        <Dropdown value={color} options={COLORS} onPick={setColorIdx} dot />
-      </div>
+      {/* Desktop: controls in the four corners */}
+      <div className="cur-tl">{colorDrop}</div>
       <div className="cur-tr">{preset.feel}</div>
-      <div className="cur-bl">
-        <Dropdown value={preset} options={PRESETS} onPick={setPresetIdx} />
-      </div>
-      <div className="cur-br">
-        <button type="button" className={"cur-copy" + (copied ? " is-copied" : "")} onClick={copyCss}>
-          {copied ? "Copied" : "Copy CSS"}
-        </button>
-      </div>
+      <div className="cur-bl">{presetDrop}</div>
+      <div className="cur-br">{copyBtn}</div>
+
+      {/* Mobile (<=600px): the same controls collapsed into a bottom sheet */}
+      <OptionsSheet>
+        <div className="osheet__field">
+          <span className="osheet__lbl">Color</span>
+          {colorDrop}
+        </div>
+        <div className="osheet__field">
+          <span className="osheet__lbl">Animation</span>
+          {presetDrop}
+        </div>
+        <div className="osheet__field">
+          <span className="osheet__lbl">Feel</span>
+          <span className="osheet__val">{preset.feel}</span>
+        </div>
+        <div className="osheet__field osheet__field--wide">{copyBtn}</div>
+      </OptionsSheet>
     </div>
   );
 }

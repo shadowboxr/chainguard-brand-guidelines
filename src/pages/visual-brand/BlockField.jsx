@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect, useCallback, useMemo } from "react";
+import OptionsSheet from "./OptionsSheet.jsx";
 
 /* Shared block-field engine behind "Building blocks" and "Patterns"
    (Figma 51:2842 / 51:2932). Props:
@@ -173,6 +174,33 @@ export default function BlockField({ autoCycle = false, grid = false, densitySli
   const toggle = (key) => { interact(); setActive((a) => ({ ...a, [key]: !a[key] })); };
   const shuffle = () => { interact(); regenBase(); };
 
+  // Controls are defined once and rendered twice: in the desktop overlay bars
+  // and in the mobile OptionsSheet. Each usage renders its own instance, but the
+  // shared parent state keeps them in sync.
+  const sizeDrop = <Dropdown value={SIZES[sizeIdx]} options={SIZES} onPick={(i) => { interact(); setSizeIdx(i); }} onOpen={interact} />;
+  const densityCtrl = densitySlider ? (
+    <label className="bb-density">
+      <span className="bb-density__label">Density</span>
+      <input type="range" min="0" max="100" value={density} onChange={(e) => setDensity(+e.target.value)} aria-label="Density" />
+    </label>
+  ) : null;
+  const shuffleBtn = <button type="button" className="bb-btn" onClick={shuffle}>Shuffle</button>;
+  const hueToggles = HUES.map((h) => {
+    const on = active[h.key];
+    return (
+      <button type="button" key={h.key} className={"bb-tog" + (on ? " is-on" : "")} style={{ "--tog-color": h.dot }} aria-pressed={on} onClick={() => toggle(h.key)}>
+        <span className="bb-tog__dot" />
+        {h.label}
+      </button>
+    );
+  });
+  const coreToggle = (
+    <button type="button" className={"bb-tog bb-tog--core" + (coreOnly ? " is-on" : "")} aria-pressed={coreOnly} onClick={() => { interact(); setCoreOnly((c) => !c); }}>
+      <span className="bb-tog__dot" />
+      Core Only
+    </button>
+  );
+
   return (
     <div className={"bblocks" + (grid ? " bblocks--grid" : "")} style={grid ? { "--bb-cell": 100 / cols + "%" } : undefined}>
       <div className="bblocks__grid" style={{ gridTemplateColumns: `repeat(${cols},1fr)`, gridTemplateRows: `repeat(${cols},1fr)` }}>
@@ -181,36 +209,36 @@ export default function BlockField({ autoCycle = false, grid = false, densitySli
         ))}
       </div>
 
+      {/* Desktop: controls overlaid on the demo */}
       <div className="bblocks__top">
         <div className="bblocks__topleft">
-          <Dropdown value={SIZES[sizeIdx]} options={SIZES} onPick={(i) => { interact(); setSizeIdx(i); }} onOpen={interact} />
-          {densitySlider && (
-            <label className="bb-density">
-              <span className="bb-density__label">Density</span>
-              <input type="range" min="0" max="100" value={density} onChange={(e) => setDensity(+e.target.value)} aria-label="Density" />
-            </label>
-          )}
+          {sizeDrop}
+          {densityCtrl}
         </div>
-        <button type="button" className="bb-btn" onClick={shuffle}>Shuffle</button>
+        {shuffleBtn}
       </div>
 
       <div className="bblocks__bottom">
-        <div className="bblocks__hues">
-          {HUES.map((h) => {
-            const on = active[h.key];
-            return (
-              <button type="button" key={h.key} className={"bb-tog" + (on ? " is-on" : "")} style={{ "--tog-color": h.dot }} aria-pressed={on} onClick={() => toggle(h.key)}>
-                <span className="bb-tog__dot" />
-                {h.label}
-              </button>
-            );
-          })}
-        </div>
-        <button type="button" className={"bb-tog bb-tog--core" + (coreOnly ? " is-on" : "")} aria-pressed={coreOnly} onClick={() => { interact(); setCoreOnly((c) => !c); }}>
-          <span className="bb-tog__dot" />
-          Core Only
-        </button>
+        <div className="bblocks__hues">{hueToggles}</div>
+        {coreToggle}
       </div>
+
+      {/* Mobile (<=600px): the same controls collapsed into a bottom sheet */}
+      <OptionsSheet onOpen={interact}>
+        <div className="osheet__field">
+          <span className="osheet__lbl">Size</span>
+          {sizeDrop}
+        </div>
+        {densitySlider && <div className="osheet__field osheet__field--wide">{densityCtrl}</div>}
+        <div className="osheet__field osheet__field--wide">
+          <span className="osheet__lbl">Color</span>
+          <div className="osheet__toggles">
+            {hueToggles}
+            {coreToggle}
+          </div>
+        </div>
+        <div className="osheet__field osheet__field--wide">{shuffleBtn}</div>
+      </OptionsSheet>
     </div>
   );
 }
