@@ -171,7 +171,9 @@
    hovering a bar expands it to ~50% of the width (flex-grow 31 vs the 31 others)
    while the rest compress. Decorative only — no hex/labels. Colors are literal
    light-mode hex (inline) so the strip never follows the site's dark/light theme. */
-.ctheme{aspect-ratio:16/9;display:flex;overflow:hidden;background:#fff;border:1px solid #e7e8e8}
+/* Bar/cell colors are fixed to their mode, but the outer frame border follows
+   the site theme (light/dark) like the other cards. */
+.ctheme{aspect-ratio:16/9;display:flex;overflow:hidden;background:#fff;border:1px solid var(--border-default)}
 /* Dark variant: ink backdrop so any sub-pixel seams blend with the dark bars. */
 .ctheme--dark{background:#0d161c}
 .ctheme__bar{flex:1 1 0;min-width:0;transition:flex-grow .45s var(--ease-out)}
@@ -180,13 +182,13 @@
 
 /* Color themes — Monochromatic tone-on-tone (Figma 56:3698). Static demo:
    3 hue rows x (light bg, dark bg) tone-on-tone cells. Colors set inline. */
-.cmono{aspect-ratio:16/9;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,1fr);overflow:hidden;border:1px solid #e7e8e8;container-type:inline-size}
-.cmono__cell{display:flex;align-items:center;padding-left:5cqi;min-width:0}
-.cmono__cell span{font:700 clamp(10px,3.35cqi,16px)/1.05 var(--font-title);letter-spacing:-.02em;white-space:nowrap}
+.cmono{aspect-ratio:16/9;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,1fr);overflow:hidden;border:1px solid var(--border-default);container-type:inline-size}
+.cmono__cell{display:flex;align-items:center;justify-content:center;padding:0 3cqi;min-width:0}
+.cmono__cell span{text-align:center;font:700 clamp(11px,3.9cqi,19px)/1.05 var(--font-title);letter-spacing:-.02em;white-space:nowrap}
 
 /* Color themes — Blurple core drench (Figma 56:3715). Static demo. */
-.cdrench{aspect-ratio:16/9;display:grid;place-items:center;overflow:hidden;background:#6226fb;border:1px solid #6226fb;container-type:inline-size}
-.cdrench span{max-width:80cqi;text-align:center;color:#fff;font:700 clamp(15px,6.7cqi,34px)/1.12 var(--font-title);letter-spacing:-.03em;text-wrap:balance}
+.cdrench{aspect-ratio:16/9;display:grid;place-items:center;overflow:hidden;background:#6226fb;border:1px solid var(--border-default);container-type:inline-size}
+.cdrench span{max-width:82cqi;text-align:center;color:#fff;font:700 clamp(16px,7.4cqi,38px)/1.12 var(--font-title);letter-spacing:-.03em;text-wrap:balance}
 .typo{display:flex;flex-direction:column;gap:var(--sp-16)}
 .typo .cpal-h3{margin:0}
 .tcard{display:flex;flex-direction:column;gap:var(--sp-6);padding:var(--sp-6);background:var(--surface-card);border:1px solid var(--border-default)}

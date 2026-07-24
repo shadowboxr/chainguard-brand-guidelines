@@ -39,6 +39,8 @@ const DARK_BARS = [
   "#f85722", "#65220b",
 ];
 
+import { nameFor } from "./paletteNames.js";
+
 const THEMES = { light: LIGHT_BARS, dark: DARK_BARS };
 
 export default function ColorThemeBars({ mode = "light" }) {
@@ -46,7 +48,7 @@ export default function ColorThemeBars({ mode = "light" }) {
   return (
     <div className={"ctheme ctheme--" + mode} style={{ "--ct-grow": bars.length - 1 }} aria-hidden="true">
       {bars.map((hex, i) => (
-        <div key={i} className="ctheme__bar" style={{ background: hex }} />
+        <div key={i} className="ctheme__bar" style={{ background: hex }} data-cname={nameFor(hex)} />
       ))}
     </div>
   );

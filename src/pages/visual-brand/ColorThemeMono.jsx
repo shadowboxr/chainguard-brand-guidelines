@@ -10,6 +10,8 @@ const ROWS = [
   { light: { bg: "#f2fdf2", fg: "#108000" }, dark: { bg: "#083e00", fg: "#04bd13" } }, // Lime
 ];
 
+import { nameFor } from "./paletteNames.js";
+
 const LABEL = "Prevent AI attacks";
 
 export default function ColorThemeMono() {
@@ -17,8 +19,8 @@ export default function ColorThemeMono() {
     <div className="cmono" aria-hidden="true">
       {ROWS.flatMap((r, i) =>
         [r.light, r.dark].map((c, j) => (
-          <div className="cmono__cell" key={i + "-" + j} style={{ background: c.bg, color: c.fg }}>
-            <span>{LABEL}</span>
+          <div className="cmono__cell" key={i + "-" + j} style={{ background: c.bg, color: c.fg }} data-cname={nameFor(c.bg)}>
+            <span data-cname={nameFor(c.fg)}>{LABEL}</span>
           </div>
         ))
       )}

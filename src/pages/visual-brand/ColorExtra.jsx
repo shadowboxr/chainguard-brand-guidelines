@@ -1,3 +1,4 @@
+import { useRef, useState, useCallback } from "react";
 import ContrastChecker from "./ContrastChecker.jsx";
 import ColorThemeBars from "./ColorThemeBars.jsx";
 import ColorThemeMono from "./ColorThemeMono.jsx";
@@ -35,17 +36,33 @@ function PRow({ label, items }) {
 }
 
 export default function ColorExtra() {
+  const tipRef = useRef(null);
+  const [tip, setTip] = useState({ text: "", on: false });
+
+  // Cursor-following callout that names the color under the pointer, reusing the
+  // copy-hex tooltip style. Elements carry data-cname (e.g. "Blurple 500").
+  const onTipMove = useCallback((ev) => {
+    const t = tipRef.current;
+    if (t) { t.style.left = ev.clientX + "px"; t.style.top = ev.clientY + "px"; }
+    const el = ev.target.closest && ev.target.closest("[data-cname]");
+    const name = el && el.getAttribute("data-cname");
+    if (name) setTip({ text: name, on: true });
+    else setTip((s) => (s.on ? { ...s, on: false } : s));
+  }, []);
+  const onTipLeave = useCallback(() => setTip((s) => (s.on ? { ...s, on: false } : s)), []);
+
   return (
     <div className="cextra">
       <section className="cxsec">
         <h3 id="themes" className="cpal-h3 fanchor">Color themes</h3>
         <p className="cxintro">Our expanded palette gives our brand flexibility without losing consistency. The tints and shades create a spectrum of color that is both useful for dark/light mode, and modern monochromatic design. We group our colors into “themes” so that this expanded use of color stays consistent.</p>
-        <div className="fsplit">
+        <div className="fsplit" onMouseMove={onTipMove} onMouseLeave={onTipLeave}>
           <TRow label="Light mode" desc="This is our core color theme. It allows us to lead with bold Ink type, supported by our blocks in full color, and accents in the Light and Air tints." media={<ColorThemeBars />} />
           <TRow label="Dark mode" desc="Our dark mode variation creates a sleek, modern look that reflects the dark mode many of our engineers prefer to work in. Dark mode relies on bold white type, and our dark and deep color shades." media={<ColorThemeBars mode="dark" />} />
           <TRow label="Monochromatic tone-on-tone" desc="Can be used in light blurple, fuschia, and aqua; or dark blurple, fuschia, and aqua; for when you’d like to give visual variety to a repeatable system (examples include webinar meta images or book covers)." media={<ColorThemeMono />} />
           <TRow label="Blurple core" desc="This color-drench option emphasizes our core color, and creates a very bold look for impactful statements and advertising opportunities." media={<ColorThemeBlurple />} />
         </div>
+        <div className={"cpal-tip" + (tip.on ? " is-on" : "")} aria-hidden="true" ref={tipRef}>{tip.text}</div>
       </section>
       <section className="cxsec">
         <h3 id="print" className="cpal-h3 fanchor">Print</h3>
