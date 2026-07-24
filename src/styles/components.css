@@ -411,3 +411,18 @@
 .hl-cursor{flex:none;width:calc(var(--u)*7.34);height:var(--hl-h);background:var(--primary);animation:cursor-blink 1.1s steps(1,end) infinite}
 .hl-measure{position:absolute;top:0;left:0;visibility:hidden;pointer-events:none;display:flex;flex-direction:column}
 @media (prefers-reduced-motion:reduce){.hl-cursor{animation:none}}
+
+/* ---- Design-element controls: responsive on small cards ---- */
+/* Let the overlay control bars wrap instead of overflowing the card. */
+.vgrid__top,.cc__top,.bblocks__top,.bblocks__bottom,.bblocks__hues,.bblocks__topleft{flex-wrap:wrap;row-gap:var(--sp-2)}
+/* Density slider can shrink (prefers ~220px, down to ~120px). */
+.bb-density{flex:1 1 220px;min-width:120px;max-width:280px}
+@media (width<=600px){
+  /* Compact the pills so the same system still fits on small screens. */
+  .cc-drop,.bb-btn,.bb-tog,.cur-copy{padding:8px 9px}
+  .cc-drop,.bb-btn,.bb-tog,.cur-copy,.cur-tr,.cc__title,.vgrid__label{font-size:10px}
+  .bb-tog{gap:6px}
+  .vgrid__top,.cc__top,.bblocks__top,.bblocks__bottom,.bblocks__hues{gap:var(--sp-2)}
+  .bb-density{flex:1 1 100px;min-width:90px;height:32px;padding:0 var(--sp-3)}
+  .bb-dot,.cc-dot,.bb-tog__dot{width:7px;height:7px}
+}
