@@ -182,12 +182,12 @@
 
 /* Color themes — Monochromatic tone-on-tone (Figma 56:3698). Static demo:
    3 hue rows x (light bg, dark bg) tone-on-tone cells. Colors set inline. */
-.cmono{aspect-ratio:16/9;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,1fr);overflow:hidden;border:1px solid var(--border-default);container-type:inline-size}
+.cmono{aspect-ratio:16/9;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,1fr);overflow:hidden;border:1px solid var(--border-default);container-type:inline-size;cursor:default;user-select:none}
 .cmono__cell{display:flex;align-items:center;justify-content:center;padding:0 3cqi;min-width:0}
 .cmono__cell span{text-align:center;font:700 clamp(11px,3.9cqi,19px)/1.05 var(--font-title);letter-spacing:-.02em;white-space:nowrap}
 
 /* Color themes — Blurple core drench (Figma 56:3715). Static demo. */
-.cdrench{aspect-ratio:16/9;display:grid;place-items:center;overflow:hidden;background:#6226fb;border:1px solid var(--border-default);container-type:inline-size}
+.cdrench{aspect-ratio:16/9;display:grid;place-items:center;overflow:hidden;background:#6226fb;border:1px solid var(--border-default);container-type:inline-size;cursor:default;user-select:none}
 .cdrench span{max-width:82cqi;text-align:center;color:#fff;font:700 clamp(16px,7.4cqi,38px)/1.12 var(--font-title);letter-spacing:-.03em;text-wrap:balance}
 .typo{display:flex;flex-direction:column;gap:var(--sp-16)}
 .typo .cpal-h3{margin:0}
