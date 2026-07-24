@@ -401,7 +401,7 @@
 @media (prefers-reduced-motion:reduce){.chl__cursor{animation:none}}
 
 /* Typography — "The highlight" typewriter reveal */
-.hl{position:relative;container-type:inline-size;aspect-ratio:16/9;background:var(--surface-inset);border:1px solid var(--border-default);overflow:hidden;padding:5.2cqw;display:flex;flex-direction:column;align-items:flex-start;--hl-dur:.6s;--hl-bg:#f1ecfe;--hl-h:14.68cqw}
+.hl{position:relative;container-type:inline-size;aspect-ratio:16/9;background:var(--surface-inset);border:1px solid var(--border-default);overflow:hidden;padding:5.2cqw;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;--hl-dur:.6s;--hl-bg:#f1ecfe;--hl-h:14.68cqw}
 :root[data-theme=dark] .hl{--hl-bg:#14003d}
 .hl.is-fast{--hl-dur:.32s}
 .hl-row{display:flex;align-items:center;height:var(--hl-h)}
