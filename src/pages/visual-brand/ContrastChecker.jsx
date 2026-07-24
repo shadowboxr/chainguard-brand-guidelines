@@ -41,10 +41,6 @@ function wcag(r) {
   const tier = r >= 7 ? "AAA" : "AA"; // only >=3 pairs are shown
   return tier + " " + r.toFixed(2) + ":1";
 }
-function rgbOf(hex) {
-  return [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16)).join(" ");
-}
-
 const PITCH = 208; // chip width (152) + gap (56)
 const CHIP_W = 152;
 
@@ -183,6 +179,7 @@ function Carousel({ bg, passing }) {
 
   return (
     <div className="cc-carousel">
+      <div className="cc-wcag">{current ? "WCAG: " + current.wcag : "—"}</div>
       <div className="cc-strip">
         <button type="button" className="cc-arw cc-arw--prev" aria-label="Previous" onClick={() => go(-1)} disabled={!len}>
           <Chev />
@@ -214,31 +211,18 @@ function Carousel({ bg, passing }) {
         <div className="cc-frame" aria-hidden="true" />
       </div>
 
-      <div className="cc-info">
-        <div className="cc-info__row">
-          <span className="cc-info__key">Background:</span>
-          <span className="cc-swatch" style={{ background: bg.hex }} />
-          <span className="cc-info__name">{bg.name + " " + bg.step}</span>
-          <span className="cc-info__wcag">{current ? "WCAG: " + current.wcag : "—"}</span>
-        </div>
-        <div className="cc-info__row cc-info__row--text">
-          <span className="cc-info__key">Text:</span>
-          <span className="cc-swatch" style={{ background: current ? current.hex : "transparent" }} />
-          <span className="cc-info__name">{current ? current.name + " " + current.step : "—"}</span>
-          <span className="cc-info__wcag">{current ? "WCAG: " + current.wcag : "—"}</span>
-        </div>
-      </div>
+      <CopyInfo bg={bg} text={current} />
     </div>
   );
 }
 
-function ScaleBar({ color, bgStep, onPick }) {
-  const barRef = useRef(null);
+// Background / Text identity rows. Hovering a whole row shows a "Copy HEX"
+// tooltip; clicking anywhere on the row copies that color's hex.
+function CopyInfo({ bg, text }) {
   const tipRef = useRef(null);
   const copiedRef = useRef(false);
   const revertRef = useRef(0);
   const [tip, setTip] = useState({ text: "", on: false });
-  const n1 = color.scale.length - 1;
 
   const positionTip = (x, y) => {
     const t = tipRef.current;
@@ -248,14 +232,16 @@ function ScaleBar({ color, bgStep, onPick }) {
     positionTip(ev.clientX, ev.clientY);
     if (copiedRef.current) return;
     const el = ev.target.closest && ev.target.closest("[data-copy]");
-    if (el && ev.currentTarget.contains(el)) setTip({ text: "Copy " + (el.getAttribute("data-label") || "HEX"), on: true });
+    if (el && ev.currentTarget.contains(el)) setTip({ text: "Copy HEX", on: true });
     else setTip((s) => (s.on ? { ...s, on: false } : s));
   }, []);
   const onLeave = useCallback(() => {
     if (!copiedRef.current) setTip((s) => (s.on ? { ...s, on: false } : s));
   }, []);
-  const onCopy = useCallback((ev, val) => {
-    ev.stopPropagation();
+  const onClick = useCallback((ev) => {
+    const el = ev.target.closest && ev.target.closest("[data-copy]");
+    if (!el || !ev.currentTarget.contains(el)) return;
+    const val = el.getAttribute("data-copy");
     try { if (navigator.clipboard) navigator.clipboard.writeText(val); } catch (e) {}
     positionTip(ev.clientX, ev.clientY);
     setTip({ text: "Copied", on: true });
@@ -265,29 +251,37 @@ function ScaleBar({ color, bgStep, onPick }) {
   }, []);
 
   return (
-    <div className="cc-bar" ref={barRef} style={{ "--n1": n1 }} onMouseMove={onMove} onMouseLeave={onLeave}>
-      {color.scale.map(([step, hex]) => {
-        const current = step === bgStep;
-        return (
-          <div
-            key={step}
-            className={"cc-seg" + (current ? " cc-seg--current" : "")}
-            style={{ background: hex }}
-            data-copy={hex}
-            data-label="HEX"
-            onClick={() => onPick(step)}
-          >
-            <span className="cc-seg__num" style={{ color: lum(hex) > 0.5 ? "var(--neutral-900)" : "#fff" }}>{step}</span>
-            {current ? (
-              <div className="cc-seg__vals" style={{ color: lum(hex) > 0.5 ? "var(--neutral-900)" : "#fff" }}>
-                <button type="button" className="cc-row" data-copy={hex} data-label="HEX" onClick={(e) => onCopy(e, hex)}>{"HEX: " + hex}</button>
-                <button type="button" className="cc-row" data-copy={rgbOf(hex)} data-label="RGB" onClick={(e) => onCopy(e, rgbOf(hex))}>{"RGB: " + rgbOf(hex)}</button>
-              </div>
-            ) : null}
-          </div>
-        );
-      })}
+    <div className="cc-info" onMouseMove={onMove} onMouseLeave={onLeave} onClick={onClick}>
+      <button type="button" className="cc-info__row" data-copy={bg.hex}>
+        <span className="cc-info__key">Background:</span>
+        <span className="cc-swatch" style={{ background: bg.hex }} />
+        <span className="cc-info__name">{bg.name + " " + bg.step}</span>
+      </button>
+      <button type="button" className="cc-info__row cc-info__row--text" data-copy={text ? text.hex : ""}>
+        <span className="cc-info__key">Text:</span>
+        <span className="cc-swatch" style={{ background: text ? text.hex : "transparent" }} />
+        <span className="cc-info__name">{text ? text.name + " " + text.step : "—"}</span>
+      </button>
       <div className={"cpal-tip" + (tip.on ? " is-on" : "")} aria-hidden="true" ref={tipRef}>{tip.text}</div>
+    </div>
+  );
+}
+
+// Background shuffle: click a step to set it as the background. No copy here.
+function ScaleBar({ color, bgStep, onPick }) {
+  const n1 = color.scale.length - 1;
+  return (
+    <div className="cc-bar" style={{ "--n1": n1 }}>
+      {color.scale.map(([step, hex]) => (
+        <div
+          key={step}
+          className={"cc-seg" + (step === bgStep ? " cc-seg--current" : "")}
+          style={{ background: hex }}
+          onClick={() => onPick(step)}
+        >
+          <span className="cc-seg__num" style={{ color: lum(hex) > 0.5 ? "var(--neutral-900)" : "#fff" }}>{step}</span>
+        </div>
+      ))}
     </div>
   );
 }

@@ -303,19 +303,17 @@
 .cc-arw--prev{left:calc(50% - 110px);transform:scaleX(-1)}
 .cc-arw--next{left:calc(50% + 82px)}
 /* info row */
+.cc-wcag{text-align:center;font:500 12px/1.33 var(--font-label);letter-spacing:.06em;text-transform:uppercase;color:var(--text-secondary)}
 .cc-info{display:flex;flex-direction:column;gap:var(--sp-1);align-items:center}
-.cc-info__row{display:flex;align-items:center;gap:var(--sp-2);font:500 12px/1.33 var(--font-label);letter-spacing:.06em;text-transform:uppercase;color:var(--text-primary)}
+.cc-info__row{display:flex;align-items:center;gap:var(--sp-2);padding:var(--sp-1) var(--sp-2);background:0 0;border:0;font:500 12px/1.33 var(--font-label);letter-spacing:.06em;text-transform:uppercase;color:var(--text-primary);cursor:pointer;border-radius:var(--radius-xs);transition:background var(--dur-fast) var(--ease)}
+.cc-info__row:hover{background:var(--surface-inset)}
 .cc-info__key{color:var(--text-secondary)}
-.cc-info__wcag{margin-left:var(--sp-4);color:var(--text-secondary)}
 .cc-swatch{width:8px;height:8px;flex:none;border:1px solid var(--border-default)}
 /* scale (background shuffle) */
-.cc-bar{position:relative;display:flex;height:150px;border:1px solid var(--border-default);overflow:hidden}
+.cc-bar{position:relative;display:flex;height:100px;border:1px solid var(--border-default);overflow:hidden}
 /* Hover widens the segment (same idea as the color scales) so it stays fully
    inside the bar; the column stays filled and the step number doesn't move. */
 .cc-seg{position:relative;flex:1 1 0;min-width:0;height:100%;cursor:pointer;transition:flex-grow .3s var(--ease-out)}
 .cc-seg--current{flex-grow:var(--n1)}
 .cc-seg:not(.cc-seg--current):hover{flex-grow:2.4;z-index:2}
 .cc-seg__num{position:absolute;top:14px;left:12px;font:500 12px/1.25 var(--font-label);letter-spacing:.02em}
-.cc-seg__vals{position:absolute;bottom:16px;left:14px;display:flex;flex-direction:column;align-items:flex-start;gap:2px}
-.cc-row{display:block;margin:0 0 0 -3px;padding:1px 3px;background:0 0;border:0;border-radius:3px;color:inherit;font:500 12px/1.6 var(--font-label);letter-spacing:.02em;text-align:left;cursor:pointer;white-space:nowrap;transition:background var(--dur-fast) var(--ease)}
-.cc-row:hover{background:rgba(255,255,255,.18)}
