@@ -352,3 +352,21 @@
 .vgrid__top{position:absolute;top:var(--sp-6);left:var(--sp-6);right:var(--sp-6);z-index:5;display:flex;align-items:center;justify-content:space-between;gap:var(--sp-4)}
 .vgrid__label{font:500 12px/1 var(--font-label);letter-spacing:.06em;text-transform:uppercase;color:var(--text-tertiary)}
 @media (prefers-reduced-motion:reduce){.vgrid{transition:none}}
+
+/* Design elements — "Building blocks" */
+.bblocks{position:relative;aspect-ratio:1/1;margin-top:var(--sp-4);background:var(--surface-inset);border:1px solid var(--border-default);overflow:hidden;
+  --bb-b0:#6226FB;--bb-b1:#9D7AF6;--bb-b2:#C0A8FD;--bb-b3:#C8B6F6;--bb-b4:#F1ECFE;
+  --bb-f0:#FDDFFC;--bb-f1:#FEF5FE;--bb-a0:#DFF4FE;--bb-a1:#F5FCFF}
+:root[data-theme=dark] .bblocks{
+  --bb-b0:#6226FB;--bb-b1:#4104DD;--bb-b2:#3200AF;--bb-b3:#14003D;--bb-b4:#090119;
+  --bb-f0:#A10099;--bb-f1:#480044;--bb-a0:#006A97;--bb-a1:#003247}
+.bblocks__grid{position:absolute;inset:0;display:grid}
+.bb-cell{transition:background-color .45s var(--ease)}
+.bblocks__top{position:absolute;top:var(--sp-6);left:var(--sp-6);right:var(--sp-6);z-index:5;display:flex;align-items:center;justify-content:space-between;gap:var(--sp-4)}
+.bblocks__bottom{position:absolute;bottom:var(--sp-6);left:var(--sp-6);right:var(--sp-6);z-index:5;display:flex;align-items:center;gap:var(--sp-4)}
+.bb-btn{display:inline-flex;align-items:center;padding:11px;background:var(--surface-card);border:1px solid var(--border-default);font:500 12px/1 var(--font-label);letter-spacing:.06em;text-transform:uppercase;color:var(--text-primary);cursor:pointer;transition:border-color var(--dur-fast) var(--ease),color var(--dur-fast) var(--ease)}
+.bb-btn:hover{border-color:var(--primary);color:var(--primary)}
+.bb-tog{display:inline-flex;align-items:center;gap:var(--sp-2);padding:11px;background:var(--surface-card);border:1px solid var(--border-default);font:500 12px/1 var(--font-label);letter-spacing:.06em;text-transform:uppercase;color:var(--text-secondary);cursor:pointer;transition:color var(--dur-fast) var(--ease)}
+.bb-tog.is-on{color:var(--text-primary)}
+.bb-tog__dot{width:8px;height:8px;flex:none;background:var(--border-strong)}
+.bb-tog.is-on .bb-tog__dot{background:var(--tog-color)}
