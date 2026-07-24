@@ -10,7 +10,7 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 export default function Highlight() {
   const rootRef = useRef(null);
-  const hiRefs = useRef([]);
+  const measRefs = useRef([]);
   const [w, setW] = useState([0, 0, 0]); // full pixel width of each line's highlight
   const [prog, setProg] = useState([0, 0, 0]); // 0..1 reveal per line
   const [active, setActive] = useState(0); // which line the cursor sits on
@@ -25,11 +25,13 @@ export default function Highlight() {
     return () => mq.removeEventListener("change", on);
   }, []);
 
-  // Measure each line's full width (scrollWidth is stable regardless of the
-  // constrained width). Re-measure on resize since the type scales with the card.
+  // Measure each line's natural width from a hidden, unconstrained copy. Must
+  // run after the web font loads (otherwise the fallback font measures narrow
+  // and the boxes clip); also re-measure on resize since type scales with the card.
   useLayoutEffect(() => {
-    const measure = () => setW(hiRefs.current.map((el) => (el ? el.scrollWidth : 0)));
+    const measure = () => setW(measRefs.current.map((el) => (el ? Math.ceil(el.getBoundingClientRect().width) : 0)));
     measure();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
     const ro = new ResizeObserver(measure);
     if (rootRef.current) ro.observe(rootRef.current);
     return () => ro.disconnect();
@@ -63,12 +65,21 @@ export default function Highlight() {
     <div className={"hl" + (fast ? " is-fast" : "")} ref={rootRef} aria-label="Hardened, secure, production ready">
       {LINES.map((line, i) => (
         <div className="hl-row" key={i}>
-          <div className="hl-hi" ref={(el) => (hiRefs.current[i] = el)} style={{ width: Math.round(w[i] * prog[i]) + "px" }}>
-            <span className="hl-hi__t">{line}</span>
+          <div className="hl-reveal" style={{ width: Math.round(w[i] * prog[i]) + "px" }}>
+            <div className="hl-hi"><span className="hl-hi__t">{line}</span></div>
           </div>
           {active === i && <div className="hl-cursor" />}
         </div>
       ))}
+
+      {/* hidden measurers — natural width of each line for the reveal */}
+      <div className="hl-measure" aria-hidden="true">
+        {LINES.map((line, i) => (
+          <div className="hl-hi" key={i} ref={(el) => (measRefs.current[i] = el)}>
+            <span className="hl-hi__t">{line}</span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
