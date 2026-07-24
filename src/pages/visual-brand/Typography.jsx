@@ -1,6 +1,7 @@
 import { useRef, useState, useCallback, useEffect } from "react";
 import { flushSync } from "react-dom";
 import Carousel from "./Carousel.jsx";
+import CursorBlink from "./CursorBlink.jsx";
 
 const FN = { gellix: "Gellix", poppins: "Poppins", roobert: "Roobert SemiMono", robotomono: "Roboto Mono" };
 
@@ -294,7 +295,15 @@ export default function Typography() {
       <XSec id="capitalization" title="Capitalization" intro="As outlined in our Writing Style Guide, we use sentence case for all of our headlines. We only use capital letters at the start of the sentence, or when mentioning a proper noun like a person, place, company, or product (like Chainguard Containers, or The Guardener). We reserve all-caps for labels, like eyebrow text." />
       <XSec id="cursor-highlight" title="The cursor and highlight" intro="Our brand system uses two elements alongside our typeface: the cursor and the highlight.">
         <div className="fsplit">
-          <FMedia label="The cursor" desc="Inspired by a terminal, the cursor grounds eyebrow text elements and other labels. It is an opportunity to introduce our core colors and speak directly to our engineering audience." />
+          <div className="fsplit__row">
+            <div className="fsplit__side fsplit__side--tall">
+              <h4 className="fsplit__label">The cursor</h4>
+              <p className="fsplit__desc">Inspired by a terminal, the cursor grounds eyebrow text elements and other labels. It is an opportunity to introduce our core colors and speak directly to our engineering audience.</p>
+            </div>
+            <div className="fsplit__main">
+              <CursorBlink />
+            </div>
+          </div>
           <FMedia label="The highlight" desc="The highlight element combines the highlighting capability in a terminal with our building blocks, to create an opportunity for emphasis on a couple words of a headline." />
         </div>
       </XSec>
