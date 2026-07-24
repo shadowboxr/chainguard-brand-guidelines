@@ -1,5 +1,7 @@
 import ContrastChecker from "./ContrastChecker.jsx";
 import ColorThemeBars from "./ColorThemeBars.jsx";
+import ColorThemeMono from "./ColorThemeMono.jsx";
+import ColorThemeBlurple from "./ColorThemeBlurple.jsx";
 
 function TRow({ label, desc, media }) {
   return (
@@ -41,8 +43,8 @@ export default function ColorExtra() {
         <div className="fsplit">
           <TRow label="Light mode" desc="This is our core color theme. It allows us to lead with bold Ink type, supported by our blocks in full color, and accents in the Light and Air tints." media={<ColorThemeBars />} />
           <TRow label="Dark mode" desc="Our dark mode variation creates a sleek, modern look that reflects the dark mode many of our engineers prefer to work in. Dark mode relies on bold white type, and our dark and deep color shades." media={<ColorThemeBars mode="dark" />} />
-          <TRow label="Monochromatic tone-on-tone" desc="Can be used in light blurple, fuschia, and aqua; or dark blurple, fuschia, and aqua; for when you’d like to give visual variety to a repeatable system (examples include webinar meta images or book covers)." />
-          <TRow label="Blurple core" desc="This color-drench option emphasizes our core color, and creates a very bold look for impactful statements and advertising opportunities." />
+          <TRow label="Monochromatic tone-on-tone" desc="Can be used in light blurple, fuschia, and aqua; or dark blurple, fuschia, and aqua; for when you’d like to give visual variety to a repeatable system (examples include webinar meta images or book covers)." media={<ColorThemeMono />} />
+          <TRow label="Blurple core" desc="This color-drench option emphasizes our core color, and creates a very bold look for impactful statements and advertising opportunities." media={<ColorThemeBlurple />} />
         </div>
       </section>
       <section className="cxsec">

@@ -177,6 +177,16 @@
 .ctheme__bar{flex:1 1 0;min-width:0;transition:flex-grow .45s var(--ease-out)}
 @media (hover:hover){.ctheme:hover .ctheme__bar:hover{flex-grow:var(--ct-grow)}}
 @media (prefers-reduced-motion:reduce){.ctheme__bar{transition:none}}
+
+/* Color themes — Monochromatic tone-on-tone (Figma 56:3698). Static demo:
+   3 hue rows x (light bg, dark bg) tone-on-tone cells. Colors set inline. */
+.cmono{aspect-ratio:16/9;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,1fr);overflow:hidden;border:1px solid #e7e8e8;container-type:inline-size}
+.cmono__cell{display:flex;align-items:center;padding-left:5cqi;min-width:0}
+.cmono__cell span{font:700 clamp(10px,3.35cqi,16px)/1.05 var(--font-title);letter-spacing:-.02em;white-space:nowrap}
+
+/* Color themes — Blurple core drench (Figma 56:3715). Static demo. */
+.cdrench{aspect-ratio:16/9;display:grid;place-items:center;overflow:hidden;background:#6226fb;border:1px solid #6226fb;container-type:inline-size}
+.cdrench span{max-width:80cqi;text-align:center;color:#fff;font:700 clamp(15px,6.7cqi,34px)/1.12 var(--font-title);letter-spacing:-.03em;text-wrap:balance}
 .typo{display:flex;flex-direction:column;gap:var(--sp-16)}
 .typo .cpal-h3{margin:0}
 .tcard{display:flex;flex-direction:column;gap:var(--sp-6);padding:var(--sp-6);background:var(--surface-card);border:1px solid var(--border-default)}
