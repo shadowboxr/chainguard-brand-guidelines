@@ -29,7 +29,14 @@ export default function Highlight() {
   // run after the web font loads (otherwise the fallback font measures narrow
   // and the boxes clip); also re-measure on resize since type scales with the card.
   useLayoutEffect(() => {
-    const measure = () => setW(measRefs.current.map((el) => (el ? Math.ceil(el.getBoundingClientRect().width) : 0)));
+    const measure = () => {
+      const root = rootRef.current;
+      if (!root) return;
+      // Drive all sizing off a unit = card width / 100 (design ratios), so the
+      // type scales to the actual card at any screen size.
+      root.style.setProperty("--u", root.getBoundingClientRect().width / 100 + "px");
+      setW(measRefs.current.map((el) => (el ? Math.ceil(el.getBoundingClientRect().width) : 0)));
+    };
     measure();
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
     const ro = new ResizeObserver(measure);
