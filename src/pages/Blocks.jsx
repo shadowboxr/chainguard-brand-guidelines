@@ -8,6 +8,7 @@ import DataViz from "./visual-brand/DataViz.jsx";
 import Carousel from "./visual-brand/Carousel.jsx";
 import MisuseGrid from "./assets/MisuseGrid.jsx";
 import LogoVariants from "./assets/LogoVariants.jsx";
+import StarIcon from "../components/StarIcon.jsx";
 
 export default function Blocks({ blocks }) {
   return (
@@ -37,7 +38,7 @@ export default function Blocks({ blocks }) {
           </h3>
         ) : block.type === "note" ? (
           <div className="cpal-note" key={i}>
-            <span className="cpal-note__icon">*</span>
+            <span className="cpal-note__icon"><StarIcon /></span>
             <p>{block.text}</p>
           </div>
         ) : block.type === "media" ? (

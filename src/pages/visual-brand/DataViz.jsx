@@ -1,4 +1,5 @@
 import Carousel from "./Carousel.jsx";
+import StarIcon from "../../components/StarIcon.jsx";
 
 function FText({ label, text }) {
   return (
@@ -23,29 +24,19 @@ export default function DataViz() {
         <FText label="Create structure" text="Use the grid to clearly organize the data, and make it easy to read, especially when creating longer lists or tables." />
       </div>
       <div className="dnote">
-        <h3 className="dnote__title">Design notes</h3>
-        <div className="fsplit">
-          <div className="fsplit__row">
-            <div className="fsplit__side">
-              <h4 className="fsplit__label">Color</h4>
-            </div>
-            <div className="fsplit__main">
-              <p className="fsplit__body">Data visualizations can be created using our core and secondary colors.</p>
-              <ul className="fsplit__list">
-                <li>Always consider if there is enough contrast between categories of a chart.</li>
-                <li>Simple charts and visualizations (4 categories or less) can be monochromatic, using our tints and shades.</li>
-                <li>When representing data, always reserve the use of Lime/Solar for good/bad, or increase/decrease.</li>
-              </ul>
-            </div>
-          </div>
-          <div className="fsplit__row">
-            <div className="fsplit__side">
-              <h4 className="fsplit__label">Type</h4>
-            </div>
-            <div className="fsplit__main">
-              <p className="fsplit__body">Large-scale stats should always use Gellix Bold. Body copy should be Gellix Regular to ensure legibility. Labels can use Roobert SemiMono.</p>
-            </div>
-          </div>
+        <div className="dnote__head">
+          <span className="cpal-note__icon"><StarIcon /></span>
+          <h3 className="dnote__title">Design notes</h3>
+        </div>
+        <div className="dnote__body">
+          <p className="dnote__line"><strong>Color:</strong> Data visualizations can be created using our core and secondary colors.</p>
+          <ul className="dnote__list">
+            <li>Always consider if there is enough contrast between categories of a chart.</li>
+            <li>Simple charts and visualizations (4 categories or less) can be monochromatic, using our tints and shades.</li>
+            <li>When representing data, always reserve the use of Lime/Solar for good/bad, or increase/decrease.</li>
+          </ul>
+          <hr className="dnote__divider" />
+          <p className="dnote__line"><strong>Type:</strong> Large-scale stats should always use Gellix Bold. Body copy should be Gellix Regular to ensure legibility. Labels can use Roobert SemiMono.</p>
         </div>
       </div>
       <div className="dv-ex">

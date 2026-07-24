@@ -1,4 +1,5 @@
 import { useRef, useState, useCallback } from "react";
+import StarIcon from "../../components/StarIcon.jsx";
 
 const NOTE = "Note: We reserve use of our tertiary colors primarily to depict good/bad, positive/negative outcomes.";
 
@@ -74,7 +75,7 @@ function Category({ cat }) {
       </div>
       {cat.note ? (
         <div className="cpal-note">
-          <span className="cpal-note__icon">*</span>
+          <span className="cpal-note__icon"><StarIcon /></span>
           <p>{cat.note}</p>
         </div>
       ) : null}

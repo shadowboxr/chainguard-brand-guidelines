@@ -2,6 +2,7 @@ import { useRef, useState, useCallback, useEffect } from "react";
 import { flushSync } from "react-dom";
 import Carousel from "./Carousel.jsx";
 import CursorBlink from "./CursorBlink.jsx";
+import StarIcon from "../../components/StarIcon.jsx";
 
 const FN = { gellix: "Gellix", poppins: "Poppins", roobert: "Roobert SemiMono", robotomono: "Roboto Mono" };
 
@@ -286,7 +287,7 @@ export default function Typography() {
       </section>
       <XSec id="hierarchy" title="Hierarchy" intro="Our bold, modern primary typeface is an important and recognizable element of our brand system. We use Gellix Bold at scale to display headlines with impact and personality, supported by smaller Gellix Regular for body copy.">
         <div className="cpal-note">
-          <span className="cpal-note__icon">*</span>
+          <span className="cpal-note__icon"><StarIcon /></span>
           <p>We reserve all-caps Roobert Semimono for labels (like eyebrows, date/time, and our website url)</p>
         </div>
         <div className="cxph"></div>
