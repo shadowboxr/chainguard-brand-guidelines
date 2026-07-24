@@ -399,3 +399,13 @@
 :root[data-theme=dark] .chl{--chl-neutral:#fff}
 .chl__cursor{height:30%;aspect-ratio:1/2;animation:cursor-blink 1.1s steps(1,end) infinite}
 @media (prefers-reduced-motion:reduce){.chl__cursor{animation:none}}
+
+/* Typography — "The highlight" typewriter reveal */
+.hl{position:relative;container-type:inline-size;aspect-ratio:16/9;background:var(--surface-inset);border:1px solid var(--border-default);overflow:hidden;padding:5.2cqw;display:flex;flex-direction:column;align-items:flex-start;--hl-dur:.6s;--hl-bg:#f1ecfe}
+:root[data-theme=dark] .hl{--hl-bg:#14003d}
+.hl.is-fast{--hl-dur:.32s}
+.hl-row{display:flex;align-items:center;height:14.68cqw}
+.hl-hi{overflow:hidden;white-space:nowrap;box-sizing:border-box;height:100%;display:flex;align-items:center;padding:0 3.79cqw;background:var(--hl-bg);transition:width var(--hl-dur) var(--ease-out)}
+.hl-hi__t{font:700 10.1cqw/1 var(--font-title);letter-spacing:-.03em;color:var(--text-primary);white-space:nowrap}
+.hl-cursor{flex:none;width:7.34cqw;height:14.68cqw;background:var(--primary);animation:cursor-blink 1.1s steps(1,end) infinite}
+@media (prefers-reduced-motion:reduce){.hl-cursor{animation:none}}

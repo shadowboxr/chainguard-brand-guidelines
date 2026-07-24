@@ -2,6 +2,7 @@ import { useRef, useState, useCallback, useEffect } from "react";
 import { flushSync } from "react-dom";
 import Carousel from "./Carousel.jsx";
 import CursorBlink from "./CursorBlink.jsx";
+import Highlight from "./Highlight.jsx";
 import StarIcon from "../../components/StarIcon.jsx";
 
 const FN = { gellix: "Gellix", poppins: "Poppins", roobert: "Roobert SemiMono", robotomono: "Roboto Mono" };
@@ -305,7 +306,15 @@ export default function Typography() {
               <CursorBlink />
             </div>
           </div>
-          <FMedia label="The highlight" desc="The highlight element combines the highlighting capability in a terminal with our building blocks, to create an opportunity for emphasis on a couple words of a headline." />
+          <div className="fsplit__row">
+            <div className="fsplit__side fsplit__side--tall">
+              <h4 className="fsplit__label">The highlight</h4>
+              <p className="fsplit__desc">The highlight element combines the highlighting capability in a terminal with our building blocks, to create an opportunity for emphasis on a couple words of a headline.</p>
+            </div>
+            <div className="fsplit__main">
+              <Highlight />
+            </div>
+          </div>
         </div>
       </XSec>
     </div>
