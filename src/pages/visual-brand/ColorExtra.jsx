@@ -1,6 +1,7 @@
 import ContrastChecker from "./ContrastChecker.jsx";
+import ColorThemeBars from "./ColorThemeBars.jsx";
 
-function TRow({ label, desc }) {
+function TRow({ label, desc, media }) {
   return (
     <div className="fsplit__row">
       <div className="fsplit__side fsplit__side--tall">
@@ -8,7 +9,7 @@ function TRow({ label, desc }) {
         <p className="fsplit__desc">{desc}</p>
       </div>
       <div className="fsplit__main">
-        <div className="fsplit__media"></div>
+        {media || <div className="fsplit__media"></div>}
       </div>
     </div>
   );
@@ -38,7 +39,7 @@ export default function ColorExtra() {
         <h3 id="themes" className="cpal-h3 fanchor">Color themes</h3>
         <p className="cxintro">Our expanded palette gives our brand flexibility without losing consistency. The tints and shades create a spectrum of color that is both useful for dark/light mode, and modern monochromatic design. We group our colors into “themes” so that this expanded use of color stays consistent.</p>
         <div className="fsplit">
-          <TRow label="Light mode" desc="This is our core color theme. It allows us to lead with bold Ink type, supported by our blocks in full color, and accents in the Light and Air tints." />
+          <TRow label="Light mode" desc="This is our core color theme. It allows us to lead with bold Ink type, supported by our blocks in full color, and accents in the Light and Air tints." media={<ColorThemeBars />} />
           <TRow label="Dark mode" desc="Our dark mode variation creates a sleek, modern look that reflects the dark mode many of our engineers prefer to work in. Dark mode relies on bold white type, and our dark and deep color shades." />
           <TRow label="Monochromatic tone-on-tone" desc="Can be used in light blurple, fuschia, and aqua; or dark blurple, fuschia, and aqua; for when you’d like to give visual variety to a repeatable system (examples include webinar meta images or book covers)." />
           <TRow label="Blurple core" desc="This color-drench option emphasizes our core color, and creates a very bold look for impactful statements and advertising opportunities." />

@@ -165,6 +165,17 @@
 .cxph{display:grid;place-items:center;min-height:360px;background:var(--surface-inset);border:1px solid var(--border-default)}
 .cxph__label{color:var(--text-tertiary)}
 @media(max-width:640px){.fsplit__row{flex-direction:column;gap:var(--sp-4)}.fsplit__side{width:auto}}
+
+/* Color themes — Light mode palette strip (Figma 54:3415). Decorative only.
+   Bars are collapsed to a thin band and grow to 50% of the box height on hover.
+   Colors are literal light-mode hex (set inline), so the strip never follows
+   the site's dark/light theme. */
+.ctheme{position:relative;aspect-ratio:16/9;display:flex;align-items:flex-start;overflow:hidden;background:#fff;border:1px solid #e7e8e8}
+.ctheme__bar{flex:1 1 0;min-width:0;height:8%;transition:height .55s var(--ease-out)}
+@media (hover:hover){.ctheme:hover .ctheme__bar{height:50%}}
+/* No hover on touch: show the open state so the palette is still visible. */
+@media (hover:none){.ctheme__bar{height:50%}}
+@media (prefers-reduced-motion:reduce){.ctheme__bar{transition:none}}
 .typo{display:flex;flex-direction:column;gap:var(--sp-16)}
 .typo .cpal-h3{margin:0}
 .tcard{display:flex;flex-direction:column;gap:var(--sp-6);padding:var(--sp-6);background:var(--surface-card);border:1px solid var(--border-default)}
