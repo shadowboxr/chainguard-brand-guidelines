@@ -274,7 +274,7 @@
 .fblocks>.cpal-h3.fanchor:first-child{margin-top:0}
 
 /* Accessibility contrast checker */
-.cc{display:flex;flex-direction:column;gap:var(--sp-8);margin-top:var(--sp-4);padding:var(--sp-6) var(--sp-6) 0;background:var(--surface-card);border:1px solid var(--border-default)}
+.cc{display:flex;flex-direction:column;gap:var(--sp-8);margin-top:var(--sp-4);padding:var(--sp-6) var(--sp-6) 0;background:var(--surface-inset);border:1px solid var(--border-default)}
 .cc__top{display:flex;align-items:center;justify-content:space-between;gap:var(--sp-4)}
 .cc__title{font:500 12px/1 var(--font-label);letter-spacing:.72px;text-transform:uppercase;color:var(--text-tertiary)}
 .cc-dot{width:8px;height:8px;flex:none;border:1px solid var(--border-default)}
@@ -306,7 +306,7 @@
 .cc-wcag{text-align:center;font:500 12px/1.33 var(--font-label);letter-spacing:.06em;text-transform:uppercase;color:var(--text-secondary)}
 .cc-info{display:flex;flex-direction:column;gap:var(--sp-1);align-items:center}
 .cc-info__row{display:flex;align-items:center;gap:var(--sp-2);padding:var(--sp-1) var(--sp-2);background:0 0;border:0;font:500 12px/1.33 var(--font-label);letter-spacing:.06em;text-transform:uppercase;color:var(--text-primary);cursor:pointer;border-radius:var(--radius-xs);transition:background var(--dur-fast) var(--ease)}
-.cc-info__row:hover{background:var(--surface-inset)}
+.cc-info__row:hover{background:var(--surface-card)}
 .cc-info__key{color:var(--text-secondary)}
 .cc-swatch{width:8px;height:8px;flex:none;border:1px solid var(--border-default)}
 /* scale (background shuffle) */
@@ -319,7 +319,7 @@
 .cc-seg__num{position:absolute;top:14px;left:12px;font:500 12px/1.25 var(--font-label);letter-spacing:.02em}
 
 /* Design elements — "The cursor" interactive demo */
-.cur{position:relative;aspect-ratio:16/9;margin-top:var(--sp-4);background:var(--surface-card);border:1px solid var(--border-default);overflow:hidden}
+.cur{position:relative;aspect-ratio:16/9;margin-top:var(--sp-4);background:var(--surface-inset);border:1px solid var(--border-default);overflow:hidden}
 .cur-grid{position:absolute;inset:0}
 .cur-line{position:absolute;background:var(--border-default)}
 .cur-line--v1{top:0;bottom:0;left:calc(50% - 30px);width:1px}
