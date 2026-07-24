@@ -41,22 +41,11 @@ const DARK_BARS = [
 
 const THEMES = { light: LIGHT_BARS, dark: DARK_BARS };
 
-// Perceived luminance (YIQ luma), same weighting used elsewhere for text contrast.
-function luma(hex) {
-  const h = hex.replace("#", "");
-  const r = parseInt(h.slice(0, 2), 16);
-  const g = parseInt(h.slice(2, 4), 16);
-  const b = parseInt(h.slice(4, 6), 16);
-  return (r * 299 + g * 587 + b * 114) / 1000;
-}
-
 export default function ColorThemeBars({ mode = "light" }) {
   const bars = THEMES[mode] || LIGHT_BARS;
-  // Ordered lightest -> darkest by luminance (rather than grouped by hue).
-  const ordered = [...bars].sort((a, b) => luma(b) - luma(a));
   return (
-    <div className={"ctheme ctheme--" + mode} style={{ "--ct-grow": ordered.length - 1 }} aria-hidden="true">
-      {ordered.map((hex, i) => (
+    <div className={"ctheme ctheme--" + mode} style={{ "--ct-grow": bars.length - 1 }} aria-hidden="true">
+      {bars.map((hex, i) => (
         <div key={i} className="ctheme__bar" style={{ background: hex }} />
       ))}
     </div>
