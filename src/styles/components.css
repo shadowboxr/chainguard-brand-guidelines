@@ -349,6 +349,6 @@
 
 /* Design elements — "The visible grid" */
 .vgrid{position:relative;aspect-ratio:1/1;margin-top:var(--sp-4);background-color:var(--surface-inset);border:1px solid var(--border-default);overflow:hidden;background-image:linear-gradient(to right,var(--border-default) 1px,transparent 1px),linear-gradient(to bottom,var(--border-default) 1px,transparent 1px);background-size:var(--vg-cell) var(--vg-cell);background-origin:border-box;background-position:0 0;transition:background-size 2s cubic-bezier(.16,1,.3,1)}
-.vgrid__tl{position:absolute;top:var(--sp-6);left:var(--sp-6);z-index:5}
-.vgrid__tr{position:absolute;top:calc(var(--sp-6) + 2px);right:var(--sp-6);z-index:5;font:500 12px/1 var(--font-label);letter-spacing:.06em;text-transform:uppercase;color:var(--text-tertiary)}
+.vgrid__top{position:absolute;top:var(--sp-6);left:var(--sp-6);right:var(--sp-6);z-index:5;display:flex;align-items:center;justify-content:space-between;gap:var(--sp-4)}
+.vgrid__label{font:500 12px/1 var(--font-label);letter-spacing:.06em;text-transform:uppercase;color:var(--text-tertiary)}
 @media (prefers-reduced-motion:reduce){.vgrid{transition:none}}

@@ -90,10 +90,10 @@ export default function VisibleGrid() {
 
   return (
     <div className="vgrid" style={{ "--vg-cell": SIZES[idx].pct + "%" }}>
-      <div className="vgrid__tl">
+      <div className="vgrid__top">
         <Dropdown value={SIZES[idx]} options={SIZES} onPick={pick} onOpen={interact} />
+        <span className="vgrid__label">The Grid</span>
       </div>
-      <div className="vgrid__tr">The Grid</div>
     </div>
   );
 }
