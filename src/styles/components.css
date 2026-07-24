@@ -317,3 +317,32 @@
 .cc-seg--current{flex-grow:var(--n1)}
 .cc-seg:not(.cc-seg--current):hover{flex-grow:2.4;z-index:2}
 .cc-seg__num{position:absolute;top:14px;left:12px;font:500 12px/1.25 var(--font-label);letter-spacing:.02em}
+
+/* Design elements — "The cursor" interactive demo */
+.cur{position:relative;aspect-ratio:16/9;margin-top:var(--sp-4);background:var(--surface-card);border:1px solid var(--border-default);overflow:hidden}
+.cur-grid{position:absolute;inset:0}
+.cur-line{position:absolute;background:var(--border-default)}
+.cur-line--v1{top:0;bottom:0;left:calc(50% - 30px);width:1px}
+.cur-line--v2{top:0;bottom:0;left:calc(50% + 30px);width:1px}
+.cur-line--h1{left:0;right:0;top:calc(50% - 60px);height:1px}
+.cur-line--h2{left:0;right:0;top:calc(50% + 60px);height:1px}
+.cur-block{position:absolute;left:50%;top:50%;width:60px;height:120px;transform:translate(-50%,-50%);animation:cursor-blink 1.1s steps(1,end) infinite}
+.cur-block--confident{animation:confident-blink 1.05s steps(1,end) infinite}
+.cur-block--alert{animation:alert-blink 1.05s steps(1,end) infinite}
+@keyframes cursor-blink{0%,50%{opacity:1}50.01%,100%{opacity:0}}
+@keyframes confident-blink{0%,66%{opacity:1}66.01%,100%{opacity:0}}
+@keyframes alert-blink{0%,12%,22%,34%{opacity:1}13%,21%,35%,100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.cur-block,.cur-block--confident,.cur-block--alert{animation:none}}
+.cur-lbl{position:absolute;font:500 10px/1 var(--font-label);letter-spacing:.06em;text-transform:uppercase;color:var(--text-tertiary)}
+.cur-lbl--top{left:50%;top:calc(50% - 60px - 22px);transform:translateX(-50%)}
+.cur-lbl--bottom{left:50%;top:calc(50% + 60px + 14px);transform:translateX(-50%)}
+.cur-lbl--left{top:50%;left:calc(50% - 30px - 28px);transform:translateY(-50%)}
+.cur-lbl--right{top:50%;left:calc(50% + 30px + 16px);transform:translateY(-50%)}
+.cur-tl{position:absolute;top:var(--sp-6);left:var(--sp-6);z-index:5}
+.cur-tr{position:absolute;top:calc(var(--sp-6) + 2px);right:var(--sp-6);z-index:5;font:500 12px/1 var(--font-label);letter-spacing:.06em;text-transform:uppercase;color:var(--text-tertiary)}
+.cur-bl{position:absolute;bottom:var(--sp-6);left:var(--sp-6);z-index:5}
+.cur-br{position:absolute;bottom:var(--sp-6);right:var(--sp-6);z-index:5}
+.cur-copy{display:inline-flex;align-items:center;padding:11px;background:var(--surface-card);border:1px solid var(--border-default);font:500 10px/1 var(--font-label);letter-spacing:.6px;text-transform:uppercase;color:var(--text-primary);cursor:pointer;transition:border-color var(--dur-fast) var(--ease),color var(--dur-fast) var(--ease)}
+.cur-copy:hover,.cur-copy.is-copied{border-color:var(--primary);color:var(--primary)}
+/* the bottom-left animation dropdown opens upward */
+.cur-bl .cc-drop-menu{top:auto;bottom:calc(100% + 4px)}
