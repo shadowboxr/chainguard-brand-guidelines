@@ -1,13 +1,14 @@
 import { useRef, useState, useEffect, useCallback } from "react";
 
-/* "Building blocks" (Figma 51:2842) — a weighted-random field of solid color
-   blocks on the same square grid. Blurple is the always-on core and always
-   carries the most weight; Fuchsia / Aqua are additive light accents. Some
-   cells stay empty. Shuffle re-randomizes the layout.
+/* "Building blocks" (Figma 51:2842) — a weighted field of solid color blocks on
+   the shared square grid. Blurple is the always-on base and stays primary.
+   Each hue has a CORE (500) shade and lighter ACCENT tints; cores are
+   prioritised over accents — including over blurple's tints — so the Fuchsia /
+   Aqua cores always show when enabled. "Core Only" drops the accents entirely.
 
-   Shade tokens (b0..b4 / f0..f1 / a0..a1) map to CSS variables that flip with
-   the theme (see .bblocks in components.css), so blocks recolor on light/dark
-   without regenerating the layout. Tier 0 is the core/heaviest shade. */
+   Shade tokens (b0..b4 / f0..f2 / a0..a2) map to CSS variables that flip with
+   the theme (see .bblocks in components.css). Cores (b0/f0/a0) stay vivid in
+   both themes; accents mirror to the dark end of each scale in dark mode. */
 
 const SIZES = [
   { label: "Large", cols: 4 },
@@ -16,39 +17,44 @@ const SIZES = [
   { label: "Extra small", cols: 32 },
 ];
 
+// Core weight >> accent weight so cores dominate; blurple weights >> secondary
+// so blurple stays primary overall.
 const HUES = [
-  { key: "blurple", label: "Blurple", dot: "#6226FB", tokens: ["b0", "b1", "b2", "b3", "b4"], weight: 3 },
-  { key: "fuchsia", label: "Fuchsia", dot: "#FD2BF2", tokens: ["f0", "f1"], weight: 1 },
-  { key: "aqua", label: "Aqua", dot: "#2BBAFD", tokens: ["a0", "a1"], weight: 1 },
+  { key: "blurple", label: "Blurple", dot: "#6226FB", core: "b0", accents: ["b1", "b2", "b3", "b4"], coreW: 5, accentW: 1.2 },
+  { key: "fuchsia", label: "Fuchsia", dot: "#FD2BF2", core: "f0", accents: ["f1", "f2"], coreW: 4, accentW: 0.7 },
+  { key: "aqua", label: "Aqua", dot: "#2BBAFD", core: "a0", accents: ["a1", "a2"], coreW: 4, accentW: 0.7 },
 ];
 
-const EMPTY_RATE = 0.5; // fraction of cells left empty
-
-function tokenFor(hue) {
-  // Blurple leans on its core (b0) so the core always carries more weight.
-  if (hue.key === "blurple" && Math.random() < 0.4) return "b0";
-  return hue.tokens[Math.floor(Math.random() * hue.tokens.length)];
-}
+const EMPTY_RATE = 0.5;
 
 // Reusable block-field generator (Patterns will reuse this with a density arg).
-// Distributes filled cells by hue weight so blurple always has the largest
-// share and every active accent appears at least once, then shuffles positions.
-function genCells(count, activeHues, emptyRate = EMPTY_RATE) {
+// Guarantees each active hue's core appears, weights cores over accents, keeps
+// blurple primary, then shuffles positions.
+function genCells(count, activeHues, coreOnly, emptyRate = EMPTY_RATE) {
   const active = HUES.filter((h) => activeHues[h.key]);
   const filled = Math.min(count, Math.max(active.length, Math.round(count * (1 - emptyRate))));
-  const totalW = active.reduce((s, h) => s + h.weight, 0);
 
-  const counts = active.map((h) => Math.max(1, Math.floor((filled * h.weight) / totalW)));
-  // Reconcile to `filled`; blurple (index 0, highest weight) absorbs the remainder.
-  let sum = counts.reduce((a, b) => a + b, 0);
-  counts[0] = Math.max(1, counts[0] + (filled - sum));
+  const sw = [];
+  active.forEach((h) => {
+    sw.push({ token: h.core, w: h.coreW });
+    if (!coreOnly) h.accents.forEach((a) => sw.push({ token: a, w: h.accentW }));
+  });
 
-  const toks = [];
-  active.forEach((h, i) => { for (let k = 0; k < counts[i]; k++) toks.push(tokenFor(h)); });
+  // One guaranteed core per active hue (so Fuchsia / Aqua cores always show).
+  const toks = active.map((h) => h.core);
+  const remaining = Math.max(0, filled - active.length);
+  const totalW = sw.reduce((s, x) => s + x.w, 0);
+
+  // Largest-remainder allocation of the rest, proportional to weight.
+  const exact = sw.map((x) => (remaining * x.w) / totalW);
+  const alloc = exact.map(Math.floor);
+  let deficit = remaining - alloc.reduce((a, b) => a + b, 0);
+  const order = exact.map((v, i) => [i, v - Math.floor(v)]).sort((a, b) => b[1] - a[1]);
+  for (let k = 0; k < deficit; k++) alloc[order[k % order.length][0]]++;
+  sw.forEach((x, i) => { for (let k = 0; k < alloc[i]; k++) toks.push(x.token); });
+
   while (toks.length < count) toks.push(null);
   toks.length = count;
-
-  // Fisher-Yates shuffle for random placement.
   for (let i = toks.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [toks[i], toks[j]] = [toks[j], toks[i]];
@@ -89,14 +95,14 @@ function Dropdown({ value, options, onPick }) {
 export default function BuildingBlocks() {
   const [sizeIdx, setSizeIdx] = useState(0);
   const [active, setActive] = useState({ blurple: true, fuchsia: false, aqua: false });
+  const [coreOnly, setCoreOnly] = useState(false);
   const [cells, setCells] = useState([]);
   const cols = SIZES[sizeIdx].cols;
 
   const regen = useCallback(() => {
-    setCells(genCells(cols * cols, active));
-  }, [cols, active]);
+    setCells(genCells(cols * cols, active, coreOnly));
+  }, [cols, active, coreOnly]);
 
-  // Regenerate when the size or active hues change.
   useEffect(() => { regen(); }, [regen]);
 
   const toggle = (key) => {
@@ -118,22 +124,33 @@ export default function BuildingBlocks() {
       </div>
 
       <div className="bblocks__bottom">
-        {HUES.map((h) => {
-          const on = active[h.key];
-          return (
-            <button
-              type="button"
-              key={h.key}
-              className={"bb-tog" + (on ? " is-on" : "")}
-              style={{ "--tog-color": h.dot }}
-              aria-pressed={on}
-              onClick={() => toggle(h.key)}
-            >
-              <span className="bb-tog__dot" />
-              {h.label}
-            </button>
-          );
-        })}
+        <div className="bblocks__hues">
+          {HUES.map((h) => {
+            const on = active[h.key];
+            return (
+              <button
+                type="button"
+                key={h.key}
+                className={"bb-tog" + (on ? " is-on" : "")}
+                style={{ "--tog-color": h.dot }}
+                aria-pressed={on}
+                onClick={() => toggle(h.key)}
+              >
+                <span className="bb-tog__dot" />
+                {h.label}
+              </button>
+            );
+          })}
+        </div>
+        <button
+          type="button"
+          className={"bb-tog bb-tog--core" + (coreOnly ? " is-on" : "")}
+          aria-pressed={coreOnly}
+          onClick={() => setCoreOnly((c) => !c)}
+        >
+          <span className="bb-tog__dot" />
+          Core Only
+        </button>
       </div>
     </div>
   );
