@@ -22,29 +22,48 @@ const PRESETS = [
     label: "Standard",
     feel: "Active / Neutral",
     cls: "",
-    css:
-      "animation: cursor-blink 1.1s steps(1, end) infinite;\n\n" +
-      "@keyframes cursor-blink {\n  0%, 50% { opacity: 1; }\n  50.01%, 100% { opacity: 0; }\n}",
+    anim: "cursor-blink",
+    dur: "1.1s",
+    keyframes: "    0%, 50%       { opacity: 1; }\n    50.01%, 100%  { opacity: 0; }",
   },
   {
     key: "confident",
     label: "Confident",
     feel: "Secure / Resolved",
     cls: "cur-block--confident",
-    css:
-      "animation: confident-blink 1.5s steps(1, end) infinite;\n\n" +
-      "@keyframes confident-blink {\n  0%, 80% { opacity: 1; }\n  80.01%, 100% { opacity: 0; }\n}",
+    anim: "confident-blink",
+    dur: "1.5s",
+    keyframes: "    0%, 80%       { opacity: 1; }\n    80.01%, 100%  { opacity: 0; }",
   },
   {
     key: "alert",
     label: "Alert",
     feel: "Protective / Responsive",
     cls: "cur-block--alert",
-    css:
-      "animation: alert-blink 1.2s steps(1, end) infinite;\n\n" +
-      "@keyframes alert-blink {\n  0%, 16%, 32% { opacity: 1; }\n  8%, 24%, 40%, 100% { opacity: 0; }\n}",
+    anim: "alert-blink",
+    dur: "1.2s",
+    keyframes: "    0%, 16%, 32%       { opacity: 1; }\n    8%, 24%, 40%, 100%  { opacity: 0; }",
   },
 ];
+
+// Full, self-contained snippet: markup + color + adaptable size + animation.
+// The developer scales the whole cursor by changing --cursor-size.
+function buildSnippet(color, preset) {
+  return (
+    `<span class="cg-cursor"></span>\n\n` +
+    `<style>\n` +
+    `  .cg-cursor {\n` +
+    `    --cursor-size: 24px;              /* 1x unit — change to scale */\n` +
+    `    display: inline-block;\n` +
+    `    width: var(--cursor-size);\n` +
+    `    height: calc(var(--cursor-size) * 2);   /* 1x wide, 2x tall */\n` +
+    `    background: ${color.hex};            /* ${color.name} */\n` +
+    `    animation: ${preset.anim} ${preset.dur} steps(1, end) infinite;\n` +
+    `  }\n\n` +
+    `  @keyframes ${preset.anim} {\n${preset.keyframes}\n  }\n` +
+    `</style>`
+  );
+}
 
 // Small dropdown matching the contrast-checker style (optional color dot).
 function Dropdown({ value, options, onPick, dot }) {
@@ -92,11 +111,11 @@ export default function Cursor() {
   useEffect(() => () => window.clearTimeout(copyT.current), []);
 
   const copyCss = useCallback(() => {
-    try { if (navigator.clipboard) navigator.clipboard.writeText(preset.css); } catch (e) {}
+    try { if (navigator.clipboard) navigator.clipboard.writeText(buildSnippet(color, preset)); } catch (e) {}
     setCopied(true);
     window.clearTimeout(copyT.current);
     copyT.current = window.setTimeout(() => setCopied(false), 1200);
-  }, [preset]);
+  }, [color, preset]);
 
   return (
     <div className="cur">
