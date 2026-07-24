@@ -428,5 +428,5 @@
 }
 
 /* Scale the cursor diagram down on small cards so the corner controls have room */
-@media (width<=600px){.cur{--cu:20px}}
-@media (width<=400px){.cur{--cu:16px}}
+@media (width<=600px){.cur{--cu:15px}}
+@media (width<=400px){.cur{--cu:11px}}
