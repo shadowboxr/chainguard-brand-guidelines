@@ -113,7 +113,8 @@
 .cpal-note p{margin:0;font:500 12px/1.6 var(--font-body);color:var(--text-tertiary)}
 .cpal-tip{position:fixed;z-index:70;transform:translate(14px,14px);padding:6px 10px;background:var(--surface-card);border:1px solid var(--border-default);color:var(--text-primary);font:500 10px/1.5 var(--font-label);letter-spacing:.6px;text-transform:uppercase;white-space:nowrap;pointer-events:none;opacity:0;box-shadow:0 6px 20px rgba(13,22,28,.14);transition:opacity var(--dur-fast) var(--ease)}
 .cpal-tip.is-on{opacity:1}
-@media(max-width:640px){.cpal-grid--3,.cpal-grid--2{grid-template-columns:1fr}}
+/* Double the hero blurple block's height on mobile (16/9 -> 8/9). */
+@media(max-width:640px){.cpal-grid--3,.cpal-grid--2{grid-template-columns:1fr}.cpal-sw--hero{aspect-ratio:8/9}}
 .fhead2{display:flex;gap:var(--sp-10);align-items:flex-start;padding-bottom:var(--sp-12);border-bottom:1px solid var(--border-default)}
 .fhead2__title{width:200px;flex:none}
 @media(max-width:640px){.fhead2{flex-direction:column;gap:var(--sp-4)}.fhead2__title{width:auto}}
@@ -131,11 +132,17 @@
 [data-theme="dark"] .scale-seg[data-open="light"] .scale-seg__vals{opacity:0}
 [data-theme="dark"] .scale-seg[data-open="dark"]{flex-grow:var(--n1)}
 [data-theme="dark"] .scale-seg[data-open="dark"] .scale-seg__vals{opacity:1}
-.scale-bar:hover .scale-seg{flex-grow:1}
-.scale-bar:hover .scale-seg .scale-seg__vals{opacity:0}
-.scale-bar:hover .scale-seg:hover{flex-grow:var(--n1)}
-.scale-bar:hover .scale-seg:hover .scale-seg__vals{opacity:1}
-.scale-seg:hover .scale-seg__vals{pointer-events:auto}
+/* Hover-to-expand is a pointer-only affordance. Gate it behind hover:hover so
+   touch devices never enter it — otherwise a sticky :hover left after a
+   swipe/scroll keeps .scale-bar:hover active (hiding all vals via the rule
+   below) once the finger leaves the segment, blanking the hex on mobile. */
+@media (hover:hover){
+  .scale-bar:hover .scale-seg{flex-grow:1}
+  .scale-bar:hover .scale-seg .scale-seg__vals{opacity:0}
+  .scale-bar:hover .scale-seg:hover{flex-grow:var(--n1)}
+  .scale-bar:hover .scale-seg:hover .scale-seg__vals{opacity:1}
+  .scale-seg:hover .scale-seg__vals{pointer-events:auto}
+}
 .scale-nav{display:none}
 @media(max-width:640px){.scale-bar{position:relative}.scale-seg{position:absolute;inset:0;flex:none!important;opacity:0;pointer-events:none;transition:opacity .3s var(--ease)}.scale-seg.is-current{opacity:1;pointer-events:auto}.scale-seg__num{top:16px;left:16px}.scale-seg__vals{opacity:1;left:16px;bottom:16px}.scale-seg.is-current .scale-seg__vals{pointer-events:auto}.scale-nav{display:grid;place-items:center;position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:34px;height:34px;padding:0;background:var(--surface-card);border:1px solid var(--border-default);color:var(--text-primary);cursor:pointer}.scale-nav--prev{left:10px}.scale-nav--next{right:10px}.scale-nav svg{display:block}.scale-nav--prev svg{transform:rotate(180deg)}.scale-nav[disabled]{opacity:.35;cursor:default}}
 .cextra{display:flex;flex-direction:column;gap:var(--sp-16);margin-top:var(--sp-16)}
@@ -431,17 +438,24 @@
 @media (width<=600px){.cur{--cu:15px}}
 @media (width<=400px){.cur{--cu:11px}}
 
-/* ---- Mobile "Options" bottom sheet (Building blocks, Patterns, The Cursor) ---- */
-/* Desktop: the sheet chrome is fully hidden; blocks use their overlay controls. */
-.osheet__trigger,.osheet__backdrop,.osheet__panel{display:none}
+/* ---- Mobile "Options"/"Details" bottom sheet (Building blocks, Patterns,
+   The Cursor, and the Typography specimen rows) ---- */
+/* Desktop: the sheet chrome is fully hidden; blocks use their inline controls. */
+.osheet__trigger,.osheet__backdrop,.osheet__panel,.tspec__mhead{display:none}
 
 @media (width<=600px){
-  /* Hide the scattered overlay controls — the sheet takes over. */
+  /* Hide the scattered inline controls — the sheet takes over. */
   .bblocks .bblocks__top,.bblocks .bblocks__bottom,
-  .cur .cur-tl,.cur .cur-tr,.cur .cur-bl,.cur .cur-br{display:none}
+  .cur .cur-tl,.cur .cur-tr,.cur .cur-bl,.cur .cur-br,
+  .tspec__ctrl{display:none}
 
-  /* Trigger pinned to the bottom-right of the card. */
-  .osheet__trigger{display:inline-flex;align-items:center;gap:6px;position:absolute;bottom:var(--sp-4);right:var(--sp-4);z-index:6;padding:9px 11px;background:var(--surface-card);border:1px solid var(--border-default);font:500 10px/1 var(--font-label);letter-spacing:.06em;text-transform:uppercase;color:var(--text-primary);cursor:pointer}
+  /* Typography rows show a compact header (label + Details trigger) instead. */
+  .tspec__mhead{display:flex;align-items:center;gap:var(--sp-2)}
+  .tspec__mhead .osheet{margin-left:auto}
+
+  /* Trigger: inline by default; pinned to the card for the demo blocks. */
+  .osheet__trigger{display:inline-flex;align-items:center;gap:6px;padding:9px 11px;background:var(--surface-card);border:1px solid var(--border-default);font:500 10px/1 var(--font-label);letter-spacing:.06em;text-transform:uppercase;color:var(--text-primary);cursor:pointer}
+  .bblocks .osheet__trigger,.cur .osheet__trigger{position:absolute;bottom:var(--sp-4);right:var(--sp-4);z-index:6}
   .osheet__gear{display:inline-flex;color:var(--text-tertiary)}
   .osheet__gear svg{display:block}
 

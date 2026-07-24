@@ -3,6 +3,7 @@ import { flushSync } from "react-dom";
 import Carousel from "./Carousel.jsx";
 import CursorBlink from "./CursorBlink.jsx";
 import Highlight from "./Highlight.jsx";
+import OptionsSheet from "./OptionsSheet.jsx";
 import StarIcon from "../../components/StarIcon.jsx";
 
 const FN = { gellix: "Gellix", poppins: "Poppins", roobert: "Roobert SemiMono", robotomono: "Roboto Mono" };
@@ -132,6 +133,33 @@ function TSpecRow({ row, registerClose, closeOthers }) {
 
   return (
     <div className="tspec__row" data-font={dataFont} data-size={row.size} data-lh={row.leadC} data-spac={row.spacP} data-wt={row.wnum}>
+      {/* Mobile (<=600px): the control bar collapses into a "Details" sheet. */}
+      <div className="tspec__mhead">
+        {row.label ? <span className="tpill tpill--label">{row.label}</span> : null}
+        <OptionsSheet label="Details">
+          <div className="osheet__field osheet__field--wide">
+            <span className="osheet__lbl">Font</span>
+            <div className="osheet__toggles">
+              <button type="button" className={"bb-tog" + (dataFont === row.fdV ? " is-on" : "")} style={{ "--tog-color": "var(--primary)" }} aria-pressed={dataFont === row.fdV} onClick={() => pickOption(row.fdV, row.fdL)}>
+                <span className="bb-tog__dot" />
+                {row.fdL}
+              </button>
+              <button type="button" className={"bb-tog" + (dataFont === row.faV ? " is-on" : "")} style={{ "--tog-color": "var(--primary)" }} aria-pressed={dataFont === row.faV} onClick={() => pickOption(row.faV, row.faL)}>
+                <span className="bb-tog__dot" />
+                {row.faL}
+              </button>
+            </div>
+          </div>
+          <div className="osheet__field"><span className="osheet__lbl">Leading</span><span className="osheet__val">{row.leadT}</span></div>
+          <div className="osheet__field"><span className="osheet__lbl">Spacing</span><span className="osheet__val">{row.spacT}</span></div>
+          <div className="osheet__field"><span className="osheet__lbl">Weight</span><span className="osheet__val">{row.wname}</span></div>
+          <div className="osheet__field osheet__field--wide">
+            <button type="button" className={"cur-copy" + (copied ? " is-copied" : "")} data-copycss onClick={copyCss}>
+              {copied ? "Copied" : "Copy CSS"}
+            </button>
+          </div>
+        </OptionsSheet>
+      </div>
       <div className="tspec__ctrl">
         <div className="tspec__cl">
           {row.label ? <span className="tpill tpill--label">{row.label}</span> : null}
