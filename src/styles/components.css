@@ -172,8 +172,10 @@
    while the rest compress. Decorative only — no hex/labels. Colors are literal
    light-mode hex (inline) so the strip never follows the site's dark/light theme. */
 .ctheme{aspect-ratio:16/9;display:flex;overflow:hidden;background:#fff;border:1px solid #e7e8e8}
+/* Dark variant: ink backdrop so any sub-pixel seams blend with the dark bars. */
+.ctheme--dark{background:#0d161c}
 .ctheme__bar{flex:1 1 0;min-width:0;transition:flex-grow .45s var(--ease-out)}
-@media (hover:hover){.ctheme:hover .ctheme__bar:hover{flex-grow:31}}
+@media (hover:hover){.ctheme:hover .ctheme__bar:hover{flex-grow:var(--ct-grow)}}
 @media (prefers-reduced-motion:reduce){.ctheme__bar{transition:none}}
 .typo{display:flex;flex-direction:column;gap:var(--sp-16)}
 .typo .cpal-h3{margin:0}
