@@ -61,7 +61,7 @@ function Segment({ step, hex, kind, isCurrent }) {
   );
 }
 
-function Bar({ shades, open, h, ink, dark, registerSwipe }) {
+function Bar({ shades, open, h, ink, dark, registerSwipe, cls }) {
   const n1 = shades.length - 1;
   const [current, setCurrent] = useState(() => initialCurrent(shades, open, ink, dark));
   const barRef = useRef(null);
@@ -85,7 +85,7 @@ function Bar({ shades, open, h, ink, dark, registerSwipe }) {
   }, [registerSwipe, move]);
 
   return (
-    <div className="scale-bar" style={{ "--n1": n1, height: h + "px" }} ref={barRef}>
+    <div className={"scale-bar" + (cls ? " " + cls : "")} style={{ "--n1": n1, height: h + "px" }} ref={barRef}>
       {shades.map((x, i) => {
         let kind = "";
         if (ink) {
@@ -244,16 +244,16 @@ export default function ColorScales() {
         </Card>
         <Card title="Tertiary Scales" label="">
           <Sub name="Lime" label="5 step: 100 - 900">
-            <Bar shades={LI} open="500" h={150} ink={false} dark={dark} registerSwipe={registerSwipe} />
+            <Bar shades={LI} open="500" h={150} ink={false} dark={dark} registerSwipe={registerSwipe} cls="scale-bar--tertiary" />
           </Sub>
           <Sub name="Solar" label="5 step: 100 - 900">
-            <Bar shades={SO} open="500" h={150} ink={false} dark={dark} registerSwipe={registerSwipe} />
+            <Bar shades={SO} open="500" h={150} ink={false} dark={dark} registerSwipe={registerSwipe} cls="scale-bar--tertiary" />
           </Sub>
           <Sub name="Amber" label="3 step: 100 - 900">
-            <Bar shades={AM} open="500" h={150} ink={false} dark={dark} registerSwipe={registerSwipe} />
+            <Bar shades={AM} open="500" h={150} ink={false} dark={dark} registerSwipe={registerSwipe} cls="scale-bar--tertiary" />
           </Sub>
           <Sub name="Orange" label="3 step: 100 - 900">
-            <Bar shades={OR} open="500" h={150} ink={false} dark={dark} registerSwipe={registerSwipe} />
+            <Bar shades={OR} open="500" h={150} ink={false} dark={dark} registerSwipe={registerSwipe} cls="scale-bar--tertiary" />
           </Sub>
         </Card>
       </div>
