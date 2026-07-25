@@ -443,6 +443,22 @@
 .hl-measure{position:absolute;top:0;left:0;visibility:hidden;pointer-events:none;display:flex;flex-direction:column}
 @media (prefers-reduced-motion:reduce){.hl-cursor{animation:none}}
 
+/* Typography — "Hierarchy" type-scale demo (Figma 63:3861). Proportional grid:
+   3 content rows (eyebrow / heading / body) x 3 columns (content / label card /
+   margin). Sizing is container-relative (cqi) so it scales at any width. */
+.thier{aspect-ratio:718/404;display:grid;grid-template-columns:389fr 288fr 41fr;grid-template-rows:63.5fr 31.5fr 130.3fr 115fr 63.5fr;margin-top:var(--sp-4);background:var(--surface-inset);border:1px solid var(--border-default);overflow:hidden;container-type:inline-size}
+.thier__panel{grid-column:2;grid-row:1/-1;background:var(--surface-card);border-inline:1px solid var(--border-default)}
+.thier__lines{grid-column:1/-1;grid-row:1/-1;pointer-events:none;background-image:linear-gradient(var(--border-default),var(--border-default)),linear-gradient(var(--border-default),var(--border-default)),linear-gradient(var(--border-default),var(--border-default)),linear-gradient(var(--border-default),var(--border-default));background-repeat:no-repeat;background-size:100% 1px;background-position:0 15.72%,0 23.54%,0 55.8%,0 84.27%}
+.thier__eyebrow{grid-column:1;grid-row:2;align-self:center;display:flex;align-items:center;gap:.42em;padding:0 4.9cqi 0 8.3cqi;font:500 1.4cqi/1 var(--font-label);letter-spacing:.08em;text-transform:uppercase;color:var(--primary)}
+.thier__cursor{flex:none;width:.62em;height:1.3em;background:var(--primary)}
+.thier__heading{grid-column:1;grid-row:3;align-self:center;margin:0;padding:0 4.9cqi 0 8.3cqi;font:700 7.24cqi/1.04 var(--font-title);letter-spacing:-.03em;color:var(--text-primary)}
+.thier__body{grid-column:1;grid-row:4;align-self:center;margin:0;padding:0 4.9cqi 0 8.3cqi;font:400 1.95cqi/1.5 var(--font-body);color:var(--text-primary)}
+.thier__lbl{grid-column:2;align-self:center;padding-left:1.95cqi;font:500 1.15cqi/1.4 var(--font-label);letter-spacing:.05em;text-transform:uppercase;color:var(--text-primary);white-space:nowrap}
+.thier__lbl--e{grid-row:2}
+.thier__lbl--h{grid-row:3}
+.thier__lbl--b{grid-row:4}
+.thier__lbl-k{color:var(--text-placeholder)}
+
 /* ---- Design-element controls: responsive on small cards ---- */
 /* Let the overlay control bars wrap instead of overflowing the card. */
 .vgrid__top,.cc__top,.bblocks__top,.bblocks__bottom,.bblocks__hues,.bblocks__topleft{flex-wrap:wrap;row-gap:var(--sp-2)}
