@@ -450,7 +450,7 @@
 .thier__panel{grid-column:2;grid-row:1/-1;background:var(--surface-card);border-inline:1px solid var(--border-default)}
 .thier__lines{grid-column:1/-1;grid-row:1/-1;pointer-events:none;background-image:linear-gradient(var(--border-default),var(--border-default)),linear-gradient(var(--border-default),var(--border-default)),linear-gradient(var(--border-default),var(--border-default)),linear-gradient(var(--border-default),var(--border-default));background-repeat:no-repeat;background-size:100% 1px;background-position:0 15.72%,0 23.54%,0 55.8%,0 84.27%}
 .thier__eyebrow{grid-column:1;grid-row:2;align-self:center;display:flex;align-items:center;gap:.42em;padding:0 4.9cqi 0 8.3cqi;font:500 1.4cqi/1 var(--font-label);letter-spacing:.08em;text-transform:uppercase;color:var(--primary)}
-.thier__cursor{flex:none;width:.62em;height:1.3em;background:var(--primary)}
+.thier__cursor{flex:none;width:.546em;height:1.144em;background:var(--primary)}
 .thier__heading{grid-column:1;grid-row:3;align-self:center;margin:0;padding:0 4.9cqi 0 8.3cqi;font:700 7.24cqi/1.04 var(--font-title);letter-spacing:-.03em;color:var(--text-primary)}
 .thier__body{grid-column:1;grid-row:4;align-self:center;margin:0;padding:0 4.9cqi 0 8.3cqi;font:400 1.95cqi/1.5 var(--font-body);color:var(--text-primary)}
 .thier__lbl{grid-column:2;align-self:center;padding-left:1.95cqi;font:500 1.15cqi/1.4 var(--font-label);letter-spacing:.05em;text-transform:uppercase;color:var(--text-primary);white-space:nowrap}
