@@ -224,8 +224,21 @@ function FMedia({ label, desc }) {
   );
 }
 
+// The alternate web fonts (Poppins, Roboto Mono) aren't used on first paint,
+// so the browser doesn't fetch them until the user swaps to them — which shows
+// the sans-serif fallback for a beat while the woff2 downloads. Warm them on
+// mount at the exact weights the specimens use, so the swap is instant.
+const ALT_FONTS = ['400 1em "Poppins"', '700 1em "Poppins"', '500 1em "Roboto Mono"'];
+
 export default function Typography() {
   const closersRef = useRef([]);
+
+  useEffect(() => {
+    if (!document.fonts || !document.fonts.load) return;
+    ALT_FONTS.forEach((f) => {
+      document.fonts.load(f).catch(() => {});
+    });
+  }, []);
 
   const registerClose = useCallback((fn) => {
     if (!closersRef.current.includes(fn)) closersRef.current.push(fn);
