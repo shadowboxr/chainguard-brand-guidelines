@@ -14,10 +14,10 @@ export const NAV = [
     label: "Visual Brand",
     path: "/visual-brand",
     children: [
-      { label: "Color", path: "/visual-brand", hash: "color" },
-      { label: "Typography", path: "/visual-brand", hash: "typography" },
-      { label: "Design elements", path: "/visual-brand", hash: "design-elements" },
-      { label: "Data visualization", path: "/visual-brand", hash: "data-visualization" },
+      { label: "Color", path: "/visual-brand/color" },
+      { label: "Typography", path: "/visual-brand/typography" },
+      { label: "Design elements", path: "/visual-brand/design-elements" },
+      { label: "Data visualization", path: "/visual-brand/data-visualization" },
     ],
   },
   {

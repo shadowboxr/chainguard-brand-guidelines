@@ -1,6 +1,9 @@
 import DocPage from "./DocPage.jsx";
-import { SECTIONS, TOC, IDS } from "../content/visual-brand.js";
+import { PAGES } from "../content/visual-brand.js";
 
-export default function VisualBrand() {
-  return <DocPage sections={SECTIONS} toc={TOC} ids={IDS} title="Visual Brand" />;
+// One page per Visual Brand topic (page = "color" | "typography" |
+// "design-elements" | "data-visualization"). Hero stays "Visual Brand".
+export default function VisualBrand({ page }) {
+  const p = PAGES[page] || PAGES.color;
+  return <DocPage sections={p.sections} toc={p.toc} ids={p.toc.map((t) => t.id)} title="Visual Brand" />;
 }

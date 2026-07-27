@@ -21,6 +21,12 @@ export default function Layout() {
   const isMobile = useMediaQuery();
 
   useEffect(() => setOpen(false), [location.pathname]);
+  // Reset the scroll container to the top on page change (but not for in-page
+  // hash links — DocPage scrolls those to their anchor).
+  useEffect(() => {
+    if (location.hash) return;
+    document.querySelector(".layout__main")?.scrollTo(0, 0);
+  }, [location.pathname, location.hash]);
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     return () => {
