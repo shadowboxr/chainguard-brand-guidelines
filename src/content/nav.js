@@ -25,10 +25,10 @@ export const NAV = [
     label: "Assets",
     path: "/assets",
     children: [
-      { label: "Logo", path: "/assets", hash: "logo" },
-      { label: "Icons", path: "/assets", hash: "icons" },
-      { label: "Illustrations", path: "/assets", hash: "illustrations" },
-      { label: "Templates and tools", path: "/assets", hash: "templates" },
+      { label: "Logo", path: "/assets/logo" },
+      { label: "Icons", path: "/assets/icons" },
+      { label: "Illustrations", path: "/assets/illustrations" },
+      { label: "Templates and tools", path: "/assets/templates" },
     ],
   },
   // External CTA — links out to the marketing site for now.
