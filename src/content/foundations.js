@@ -37,8 +37,8 @@ export const SECTIONS = [
         label: "Tone",
         blocks: [
           { type: "p", text: "Tone fluctuates depending on the channel and medium. At the most basic level, you can think of tone on a spectrum and can start to show more personality and less formality depending on the channel and purpose of the message. If the goal is engagement and memorability, turn the playfulness and quirk up. If the goal is credibility and clarity, turn it down and focus on straightforward communication." },
-          { type: "chips", lead: "You might use a lighter, more playful tone when creating:", cols: 1, items: ["Social posts", "Campaign headlines and taglines", "Top-of-funnel content like a This Sh*t Is Hard blog post", "Memorable brand experiences, like event booths"] },
-          { type: "chips", lead: "Use a more direct tone when creating:", cols: 1, items: ["Research and data-driven guides", "Product documentation and updates", "Sales enablement materials", "Executive thought leadership", "Direct email communication"] },
+          { type: "bullets", lead: "You might use a lighter, more playful tone when creating:", items: ["Social posts", "Campaign headlines and taglines", "Top-of-funnel content like a This Sh*t Is Hard blog post", "Memorable brand experiences, like event booths"] },
+          { type: "bullets", lead: "Use a more direct tone when creating:", items: ["Research and data-driven guides", "Product documentation and updates", "Sales enablement materials", "Executive thought leadership", "Direct email communication"] },
         ],
       },
       {

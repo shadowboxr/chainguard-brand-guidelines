@@ -104,11 +104,22 @@ export default function Blocks({ blocks }) {
             </div>
           </div>
         ) : block.type === "bullets" ? (
-          <ul className="fbullets" key={i}>
-            {block.items.map((item, t) => (
-              <li key={t}>{item}</li>
-            ))}
-          </ul>
+          block.lead ? (
+            <div className="fblock" key={i}>
+              <p className="ftext">{block.lead}</p>
+              <ul className="fbullets">
+                {block.items.map((item, t) => (
+                  <li key={t}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          ) : (
+            <ul className="fbullets" key={i}>
+              {block.items.map((item, t) => (
+                <li key={t}>{item}</li>
+              ))}
+            </ul>
+          )
         ) : (
           <div className="fvalues" key={i}>
             {block.items.map((item) => (
