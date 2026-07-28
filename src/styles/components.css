@@ -161,8 +161,9 @@
 .fsplit__media{aspect-ratio:16/9;background:var(--surface-inset);border:1px solid var(--border-default);display:grid;place-items:center}
 .fsplit__list{margin:0;padding-left:1.15em;display:flex;flex-direction:column;gap:var(--sp-2);font:400 16px/1.6 var(--font-body);color:var(--text-secondary)}
 .fsplit__list li{text-wrap:pretty}
-/* Print rows: the example slider wraps to its own line spanning the full row
-   width, so its left edge aligns with the Recommended/Avoid label. */
+/* Print rows: the example slider wraps to its own full-width line so its left
+   edge aligns with the Recommended/Avoid label and it spans the content area,
+   with the arrows + dots centered beneath (Figma 161:9565). */
 .fsplit__row--print{flex-wrap:wrap}
 .fsplit__row--print .tirl-wrap{flex:1 0 100%}
 .fanchor{scroll-margin-top:calc(var(--topbar-height) + var(--sp-6))}
