@@ -21,7 +21,7 @@ function TRow({ label, desc, media }) {
 
 function PRow({ label, items }) {
   return (
-    <div className="fsplit__row fsplit__row--print">
+    <div className="fsplit__row">
       <div className="fsplit__side">
         <h4 className="fsplit__label">{label}</h4>
       </div>
@@ -31,8 +31,8 @@ function PRow({ label, items }) {
             <li key={i}>{t}</li>
           ))}
         </ul>
+        <Carousel />
       </div>
-      <Carousel />
     </div>
   );
 }
