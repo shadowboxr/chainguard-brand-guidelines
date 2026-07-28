@@ -30,11 +30,6 @@ export default function Alignment() {
     <div className="talign" aria-hidden="true">
       <div className="talign__guide" />
 
-      <div className="talign__tag">
-        <span className="talign__tag-l">Left align</span>
-        <span className="talign__tag-c">Center align</span>
-      </div>
-
       <div className="talign__stage">
         <div className="talign__block talign__block--left">{SPECIMEN}</div>
         <div className="talign__block talign__block--center">{SPECIMEN}</div>

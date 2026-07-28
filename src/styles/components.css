@@ -464,9 +464,9 @@
    a dashed guide box glides between the two text-column bounds. cqi-based so it
    scales at any width; --talign-dur drives the whole synchronized timeline. */
 .talign{--talign-dur:7s;position:relative;aspect-ratio:719/405;margin-top:var(--sp-4);background:var(--surface-inset);border:1px solid var(--border-default);overflow:hidden;container-type:inline-size}
-.talign__guide{position:absolute;top:0;bottom:0;border:1px dashed var(--border-default);animation:talign-guide var(--talign-dur) ease-in-out infinite}
-.talign__tag{position:absolute;top:3.67cqi;right:3.9cqi;display:grid;text-align:right;font:500 1.67cqi/1 var(--font-label);letter-spacing:.06em;text-transform:uppercase;color:var(--text-tertiary);white-space:nowrap}
-.talign__tag > span{grid-area:1/1}
+/* top/bottom pushed outside the overflow-hidden panel so only the vertical
+   dashed edges show. */
+.talign__guide{position:absolute;top:-10px;bottom:-10px;border:1px dashed var(--border-default);animation:talign-guide var(--talign-dur) ease-in-out infinite}
 .talign__stage{position:absolute;inset:0}
 .talign__block{position:absolute;top:50%;display:flex;flex-direction:column;gap:3.756cqi}
 .talign__block--left{left:7.94cqi;align-items:flex-start;text-align:left;transform:translateY(-50%)}
@@ -481,8 +481,8 @@
 .talign__body{margin:0;font:400 1.92cqi/1.5 var(--font-body);color:var(--text-secondary)}
 .talign__block--left .talign__body{width:40.11cqi}
 .talign__block--center .talign__body{width:100%}
-.talign__block--left,.talign__tag-l{animation:talign-fade-l var(--talign-dur) ease-in-out infinite}
-.talign__block--center,.talign__tag-c{animation:talign-fade-c var(--talign-dur) ease-in-out infinite}
+.talign__block--left{animation:talign-fade-l var(--talign-dur) ease-in-out infinite}
+.talign__block--center{animation:talign-fade-c var(--talign-dur) ease-in-out infinite}
 @keyframes talign-guide{0%,42%{left:8cqi;width:40.13cqi}52%,90%{left:17.215cqi;width:65.57cqi}100%{left:8cqi;width:40.13cqi}}
 /* Sequential handoff: the outgoing alignment fades out while the dashed frame
    starts gliding, the incoming one fades in as it arrives — layers never
@@ -490,10 +490,10 @@
 @keyframes talign-fade-l{0%,42%{opacity:1}47%,95%{opacity:0}100%{opacity:1}}
 @keyframes talign-fade-c{0%,47%{opacity:0}52%,90%{opacity:1}95%,100%{opacity:0}}
 @media (prefers-reduced-motion:reduce){
-  .talign__guide,.talign__block--left,.talign__block--center,.talign__tag-l,.talign__tag-c{animation:none}
+  .talign__guide,.talign__block--left,.talign__block--center{animation:none}
   .talign__guide{left:8cqi;width:40.13cqi}
-  .talign__block--center,.talign__tag-c{opacity:0}
-  .talign__block--left,.talign__tag-l{opacity:1}
+  .talign__block--center{opacity:0}
+  .talign__block--left{opacity:1}
 }
 
 /* ---- Design-element controls: responsive on small cards ---- */
