@@ -132,7 +132,7 @@ export default function ColorPalette() {
     <div className="cpal" onMouseMove={onMouseMove} onMouseLeave={onMouseLeave} onClick={onClick}>
       <Swatch c={{ name: "Blurple", fill: "var(--blurple-500)", h: 300, hex: "#6226FB", rows: blurple.rows }} hero />
       <section className="cpal-body">
-        <h3 className="cpal-h3">We have four color categories:</h3>
+        <h3 className="cpal-h3">We have three color categories:</h3>
         <div className="cpal-cats">
           {CATS.map((cat, i) => (
             <Category cat={cat} key={i} />
