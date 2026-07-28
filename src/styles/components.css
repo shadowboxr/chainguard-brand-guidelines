@@ -417,6 +417,8 @@
 .bblocks--grid{background-image:linear-gradient(to right,var(--border-default) 1px,transparent 1px),linear-gradient(to bottom,var(--border-default) 1px,transparent 1px);background-size:var(--bb-cell) var(--bb-cell);background-origin:border-box;background-position:0 0}
 .bblocks__grid{position:absolute;inset:0;display:grid}
 .bb-cell{transition:background-color .45s var(--ease)}
+.dg-cell{display:flex;align-items:center;justify-content:center}
+.dg-dot{width:64.3%;height:64.3%;background:var(--dg-c);transition:background-color .45s var(--ease)}
 .bblocks__top{position:absolute;top:var(--sp-6);left:var(--sp-6);right:var(--sp-6);z-index:5;display:flex;align-items:center;justify-content:space-between;gap:var(--sp-4)}
 .bblocks__bottom{position:absolute;bottom:var(--sp-6);left:var(--sp-6);right:var(--sp-6);z-index:5;display:flex;align-items:center;justify-content:space-between;gap:var(--sp-4)}
 .bblocks__hues{display:flex;align-items:center;gap:var(--sp-4)}

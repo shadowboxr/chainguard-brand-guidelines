@@ -2,6 +2,7 @@ import Cursor from "./Cursor.jsx";
 import VisibleGrid from "./VisibleGrid.jsx";
 import BuildingBlocks from "./BuildingBlocks.jsx";
 import Patterns from "./Patterns.jsx";
+import DotGrid from "./DotGrid.jsx";
 
 function XSec({ id, title, intro, children }) {
   return (
@@ -25,6 +26,9 @@ export default function DesignElements() {
       </XSec>
       <XSec id="patterns" title="Grid + blocks" intro="By combining the grid and building blocks, we create patterns that add texture and depth to our visual brand. The patterns are used as background elements, and are a flexible design element that gives us range.">
         <Patterns />
+      </XSec>
+      <XSec id="dot-grid" title="Dot grid" intro="By arranging dots within a flexible grid, we create patterns that add structure, texture, and depth to the Chainguard visual system. The dot grid can be used as a subtle background or a more expressive graphic element, giving us a consistent foundation with room to adapt across different applications.">
+        <DotGrid />
       </XSec>
       <XSec id="the-cursor" title="The Cursor" intro="The cursor is a direct reference to our engineering audience. As a design element, it can be expanded into a highlight, or block text treatment that creates bold typographic moments.">
         <Cursor />

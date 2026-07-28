@@ -39,6 +39,7 @@ const DESIGN = {
     { id: "the-visible-grid", label: "The visible grid", sub: true },
     { id: "building-blocks", label: "Building blocks", sub: true },
     { id: "patterns", label: "Grid + blocks", sub: true },
+    { id: "dot-grid", label: "Dot grid", sub: true },
     { id: "the-cursor", label: "The Cursor", sub: true },
   ],
 };
