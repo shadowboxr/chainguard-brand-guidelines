@@ -6,6 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Chainguard Brand Guidelines" />
     <title>Chainguard · Brand Guidelines</title>
+    <script>
+      // Apply the saved theme before first paint to avoid a flash. Mirrors
+      // ThemeToggle: "system" (default) follows the OS preference.
+      (function () {
+        try {
+          var c = localStorage.getItem("cg-theme") || "system";
+          var dark = c === "dark" || (c === "system" && matchMedia("(prefers-color-scheme: dark)").matches);
+          document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

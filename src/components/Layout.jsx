@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLocation, Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar.jsx";
+import ThemeToggle from "./ThemeToggle.jsx";
 
 function useMediaQuery() {
   const q = "(max-width: 900px)";
@@ -16,7 +17,6 @@ function useMediaQuery() {
 
 export default function Layout() {
   const [open, setOpen] = useState(false);
-  const [theme, setTheme] = useState("light");
   const location = useLocation();
   const isMobile = useMediaQuery();
 
@@ -33,10 +33,6 @@ export default function Layout() {
       document.body.style.overflow = "";
     };
   }, [open]);
-  useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-  }, [theme]);
-
   return (
     <div className="layout">
       {!isMobile && (
@@ -71,14 +67,7 @@ export default function Layout() {
             <span />
           </button>
           <div className="topbar__spacer" />
-          <button
-            type="button"
-            className="topbar__theme"
-            aria-label="Toggle color theme"
-            onClick={() => setTheme((t) => (t === "light" ? "dark" : "light"))}
-          >
-            {theme === "light" ? "Dark" : "Light"}
-          </button>
+          <ThemeToggle />
           <span className="topbar__label t-label">Brand Guidelines</span>
         </header>
         <main className="content">
