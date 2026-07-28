@@ -18,6 +18,10 @@ export default function DataViz() {
   return (
     <div className="cdv">
       <p className="cxintro">Data allows us to communicate patterns, concepts, and our value with visual impact.</p>
+      <div className="dv-ex">
+        <h3 id="data-viz-examples" className="cpal-h3 fanchor">Data Visualization Examples</h3>
+        <Carousel />
+      </div>
       <div className="fsplit">
         <FText label="Keep it simple" text="Keep the focus on the data, and the story you are telling. Do not overcomplicate with visuals or design elements that do not add value." />
         <FText label="Use color with intent" text="Use color only when it adds emphasis or meaning; for example use Blurple to call attention to a key stat, or Lime/Solar to signify good/bad." />
@@ -38,10 +42,6 @@ export default function DataViz() {
           <hr className="dnote__divider" />
           <p className="dnote__line"><strong>Type:</strong> Large-scale stats should always use Gellix Bold. Body copy should be Gellix Regular to ensure legibility. Labels can use Roobert SemiMono.</p>
         </div>
-      </div>
-      <div className="dv-ex">
-        <h3 id="data-viz-examples" className="cpal-h3 fanchor">Data Visualization Examples</h3>
-        <Carousel />
       </div>
     </div>
   );
