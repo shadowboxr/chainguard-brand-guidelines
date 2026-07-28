@@ -27,7 +27,7 @@
 .layout__main{background:var(--surface-page);flex:auto;min-width:0;height:100%;overflow:hidden auto}
 .topbar{z-index:10;height:var(--topbar-height);align-items:center;gap:var(--sp-4);padding:0 var(--sp-6);background:color-mix(in srgb, var(--surface-page) 88%, transparent);-webkit-backdrop-filter:saturate(180%)blur(8px);backdrop-filter:saturate(180%)blur(8px);border-bottom:1px solid var(--border-default);display:flex;position:sticky;top:0}
 .topbar__spacer{flex:auto}
-.topbar__label{color:var(--text-tertiary);white-space:nowrap}
+.topbar__label{color:var(--text-tertiary);white-space:nowrap;margin-left:var(--sp-2)}
 /* Three-way theme toggle (System / Light / Dark). A blurple indicator slides
    between the 30px segments; the active icon flips to the contrast color. */
 .ttoggle{position:relative;display:inline-flex;gap:3px;border:1px solid var(--border-default);background:0 0}
