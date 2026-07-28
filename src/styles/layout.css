@@ -36,8 +36,8 @@
 .ttoggle__seg:hover{color:var(--text-secondary)}
 .ttoggle__seg.is-on{color:var(--primary-contrast)}
 .ttoggle__seg:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
-.ttoggle__ic{display:block;width:24px;height:24px}
-.ttoggle__tip{position:absolute;top:calc(100% + 8px);left:50%;padding:5px 8px;background:var(--text-primary);color:var(--text-inverse);font:500 11px/1 var(--font-label);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;border-radius:var(--radius-xs);opacity:0;pointer-events:none;transform:translate(-50%,-3px);transition:opacity var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);z-index:5}
+.ttoggle__ic{display:block;width:20px;height:20px}
+.ttoggle__tip{position:absolute;top:calc(100% + 8px);left:50%;padding:5px 8px;background:var(--text-primary);color:var(--text-inverse);font:500 11px/1 var(--font-label);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;opacity:0;pointer-events:none;transform:translate(-50%,-3px);transition:opacity var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);z-index:5}
 .ttoggle__tip::before{content:"";position:absolute;bottom:100%;left:50%;transform:translateX(-50%);border:4px solid transparent;border-bottom-color:var(--text-primary)}
 .ttoggle__seg:hover .ttoggle__tip,.ttoggle__seg:focus-visible .ttoggle__tip{opacity:1;transform:translate(-50%,0)}
 @media (prefers-reduced-motion:reduce){.ttoggle__slider{transition:none}}
