@@ -1,4 +1,5 @@
 import { useRef, useState, useCallback } from "react";
+import Carousel from "./Carousel.jsx";
 import ContrastChecker from "./ContrastChecker.jsx";
 import ColorThemeBars from "./ColorThemeBars.jsx";
 import ColorThemeMono from "./ColorThemeMono.jsx";
@@ -30,6 +31,7 @@ function PRow({ label, items }) {
             <li key={i}>{t}</li>
           ))}
         </ul>
+        <Carousel />
       </div>
     </div>
   );
