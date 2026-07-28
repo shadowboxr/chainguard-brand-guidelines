@@ -77,7 +77,7 @@
 .toc__link--active{color:var(--primary)}
 /* Download-all-fonts button under the scrollspy (Figma 161:10112). Aligned with
    the TOC list indent and spanning to the column's right edge. */
-.toc__dl{display:flex;align-items:center;justify-content:center;gap:10px;width:calc(100% - 18px);margin:var(--sp-6) 0 0 18px;padding:16px 8px;background:var(--primary);color:var(--primary-contrast);font:700 14px/1.2 var(--font-title);letter-spacing:-.01em;text-decoration:none;cursor:pointer;transition:background var(--dur-fast) var(--ease)}
+.toc__dl{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;margin:var(--sp-6) 0 0;padding:16px 8px;background:var(--primary);color:var(--primary-contrast);font:700 14px/1.2 var(--font-title);letter-spacing:-.01em;text-decoration:none;cursor:pointer;transition:background var(--dur-fast) var(--ease)}
 .toc__dl:hover{background:var(--primary-hover)}
 .toc__dl svg{display:block;flex:none}
 @media (width<=1120px){.toc{display:none}}
