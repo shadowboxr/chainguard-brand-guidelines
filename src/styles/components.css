@@ -500,8 +500,8 @@
    (Headings / Body / Eyebrow / Proper noun) rotate on a loop, each showing its
    rule with the relevant capitals highlighted. Screens hand off with the same
    sequential fade as Alignment (each fades out before the next fades in).
-   cqi-based; --tcap-dur drives the timeline (4 screens x 3.5s). */
-.tcap{--tcap-dur:14s;position:relative;aspect-ratio:719/405;margin-top:var(--sp-4);background:var(--surface-inset);border:1px solid var(--border-default);overflow:hidden;container-type:inline-size}
+   cqi-based; --tcap-dur drives the timeline (4 screens x 2.5s). */
+.tcap{--tcap-dur:10s;position:relative;aspect-ratio:719/405;margin-top:var(--sp-4);background:var(--surface-inset);border:1px solid var(--border-default);overflow:hidden;container-type:inline-size}
 .tcap__screen{position:absolute;inset:0;opacity:0}
 .tcap__labels{position:absolute;top:3.67cqi;left:3.62cqi;right:3.9cqi;display:flex;justify-content:space-between;font:500 1.67cqi/1 var(--font-label);letter-spacing:.06em;text-transform:uppercase;color:var(--text-tertiary);white-space:nowrap}
 .tcap__specimen{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center}
