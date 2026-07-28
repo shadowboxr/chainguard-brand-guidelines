@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import CopyButton from "../components/CopyButton.jsx";
 import Blocks from "./Blocks.jsx";
 
-export default function DocPage({ sections: S, toc: P, ids: M, title: H }) {
+export default function DocPage({ sections: S, toc: P, ids: M, title: H, tocFooter }) {
   const [active, setActive] = useState(M[0]);
   const listRef = useRef(null);
   const [indicatorTop, setIndicatorTop] = useState(4);
@@ -118,6 +118,7 @@ export default function DocPage({ sections: S, toc: P, ids: M, title: H }) {
                 </li>
               ))}
             </ul>
+            {tocFooter}
           </nav>
         </div>
       </div>

@@ -75,6 +75,11 @@
 .toc__link--sub{padding-left:var(--sp-4)}
 .toc__link:hover{color:var(--text-secondary)}
 .toc__link--active{color:var(--primary)}
+/* Download-all-fonts button under the scrollspy (Figma 161:10112). Aligned with
+   the TOC list indent and spanning to the column's right edge. */
+.toc__dl{display:flex;align-items:center;justify-content:center;gap:10px;width:calc(100% - 18px);margin:var(--sp-6) 0 0 18px;padding:16px 8px;background:var(--primary);color:var(--primary-contrast);font:700 14px/1.2 var(--font-title);letter-spacing:-.01em;text-decoration:none;cursor:pointer;transition:background var(--dur-fast) var(--ease)}
+.toc__dl:hover{background:var(--primary-hover)}
+.toc__dl svg{display:block;flex:none}
 @media (width<=1120px){.toc{display:none}}
 @media (width<=900px){.fhero{padding:var(--sp-6) var(--sp-5) var(--sp-6);min-height:120px}.fbody{padding:var(--sp-10) var(--sp-5) var(--sp-16)}.frow{gap:var(--sp-2);padding:var(--sp-8) 0;grid-template-columns:1fr}.frows{margin-top:var(--sp-8)}.fcards{gap:var(--sp-6);grid-template-columns:1fr}.fchips--2,.fchips--4{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (width<=600px){.fvalue__media{grid-template-columns:1fr}}
