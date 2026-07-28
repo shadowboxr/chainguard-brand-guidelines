@@ -53,17 +53,16 @@ function Dropdown({ value, options, onPick }) {
 export default function DotGrid() {
   const [sizeIdx, setSizeIdx] = useState(DEFAULT_SIZE);
   const [colorKey, setColorKey] = useState("blurple");
-  const [dotSize, setDotSize] = useState(50); // 0-100 → 5%-95% of the cell
+  const [dotSize, setDotSize] = useState(25); // % of the cell (5-95)
   const cols = SIZES[sizeIdx].cols;
   const count = cols * cols;
   const color = COLORS.find((c) => c.key === colorKey);
-  const dotPct = 5 + dotSize * 0.9; // 5% at 0, 50% at 50, 95% at 100
 
   const sizeDrop = <Dropdown value={SIZES[sizeIdx]} options={SIZES} onPick={setSizeIdx} />;
   const dotSizeCtrl = (
     <label className="bb-density">
       <span className="bb-density__label">Dot size</span>
-      <input type="range" min="0" max="100" value={dotSize} onChange={(e) => setDotSize(+e.target.value)} aria-label="Dot size" />
+      <input type="range" min="5" max="95" value={dotSize} onChange={(e) => setDotSize(+e.target.value)} aria-label="Dot size" />
     </label>
   );
   const colorToggles = COLORS.map((c) => {
@@ -77,7 +76,7 @@ export default function DotGrid() {
   });
 
   return (
-    <div className="bblocks bblocks--dots" style={{ "--dg-c": `var(--bb-${color.token})`, "--dg-size": dotPct + "%" }}>
+    <div className="bblocks bblocks--dots" style={{ "--dg-c": `var(--bb-${color.token})`, "--dg-size": dotSize + "%" }}>
       <div className="bblocks__grid" style={{ gridTemplateColumns: `repeat(${cols},1fr)`, gridTemplateRows: `repeat(${cols},1fr)` }}>
         {Array.from({ length: count }, (_, i) => (
           <div key={i} className="dg-cell"><span className="dg-dot" /></div>
