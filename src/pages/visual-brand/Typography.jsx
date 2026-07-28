@@ -5,6 +5,7 @@ import CursorBlink from "./CursorBlink.jsx";
 import Highlight from "./Highlight.jsx";
 import Hierarchy from "./Hierarchy.jsx";
 import Alignment from "./Alignment.jsx";
+import Capitalization from "./Capitalization.jsx";
 import OptionsSheet from "./OptionsSheet.jsx";
 import StarIcon from "../../components/StarIcon.jsx";
 
@@ -339,7 +340,9 @@ export default function Typography() {
       <XSec id="alignment" title="Alignment" intro="We align type primarily to the left, and in some select applications, center. Left alignment is used as the default for most content applications, since it is the most clear and easy to read. We reserve center alignment for more striking applications like a homepage hero, an out-of-home campaign, and bold statement presentation slides.">
         <Alignment />
       </XSec>
-      <XSec id="capitalization" title="Capitalization" intro="As outlined in our Writing Style Guide, we use sentence case for all of our headlines. We only use capital letters at the start of the sentence, or when mentioning a proper noun like a person, place, company, or product (like Chainguard Containers, or The Guardener). We reserve all-caps for labels, like eyebrow text." />
+      <XSec id="capitalization" title="Capitalization" intro="As outlined in our Writing Style Guide, we use sentence case for all of our headlines. We only use capital letters at the start of the sentence, or when mentioning a proper noun like a person, place, company, or product (like Chainguard Containers, or The Guardener). We reserve all-caps for labels, like eyebrow text.">
+        <Capitalization />
+      </XSec>
       <XSec id="cursor-highlight" title="The cursor and highlight" intro="Our brand system uses two elements alongside our typeface: the cursor and the highlight.">
         <div className="fsplit">
           <div className="fsplit__row">

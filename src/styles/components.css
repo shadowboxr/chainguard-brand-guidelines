@@ -496,6 +496,33 @@
   .talign__block--left{opacity:1}
 }
 
+/* Typography — "Capitalization" demo (Figma 150:4111). Four specimen screens
+   (Headings / Body / Eyebrow / Proper noun) rotate on a loop, each showing its
+   rule with the relevant capitals highlighted. Screens hand off with the same
+   sequential fade as Alignment (each fades out before the next fades in).
+   cqi-based; --tcap-dur drives the timeline (4 screens x 3.5s). */
+.tcap{--tcap-dur:14s;position:relative;aspect-ratio:719/405;margin-top:var(--sp-4);background:var(--surface-inset);border:1px solid var(--border-default);overflow:hidden;container-type:inline-size}
+.tcap__screen{position:absolute;inset:0;opacity:0}
+.tcap__labels{position:absolute;top:3.67cqi;left:3.62cqi;right:3.9cqi;display:flex;justify-content:space-between;font:500 1.67cqi/1 var(--font-label);letter-spacing:.06em;text-transform:uppercase;color:var(--text-tertiary);white-space:nowrap}
+.tcap__specimen{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center}
+.tcap__hl{color:var(--primary)}
+.tcap__heading{margin:0;font:700 7.68cqi/1 var(--font-title);letter-spacing:-.03em;color:var(--text-primary);white-space:nowrap}
+.tcap__body{margin:0;width:61.43cqi;font:400 1.92cqi/1.5 var(--font-body);color:var(--text-secondary)}
+.tcap__eyebrow{font:500 2.95cqi/1 var(--font-label);letter-spacing:.06em;text-transform:uppercase;color:var(--primary)}
+.tcap__proper{margin:0;font:700 4.45cqi/1.2 var(--font-title);letter-spacing:-.03em;color:var(--text-primary);white-space:nowrap}
+.tcap__screen--1{animation:tcap-1 var(--tcap-dur) ease-in-out infinite}
+.tcap__screen--2{animation:tcap-2 var(--tcap-dur) ease-in-out infinite}
+.tcap__screen--3{animation:tcap-3 var(--tcap-dur) ease-in-out infinite}
+.tcap__screen--4{animation:tcap-4 var(--tcap-dur) ease-in-out infinite}
+@keyframes tcap-1{0%{opacity:0}4%,21%{opacity:1}25%,100%{opacity:0}}
+@keyframes tcap-2{0%,25%{opacity:0}29%,46%{opacity:1}50%,100%{opacity:0}}
+@keyframes tcap-3{0%,50%{opacity:0}54%,71%{opacity:1}75%,100%{opacity:0}}
+@keyframes tcap-4{0%,75%{opacity:0}79%,96%{opacity:1}100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){
+  .tcap__screen{animation:none}
+  .tcap__screen--1{opacity:1}
+}
+
 /* ---- Design-element controls: responsive on small cards ---- */
 /* Let the overlay control bars wrap instead of overflowing the card. */
 .vgrid__top,.cc__top,.bblocks__top,.bblocks__bottom,.bblocks__hues,.bblocks__topleft{flex-wrap:wrap;row-gap:var(--sp-2)}
