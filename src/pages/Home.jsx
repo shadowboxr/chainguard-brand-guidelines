@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { HUB_NAV, HUB_LINKS } from "../content/hub.js";
 import StarIcon from "../components/StarIcon.jsx";
@@ -60,9 +60,10 @@ function HubLink({ item, index }) {
 export default function Home() {
   // Opening sequence: plays every time the Brand Hub home mounts (each load /
   // navigation to "/"), and is skipped entirely under prefers-reduced-motion.
-  // `phase` gates the site's entrance ("hold" = content held invisible under the
-  // overlay, "reveal" = animate in, "off" = no intro); `overlay` mounts the
-  // IntroSequence itself.
+  // `phase` gates the entrance ("hold" = everything held invisible under the
+  // overlay, "reveal" = items load in independently, "off" = no intro). It is
+  // published as a `data-intro` attribute on <html> so the shell (sidebar,
+  // topbar) reveals in step with the page. `overlay` mounts the IntroSequence.
   const [phase, setPhase] = useState(() => {
     if (typeof window === "undefined") return "off";
     const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -70,8 +71,15 @@ export default function Home() {
   });
   const [overlay, setOverlay] = useState(() => phase !== "off");
 
+  useEffect(() => {
+    if (phase === "off") return undefined;
+    const el = document.documentElement;
+    el.setAttribute("data-intro", phase);
+    return () => el.removeAttribute("data-intro");
+  }, [phase]);
+
   return (
-    <div className={"hub" + (phase === "hold" ? " hub--hold" : "") + (phase === "reveal" ? " hub--reveal" : "")}>
+    <div className="hub">
       {/* ---- Hero: full-bleed modular grid ---- */}
       <header className="hub-hero">
         <div className="hub-hero__grid">

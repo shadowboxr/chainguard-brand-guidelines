@@ -774,16 +774,17 @@
 /* ============================================================
    Opening sequence (Figma 166:15129) + homepage entrance
    ============================================================ */
-/* Full-bleed light backdrop with a centered Blurple block. The block appears
+/* A centered Blurple block over a light backdrop layer. The block appears
    small, scales up smoothly from the center, cycles the palette (driven in
-   IntroSequence.jsx), then morphs onto the live hero block. Backdrop + block
-   fade away to reveal the real hero underneath — identical Blurple, so the
-   handoff is seamless. */
-.cg-intro{position:fixed;inset:0;z-index:9999;background:var(--surface-page);transition:opacity .55s var(--ease-out)}
-.cg-intro--fade{opacity:0}
+   IntroSequence.jsx), then morphs onto the live hero block. Only the backdrop
+   layer clears — the block stays solid and locks onto the hero (identical
+   Blurple), so it builds into the purple instead of fading away. */
+.cg-intro{position:fixed;inset:0;z-index:9999}
+.cg-intro__backdrop{position:absolute;inset:0;background:var(--surface-page);transition:opacity .6s var(--ease-out)}
+.cg-intro__backdrop.is-clearing{opacity:0}
 /* Starts small + invisible, fades in (is-shown), then scales up extremely
    smoothly from the center (is-open). Background transitions so the palette
-   cycle crossfades rather than hard-cuts. */
+   cycle crossfades rather than hard-cuts. The block never fades out. */
 .cg-intro__block{position:fixed;display:flex;align-items:center;justify-content:center;transform:scale(.26);transform-origin:center;opacity:0;transition:opacity .26s var(--ease-out),transform .95s cubic-bezier(.5,0,.15,1),background-color .3s ease-in-out;will-change:transform,left,top,width,height,opacity}
 .cg-intro__block.is-shown{opacity:1}
 .cg-intro__block.is-open{transform:scale(1)}
@@ -794,20 +795,92 @@
 .cg-intro__logo img{display:block}
 .cg-intro__logo span{font-family:var(--font-title);font-weight:600;font-size:22px;letter-spacing:-.01em;line-height:1;color:#fff;white-space:nowrap}
 
-/* Site held invisible beneath the overlay until the reveal (the hero block
-   itself stays painted so the morph has something to land on). */
-.hub--hold .hub-title,.hub--hold .hub-lede,.hub--hold .hub-hero__panel,.hub--hold .hub-nav,.hub--hold .hub-support{opacity:0}
+/* ---- Entrance: every item loads in independently ----
+   Driven by a `data-intro` attribute on <html> so the shell (sidebar/topbar)
+   reveals in step with the page. `hold` keeps every item invisible beneath the
+   overlay; `reveal` animates each one in on its own slow, staggered delay. The
+   hero block is already present (the intro block locks onto it), so the hero
+   text starts as that block is swapped out (~.75s).
 
-/* Reveal: the hero text lands first with the morphing block, then the rest of
-   the page slowly stacks in after it, section by section. */
-@keyframes hubReveal{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
-.hub--reveal .hub-title{animation:hubReveal .6s var(--ease-out) both}
-.hub--reveal .hub-lede{animation:hubReveal .6s var(--ease-out) .12s both}
-.hub--reveal .hub-hero__shortcuts{animation:hubReveal .62s var(--ease-out) .42s both}
-.hub--reveal .hub-hero__note{animation:hubReveal .62s var(--ease-out) .6s both}
-.hub--reveal .hub-nav{animation:hubReveal .68s var(--ease-out) .82s both}
-.hub--reveal .hub-support{animation:hubReveal .68s var(--ease-out) 1.06s both}
+   The hero panels and nav modules sit in grid cells whose gaps show a grey
+   divider background, so we keep those *cells* painted and stagger their
+   contents — otherwise the empty cells would flash grey. */
+:root[data-intro=hold] .sidebar__brand,
+:root[data-intro=hold] .sidebar__sections>.nav-group,
+:root[data-intro=hold] .topbar__menu,
+:root[data-intro=hold] .topbar .ttoggle,
+:root[data-intro=hold] .topbar__label,
+:root[data-intro=hold] .hub-title,
+:root[data-intro=hold] .hub-lede,
+:root[data-intro=hold] .hub-hero__panel .hub-panel__head,
+:root[data-intro=hold] .hub-hero__shortcuts .hub-scut,
+:root[data-intro=hold] .hub-hero__note .hub-panel__body,
+:root[data-intro=hold] .hub-nav .hub-section__head,
+:root[data-intro=hold] .hub-modules .hub-module>*,
+:root[data-intro=hold] .hub-support .hub-section__head,
+:root[data-intro=hold] .hub-support__card{opacity:0}
+
+@keyframes hubItemIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+:root[data-intro=reveal] .sidebar__brand,
+:root[data-intro=reveal] .sidebar__sections>.nav-group,
+:root[data-intro=reveal] .topbar__menu,
+:root[data-intro=reveal] .topbar .ttoggle,
+:root[data-intro=reveal] .topbar__label,
+:root[data-intro=reveal] .hub-title,
+:root[data-intro=reveal] .hub-lede,
+:root[data-intro=reveal] .hub-hero__panel .hub-panel__head,
+:root[data-intro=reveal] .hub-hero__shortcuts .hub-scut,
+:root[data-intro=reveal] .hub-hero__note .hub-panel__body,
+:root[data-intro=reveal] .hub-nav .hub-section__head,
+:root[data-intro=reveal] .hub-modules .hub-module>*,
+:root[data-intro=reveal] .hub-support .hub-section__head,
+:root[data-intro=reveal] .hub-support__card{animation:hubItemIn .55s var(--ease-out) both}
+
+/* Shell first — sidebar brand, then each nav item, plus the topbar. */
+:root[data-intro=reveal] .sidebar__brand{animation-delay:.05s}
+:root[data-intro=reveal] .sidebar__sections>.nav-group:nth-child(1){animation-delay:.15s}
+:root[data-intro=reveal] .sidebar__sections>.nav-group:nth-child(2){animation-delay:.25s}
+:root[data-intro=reveal] .sidebar__sections>.nav-group:nth-child(3){animation-delay:.35s}
+:root[data-intro=reveal] .sidebar__sections>.nav-group:nth-child(4){animation-delay:.45s}
+:root[data-intro=reveal] .sidebar__sections>.nav-group:nth-child(5){animation-delay:.55s}
+:root[data-intro=reveal] .sidebar__sections>.nav-group:nth-child(n+6){animation-delay:.65s}
+:root[data-intro=reveal] .topbar__menu{animation-delay:.1s}
+:root[data-intro=reveal] .topbar .ttoggle{animation-delay:.2s}
+:root[data-intro=reveal] .topbar__label{animation-delay:.3s}
+/* Hero text emerges as the intro block is swapped for the real hero. */
+:root[data-intro=reveal] .hub-title{animation-delay:.75s}
+:root[data-intro=reveal] .hub-lede{animation-delay:.9s}
+/* Right rail — shortcuts head, each button, then the note. */
+:root[data-intro=reveal] .hub-hero__shortcuts .hub-panel__head{animation-delay:1.05s}
+:root[data-intro=reveal] .hub-hero__shortcuts .hub-scut:nth-child(1){animation-delay:1.15s}
+:root[data-intro=reveal] .hub-hero__shortcuts .hub-scut:nth-child(2){animation-delay:1.25s}
+:root[data-intro=reveal] .hub-hero__shortcuts .hub-scut:nth-child(3){animation-delay:1.35s}
+:root[data-intro=reveal] .hub-hero__note .hub-panel__head{animation-delay:1.45s}
+:root[data-intro=reveal] .hub-hero__note .hub-panel__body{animation-delay:1.55s}
+/* Sections below — heading, then each module, then support cards. */
+:root[data-intro=reveal] .hub-nav .hub-section__head{animation-delay:1.7s}
+:root[data-intro=reveal] .hub-modules .hub-module:nth-child(1)>*{animation-delay:1.85s}
+:root[data-intro=reveal] .hub-modules .hub-module:nth-child(2)>*{animation-delay:1.97s}
+:root[data-intro=reveal] .hub-modules .hub-module:nth-child(3)>*{animation-delay:2.09s}
+:root[data-intro=reveal] .hub-modules .hub-module:nth-child(n+4)>*{animation-delay:2.21s}
+:root[data-intro=reveal] .hub-support .hub-section__head{animation-delay:2.35s}
+:root[data-intro=reveal] .hub-support__card:nth-child(1){animation-delay:2.5s}
+:root[data-intro=reveal] .hub-support__card:nth-child(n+2){animation-delay:2.62s}
+
 @media (prefers-reduced-motion:reduce){
-  .cg-intro__block,.cg-intro__logo,.cg-intro{transition:none}
-  .hub--reveal .hub-title,.hub--reveal .hub-lede,.hub--reveal .hub-hero__shortcuts,.hub--reveal .hub-hero__note,.hub--reveal .hub-nav,.hub--reveal .hub-support{animation:none}
+  .cg-intro__block,.cg-intro__logo,.cg-intro__backdrop{transition:none}
+  :root[data-intro=reveal] .sidebar__brand,
+  :root[data-intro=reveal] .sidebar__sections>.nav-group,
+  :root[data-intro=reveal] .topbar__menu,
+  :root[data-intro=reveal] .topbar .ttoggle,
+  :root[data-intro=reveal] .topbar__label,
+  :root[data-intro=reveal] .hub-title,
+  :root[data-intro=reveal] .hub-lede,
+  :root[data-intro=reveal] .hub-hero__panel .hub-panel__head,
+  :root[data-intro=reveal] .hub-hero__shortcuts .hub-scut,
+  :root[data-intro=reveal] .hub-hero__note .hub-panel__body,
+  :root[data-intro=reveal] .hub-nav .hub-section__head,
+  :root[data-intro=reveal] .hub-modules .hub-module>*,
+  :root[data-intro=reveal] .hub-support .hub-section__head,
+  :root[data-intro=reveal] .hub-support__card{animation:none}
 }

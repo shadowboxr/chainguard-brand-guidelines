@@ -6,12 +6,14 @@ import { WHITE_LOGO } from "./Sidebar.jsx";
    A small Blurple block appears, then scales up smoothly from the center to
    reveal the "Chainguard Design" lockup. It cycles smoothly through the core
    palette — ending on Ink second-to-last, then back to Blurple — and finally
-   morphs (FLIP) onto the live hero blurple block (.hub-hero__left). The hero
-   lands first, then Home stacks the rest of the page in after it.
+   morphs (FLIP) onto the live hero blurple block (.hub-hero__left). Only the
+   light backdrop clears: the block itself stays solid and locks into the hero,
+   so it reads as building into the purple rather than fading away. Home then
+   loads every item on the page in independently after it.
 
    Home skips it entirely under prefers-reduced-motion. `onReveal` fires as the
    morph begins (Home starts its entrance), `onDone` fires once the block has
-   landed + the overlay faded. */
+   locked onto the hero. */
 
 // Flash order after the initial Blurple reveal: the remaining core hues, then Ink
 // (second-to-last), then back to Blurple (var(--primary)) to land on the hero.
@@ -19,6 +21,11 @@ const FLASH = ["#FD2BF2", "#2BBAFD", "#04BD13", "#FD3964", "#F8C222", "#F85722",
 
 export default function IntroSequence({ onReveal, onDone }) {
   const timers = useRef([]);
+  // Read the latest callbacks through a ref so the timeline effect can run once
+  // on mount — depending on the (inline, unstable) callbacks would re-run the
+  // effect on every parent re-render and clear the pending timers mid-sequence.
+  const cbRef = useRef();
+  cbRef.current = { onReveal, onDone };
   const [rect, setRect] = useState(null); // centered start geometry (px)
   const [shown, setShown] = useState(false); // small block fades in
   const [open, setOpen] = useState(false); // scales up smoothly to full size
@@ -45,27 +52,32 @@ export default function IntroSequence({ onReveal, onDone }) {
     const flashEnd = FLASH_START + FLASH.length * STEP; // landed on Blurple
 
     at(flashEnd + 240, () => {
-      // 5) morph onto the live hero block + hand off to the site (hero lands first)
+      // 5) morph onto the live hero block; clear only the backdrop + logo so the
+      //    block locks into the hero (builds into the purple), and hand off.
       const el = document.querySelector(".hub-hero__left");
       if (el) {
         const r = el.getBoundingClientRect();
         setMorph({ left: Math.round(r.left), top: Math.round(r.top), width: Math.round(r.width), height: Math.round(r.height) });
       }
       setFade(true);
-      onReveal && onReveal();
+      cbRef.current.onReveal?.();
     });
-    at(flashEnd + 240 + 820, () => onDone && onDone()); // 6) remove overlay once landed
+    at(flashEnd + 240 + 720, () => cbRef.current.onDone?.()); // 6) block has locked onto the hero — swap it out
 
     return () => {
       timers.current.forEach(clearTimeout);
       timers.current = [];
     };
-  }, [onReveal, onDone]);
+    // Run once on mount — callbacks are read live via cbRef.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (!rect) return null;
   const box = morph || rect;
   return (
-    <div className={"cg-intro" + (fade ? " cg-intro--fade" : "")} aria-hidden="true">
+    <div className="cg-intro" aria-hidden="true">
+      {/* Only the light backdrop clears — the block below stays solid. */}
+      <div className={"cg-intro__backdrop" + (fade ? " is-clearing" : "")} />
       <div
         className={"cg-intro__block" + (shown ? " is-shown" : "") + (open ? " is-open" : "") + (morph ? " is-morphing" : "")}
         style={{ left: box.left, top: box.top, width: box.width, height: box.height, background: bg }}
