@@ -4,12 +4,12 @@ import { WHITE_LOGO } from "./Sidebar.jsx";
 /* Homepage opening sequence (Figma 166:15129).
 
    On an Ink (black) backdrop the "Chainguard Design" lockup fades in on its own
-   — no fill behind it. Then a Blurple block builds slowly around it (pushing out
-   to full width, then filling in its height) and morphs (FLIP) to form the live
-   hero blurple block (.hub-hero__left). The backdrop clears as the box forms;
-   the block stays solid, so it reads as building into the hero. Once formed, the
-   logo fades away, the block is swapped for the real hero, and Home leads its
-   entrance with the title, then everything else.
+   — no fill behind it. The lockup then stays put while a Blurple square grows in
+   uniformly behind it, and morphs (FLIP) to form the live hero blurple block
+   (.hub-hero__left). The backdrop clears as the box forms; the block stays
+   solid, so it reads as building into the hero. Once formed, the logo fades
+   away, the block is swapped for the real hero, and Home leads its entrance with
+   the title, then everything else.
 
    The lockup is a separate layer on top of the block (so the building fill
    doesn't clip it) that tracks the block's box as it morphs.
@@ -26,8 +26,7 @@ export default function IntroSequence({ onReveal, onDone }) {
   cbRef.current = { onReveal, onDone };
   const [rect, setRect] = useState(null); // centered start geometry (px)
   const [logoIn, setLogoIn] = useState(false); // lockup fades in by itself
-  const [shown, setShown] = useState(false); // then the block builds to full width
-  const [open, setOpen] = useState(false); // then fills in the height
+  const [open, setOpen] = useState(false); // then a perfect square grows in behind it
   const [morph, setMorph] = useState(null); // hero-block target rect (px)
   const [clearBackdrop, setClearBackdrop] = useState(false); // Ink backdrop clears
   const [fadeLogo, setFadeLogo] = useState(false); // lockup fades away
@@ -41,11 +40,10 @@ export default function IntroSequence({ onReveal, onDone }) {
     const at = (ms, fn) => timers.current.push(setTimeout(fn, ms));
 
     at(40, () => setLogoIn(true)); // 1) lockup appears by itself on black
-    at(720, () => setShown(true)); // 2) block builds out to full width (push either side)
-    at(1320, () => setOpen(true)); // 3) fill in the height
+    at(760, () => setOpen(true)); // 2) a perfect square grows in uniformly behind it
 
-    at(2000, () => {
-      // 4) morph to form the hero box, revealing the (still-empty) page frame.
+    at(1700, () => {
+      // 3) morph to form the hero box, revealing the (still-empty) page frame.
       const el = document.querySelector(".hub-hero__left");
       if (el) {
         const r = el.getBoundingClientRect();
@@ -53,9 +51,9 @@ export default function IntroSequence({ onReveal, onDone }) {
       }
       setClearBackdrop(true);
     });
-    at(2700, () => setFadeLogo(true)); // 5) hero box formed — the logo fades away
-    at(3080, () => {
-      // 6) swap the block for the real hero and lead Home's entrance with the title
+    at(2350, () => setFadeLogo(true)); // 4) hero box formed — the logo fades away
+    at(2900, () => {
+      // 5) swap the block for the real hero and lead Home's entrance with the title
       cbRef.current.onReveal?.();
       cbRef.current.onDone?.();
     });
@@ -76,7 +74,7 @@ export default function IntroSequence({ onReveal, onDone }) {
       {/* Ink backdrop clears as the hero box forms — the block stays solid. */}
       <div className={"cg-intro__backdrop" + (clearBackdrop ? " is-clearing" : "")} />
       <div
-        className={"cg-intro__block" + (shown ? " is-shown" : "") + (open ? " is-open" : "") + (morph ? " is-morphing" : "")}
+        className={"cg-intro__block" + (open ? " is-open" : "") + (morph ? " is-morphing" : "")}
         style={boxStyle}
       />
       {/* Lockup layer on top of the block, tracking its box. */}

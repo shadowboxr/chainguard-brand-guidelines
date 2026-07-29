@@ -782,11 +782,10 @@
 .cg-intro{position:fixed;inset:0;z-index:9999}
 .cg-intro__backdrop{position:absolute;inset:0;background:var(--neutral-900);transition:opacity .6s var(--ease-out)}
 .cg-intro__backdrop.is-clearing{opacity:0}
-/* Builds one axis at a time via clip-path: from nothing it pushes out to full
-   width (is-shown), then fills in its height (is-open) — so it reads as being
-   built from either side rather than scaled. Slow + deliberate. */
-.cg-intro__block{position:fixed;background:var(--primary);clip-path:inset(50% 50% 50% 50%);transition:clip-path .6s cubic-bezier(.5,0,.15,1);will-change:clip-path,left,top,width,height}
-.cg-intro__block.is-shown{clip-path:inset(47% 0% 47% 0%)}
+/* Grows in as a perfect square via a uniform clip-path (equal insets on a
+   square box), so the colour comes in as a square from the centre out. Slow +
+   deliberate. */
+.cg-intro__block{position:fixed;background:var(--primary);clip-path:inset(50% 50% 50% 50%);transition:clip-path .65s cubic-bezier(.5,0,.15,1);will-change:clip-path,left,top,width,height}
 .cg-intro__block.is-open{clip-path:inset(0% 0% 0% 0%)}
 /* During the morph the clip is fully open; only the box geometry animates as it
    forms the hero box. */
