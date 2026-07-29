@@ -13,7 +13,7 @@ const LINKY_D =
 const LINKY_VB = "0 0 78.843 69.101";
 const LINKY_W = 78.843;
 const LINKY_H = 69.101;
-const FRAC = 0.58; // Linky width as a fraction of the container
+const FRAC = 0.435; // Linky width as a fraction of the container
 
 // mark: Linky color on this background. White bg → Blurple Linky.
 const COLORS = [

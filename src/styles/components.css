@@ -412,7 +412,7 @@
 .iconc-line--h1{left:0;right:0;top:calc(50% - var(--ic)/2);height:1px}
 .iconc-line--h2{left:0;right:0;top:calc(50% + var(--ic)/2);height:1px}
 .iconc-box{position:absolute;left:50%;top:50%;width:var(--ic);height:var(--ic);transform:translate(-50%,-50%);display:grid;place-items:center;background:var(--iconc-bg);border-radius:var(--iconc-r);border:1px solid var(--border-default);transition:background var(--dur-med) var(--ease),border-radius var(--dur-med) var(--ease)}
-.iconc-box svg{width:58%;height:auto;display:block;color:var(--iconc-mark);transition:color var(--dur-med) var(--ease)}
+.iconc-box svg{width:43.5%;height:auto;display:block;color:var(--iconc-mark);transition:color var(--dur-med) var(--ease)}
 .iconc-tl{position:absolute;top:var(--sp-6);left:var(--sp-6);z-index:5}
 .iconc-tr{position:absolute;top:var(--sp-6);right:var(--sp-6);z-index:5}
 .iconc-bl{position:absolute;bottom:var(--sp-6);left:var(--sp-6);z-index:5}
