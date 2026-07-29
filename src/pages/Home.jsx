@@ -61,11 +61,8 @@ export default function Home() {
       {/* ---- Hero: full-bleed modular grid ---- */}
       <header className="hub-hero">
         <div className="hub-hero__grid">
-          <div className="hub-hero__head">
+          <div className="hub-hero__left">
             <h1 className="hub-title">Welcome to the Chainguard Brand&nbsp;Hub</h1>
-          </div>
-
-          <div className="hub-hero__lede">
             <p className="hub-lede">
               Your go-to resource for everything brand—bringing together guidelines, assets, and tools to help every
               employee represent Chainguard clearly and consistently.
