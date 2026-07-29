@@ -640,16 +640,32 @@
    ============================================================ */
 .hub{color:var(--text-primary)}
 
-/* ---- Hero (centered editorial opening) ---- */
-.hub-hero{background:var(--surface-inset);border-bottom:1px solid var(--border-default);padding:var(--sp-20) var(--sp-12);overflow:hidden}
-.hub-hero__inner{max-width:820px;margin:0 auto;display:flex;flex-direction:column;align-items:center;text-align:center}
-.hub-title{font:700 var(--fs-2xl)/1.02 var(--font-title);letter-spacing:-.03em;margin:0;text-wrap:balance}
-.hub-lede{color:var(--text-secondary);max-width:56ch;margin:var(--sp-6) auto 0;text-wrap:pretty}
+/* ---- Hero (full-bleed modular grid) ---- */
+/* 2×2 grid: headline (light) over lede (blurple) on the left; a shortcuts panel
+   over the internal-only notice on the right. 1px gaps read as divider lines. */
+.hub-hero{border-bottom:1px solid var(--border-default)}
+.hub-hero__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,380px);grid-template-rows:minmax(0,1fr) auto;gap:1px;background:var(--border-default);min-height:calc(100vh - var(--topbar-height))}
+.hub-hero__head{grid-area:1 / 1;background:var(--surface-inset);display:flex;align-items:center;padding:var(--sp-12) var(--sp-16)}
+.hub-hero__lede{grid-area:2 / 1;background:var(--primary);display:flex;align-items:center;padding:var(--sp-12) var(--sp-16)}
+.hub-hero__panel{grid-column:2;background:var(--surface-inset);padding:var(--sp-8);display:flex;flex-direction:column;gap:var(--sp-6)}
+.hub-hero__shortcuts{grid-row:1;justify-content:space-between}
+.hub-hero__note{grid-row:2}
+.hub-title{font:700 var(--fs-2xl)/1.02 var(--font-title);letter-spacing:-.03em;margin:0;text-wrap:balance;color:var(--text-primary)}
+.hub-lede{font:400 var(--fs-2xs)/1.45 var(--font-body);color:var(--primary-contrast);margin:0;max-width:52ch;text-wrap:pretty}
 
-/* Internal-only notice — shared asterisk call-out (.cpal-note) */
-.hub-note{margin-top:var(--sp-8);max-width:640px;text-align:left}
+/* Panel heads (icon box + eyebrow), reusing the .cpal-note asterisk box. */
+.hub-panel__head{display:flex;align-items:center;gap:var(--sp-3)}
+.hub-panel__eyebrow{color:var(--text-primary);margin:0}
+.hub-panel__body{font:400 var(--fs-4xs)/1.6 var(--font-body);color:var(--text-secondary);margin:0;text-wrap:pretty}
 .hub-note__link{color:var(--primary);font-weight:600;text-decoration:underline;text-underline-offset:2px;display:inline-flex;align-items:center;gap:3px}
 .hub-note__link:hover{color:var(--primary-hover)}
+
+/* Shortcut buttons (filled blurple) */
+.hub-scuts{display:flex;flex-direction:column;gap:var(--sp-3)}
+.hub-scut{display:flex;align-items:center;justify-content:center;gap:var(--sp-2);padding:14px var(--sp-4);background:var(--primary);color:var(--primary-contrast);font:700 var(--fs-4xs)/1.2 var(--font-title);letter-spacing:-.01em;text-decoration:none;transition:background var(--dur-fast) var(--ease)}
+.hub-scut:hover{background:var(--primary-hover)}
+.hub-scut:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+.hub-scut svg{flex:none}
 
 /* ---- Shared section scaffolding ---- */
 .hub-nav,.hub-support{max-width:1200px;margin:0 auto;padding:var(--sp-16) var(--sp-12)}
@@ -709,7 +725,11 @@
 
 /* ---- Responsive ---- */
 @media (width<=900px){
-  .hub-hero{padding:var(--sp-12) var(--sp-5)}
+  /* Hero stacks: headline, lede, shortcuts, note in a single column. */
+  .hub-hero__grid{grid-template-columns:1fr;grid-template-rows:none;min-height:0}
+  .hub-hero__head,.hub-hero__lede,.hub-hero__panel{grid-area:auto}
+  .hub-hero__head,.hub-hero__lede{padding:var(--sp-10) var(--sp-5)}
+  .hub-hero__panel{padding:var(--sp-6) var(--sp-5)}
   .hub-nav,.hub-support{padding:var(--sp-10) var(--sp-5)}
   .hub-modules{grid-template-columns:1fr}
   .hub-support__grid{grid-template-columns:1fr}

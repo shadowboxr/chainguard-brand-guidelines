@@ -18,7 +18,16 @@
 .nav-child:hover{color:var(--text-primary)}
 .nav-child--active{color:var(--primary)}
 .layout{height:100%;display:flex}
-.layout__sidebar{flex:0 0 var(--sidebar-width);height:100%;position:sticky;top:0}
+.layout__sidebar{flex:0 0 var(--sidebar-width);height:100%;position:sticky;top:0;transition:margin-left .5s var(--ease-out)}
+/* Home full-bleed: pull the sidebar off-screen left so main is full width; it
+   slides back in (pushing content) on reveal. */
+.layout__sidebar.is-collapsed{margin-left:calc(var(--sidebar-width) * -1)}
+@media (prefers-reduced-motion:reduce){.layout__sidebar{transition:none}}
+/* Full-bleed home brand mark: fixed top-left, cross-fades out as the sidebar
+   (whose own logo lands in the same spot) slides in. */
+.topbar__brand{position:fixed;top:0;left:0;z-index:20;width:var(--topbar-height);height:var(--topbar-height);background:var(--primary);display:grid;place-items:center;transition:opacity var(--dur-med) var(--ease)}
+.topbar__brand.is-hidden{opacity:0;pointer-events:none}
+.topbar__brand img{display:block}
 .layout__main{background:var(--surface-page);flex:auto;min-width:0;height:100%;overflow:hidden auto}
 .topbar{z-index:10;height:var(--topbar-height);align-items:center;gap:var(--sp-4);padding:0 var(--sp-6);background:color-mix(in srgb, var(--surface-page) 88%, transparent);-webkit-backdrop-filter:saturate(180%)blur(8px);backdrop-filter:saturate(180%)blur(8px);border-bottom:1px solid var(--border-default);display:flex;position:sticky;top:0}
 .topbar__spacer{flex:auto}

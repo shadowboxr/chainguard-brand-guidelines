@@ -3,15 +3,22 @@ import { HUB_NAV, HUB_LINKS } from "../content/hub.js";
 import StarIcon from "../components/StarIcon.jsx";
 
 /* Brand Hub homepage — the elevated front door into the brand system. Reuses
-   the existing shell, tokens, and terminal/block visual language. Hero is a
-   centered editorial opening; the internal-only notice reuses the shared
-   asterisk call-out style (.cpal-note) used across the other pages. */
+   the existing shell, tokens, and terminal/block visual language. The hero is a
+   full-bleed modular grid (headline + blurple lede on the left; a shortcuts
+   panel and the internal-only notice on the right). The sidebar reveal that
+   accompanies this entrance lives in Layout.jsx. */
 
 const ExternalIcon = () => (
   <svg className="hub-ext__ic" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
     <path d="M4.5 1.5H10.5V7.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="square" />
     <path d="M10 2L4.5 7.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="square" />
     <path d="M9 7.5V10.5H1.5V3H4.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="square" />
+  </svg>
+);
+
+const DownloadIcon = () => (
+  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+    <path d="M12 12H0V10.5H12V12ZM6.75 6H8.25V7.5H6.75V9H5.25V7.5H3.75V6H5.25V0H6.75V6ZM3.75 6H2.25V4.5H3.75V6ZM9.75 6H8.25V4.5H9.75V6Z" fill="currentColor" />
   </svg>
 );
 
@@ -53,30 +60,52 @@ function HubLink({ item, index }) {
 export default function Home() {
   return (
     <div className="hub">
-      {/* ---- Hero + introduction ---- */}
+      {/* ---- Hero: full-bleed modular grid ---- */}
       <header className="hub-hero">
-        <div className="hub-hero__inner">
-          <h1 className="hub-title">
-            Welcome to the<br />
-            Chainguard Brand&nbsp;Hub
-          </h1>
-          <p className="hub-lede t-body-lg">
-            Your go-to resource for everything brand—bringing together guidelines, assets, and tools to help every
-            employee represent Chainguard clearly and consistently.
-          </p>
+        <div className="hub-hero__grid">
+          <div className="hub-hero__head">
+            <h1 className="hub-title">Welcome to the Chainguard Brand&nbsp;Hub</h1>
+          </div>
 
-          {/* Internal-only notice — shared asterisk call-out style */}
-          <div className="cpal-note hub-note" role="note">
-            <span className="cpal-note__icon"><StarIcon /></span>
-            <p>
-              Please note, this is an internal-only resource. If you are looking for an external guide to share with
-              partners, press, or other third parties, please visit the{" "}
+          <div className="hub-hero__lede">
+            <p className="hub-lede">
+              Your go-to resource for everything brand—bringing together guidelines, assets, and tools to help every
+              employee represent Chainguard clearly and consistently.
+            </p>
+          </div>
+
+          <section className="hub-hero__panel hub-hero__shortcuts" aria-label="Brand shortcuts">
+            <div className="hub-panel__head">
+              <span className="cpal-note__icon"><ExternalIcon /></span>
+              <span className="hub-panel__eyebrow t-label">Brand shortcuts</span>
+            </div>
+            <div className="hub-scuts">
+              <a className="hub-scut" href="#" onClick={(e) => e.preventDefault()}>
+                <DownloadIcon /><span>Download all logos</span>
+              </a>
+              <a className="hub-scut" href="#" onClick={(e) => e.preventDefault()}>
+                <DownloadIcon /><span>Download all fonts</span>
+              </a>
+              <Link className="hub-scut" to="/assets/icons">
+                <span>View all Chainguard icons</span>
+              </Link>
+            </div>
+          </section>
+
+          <section className="hub-hero__panel hub-hero__note" aria-label="Please note">
+            <div className="hub-panel__head">
+              <span className="cpal-note__icon"><StarIcon /></span>
+              <span className="hub-panel__eyebrow t-label">Please note</span>
+            </div>
+            <p className="hub-panel__body">
+              This is an internal-only resource. If you are looking for an external guide to share with partners, press,
+              or other third parties, please visit the{" "}
               <a className="hub-note__link" href={HUB_LINKS.mediaKit} target="_blank" rel="noopener noreferrer">
                 Media Kit<ExternalIcon />
               </a>
               .
             </p>
-          </div>
+          </section>
         </div>
       </header>
 

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { useLocation, Outlet } from "react-router-dom";
-import Sidebar from "./Sidebar.jsx";
+import { useLocation, Outlet, Link } from "react-router-dom";
+import Sidebar, { WHITE_LOGO } from "./Sidebar.jsx";
 import ThemeToggle from "./ThemeToggle.jsx";
 
 function useMediaQuery() {
@@ -19,8 +19,38 @@ export default function Layout() {
   const [open, setOpen] = useState(false);
   const location = useLocation();
   const isMobile = useMediaQuery();
+  const isHome = location.pathname === "/";
+  // Home entrance: the sidebar starts hidden (full-bleed hero) and reveals on
+  // first scroll, or after 5s of no scroll. Every visit to Home resets it.
+  const [navRevealed, setNavRevealed] = useState(!isHome);
 
   useEffect(() => setOpen(false), [location.pathname]);
+
+  useEffect(() => {
+    if (!isHome) {
+      setNavRevealed(true);
+      return;
+    }
+    setNavRevealed(false);
+    const main = document.querySelector(".layout__main");
+    let done = false;
+    const reveal = () => {
+      if (done) return;
+      done = true;
+      setNavRevealed(true);
+    };
+    const onScroll = () => {
+      if ((main?.scrollTop || 0) > 4) reveal();
+    };
+    const timer = window.setTimeout(reveal, 5000);
+    main?.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.clearTimeout(timer);
+      main?.removeEventListener("scroll", onScroll);
+    };
+  }, [isHome, location.pathname]);
+
+  const collapsed = isHome && !navRevealed && !isMobile;
   // Reset the scroll container to the top on page change (but not for in-page
   // hash links — DocPage scrolls those to their anchor).
   useEffect(() => {
@@ -36,9 +66,15 @@ export default function Layout() {
   return (
     <div className="layout">
       {!isMobile && (
-        <aside className="layout__sidebar">
+        <aside className={"layout__sidebar" + (collapsed ? " is-collapsed" : "")}>
           <Sidebar />
         </aside>
+      )}
+      {/* Full-bleed home: a logo anchored top-left until the sidebar reveals. */}
+      {isHome && !isMobile && (
+        <Link to="/" className={"topbar__brand" + (navRevealed ? " is-hidden" : "")} aria-label="Chainguard — Brand Hub home">
+          <img src={WHITE_LOGO} alt="" width={28} height={24} />
+        </Link>
       )}
       {isMobile && (
         <div className={"drawer" + (open ? " drawer--open" : "")} role="dialog" aria-modal="true" aria-hidden={!open}>
