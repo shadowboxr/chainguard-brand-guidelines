@@ -36,6 +36,14 @@ export default function Layout() {
   }, [open]);
   return (
     <div className="layout">
+      {/* Main frame lines that "draw in" during the Home intro (see entrance /
+          data-intro CSS). Static otherwise; desktop only. */}
+      <div className="cg-frame" aria-hidden="true">
+        <span className="cg-frame__line cg-frame__l" />
+        <span className="cg-frame__line cg-frame__r" />
+        <span className="cg-frame__line cg-frame__nav" />
+        <span className="cg-frame__line cg-frame__top" />
+      </div>
       {!isMobile && (
         <aside className="layout__sidebar">
           <Sidebar />
