@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { HUB_NAV, HUB_LINKS } from "../content/hub.js";
 import StarIcon from "../components/StarIcon.jsx";
@@ -58,33 +58,17 @@ function HubLink({ item, index }) {
 }
 
 export default function Home() {
-  // Opening sequence: plays once per browser session on the home route, and is
-  // skipped entirely under prefers-reduced-motion. `phase` gates the site's
-  // entrance ("hold" = content held invisible under the overlay, "reveal" =
-  // animate in, "off" = no intro); `overlay` mounts the IntroSequence itself.
+  // Opening sequence: plays every time the Brand Hub home mounts (each load /
+  // navigation to "/"), and is skipped entirely under prefers-reduced-motion.
+  // `phase` gates the site's entrance ("hold" = content held invisible under the
+  // overlay, "reveal" = animate in, "off" = no intro); `overlay` mounts the
+  // IntroSequence itself.
   const [phase, setPhase] = useState(() => {
     if (typeof window === "undefined") return "off";
     const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    let seen = false;
-    try {
-      seen = sessionStorage.getItem("cg-hub-intro") === "1";
-    } catch {
-      /* private mode / storage disabled — just play it */
-    }
-    return reduce || seen ? "off" : "hold";
+    return reduce ? "off" : "hold";
   });
   const [overlay, setOverlay] = useState(() => phase !== "off");
-
-  useEffect(() => {
-    if (phase !== "off") {
-      try {
-        sessionStorage.setItem("cg-hub-intro", "1");
-      } catch {
-        /* ignore */
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <div className={"hub" + (phase === "hold" ? " hub--hold" : "") + (phase === "reveal" ? " hub--reveal" : "")}>
