@@ -321,9 +321,20 @@
 @media (width<=640px){.amediacards{grid-template-columns:1fr}}
 /* Linky (Chainguard mark) — inlined SVGs whose colors track the theme. */
 .linky{--lk-bg:var(--surface-inset);--lk-border:var(--border-default);--lk-mark:var(--primary);--lk-fill:var(--blurple-100);--lk-guide:var(--blurple-200);--lk-text:var(--text-tertiary)}
-:root[data-theme=dark] .linky{--lk-fill:var(--blurple-900);--lk-guide:var(--blurple-800)}
+:root[data-theme=dark] .linky{--lk-fill:var(--blurple-900);--lk-guide:var(--blurple-800);--lk-mark:var(--blurple-500)}
 .linky svg{display:block;width:100%;height:auto}
 .linky--flat svg{border:1px solid var(--border-default)}
+
+/* Hover-to-download tile (logo variants, Linky) — download analog of copy-hex. */
+.dltile{position:relative}
+.dltile::after{content:"";position:absolute;inset:0;background:rgba(13,22,28,.14);opacity:0;pointer-events:none;transition:opacity var(--dur-fast) var(--ease)}
+.dltile:hover::after,.dltile:focus-within::after{opacity:1}
+.dltile__btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(.96);z-index:2;display:inline-flex;align-items:center;gap:6px;padding:9px 13px;background:var(--surface-card);color:var(--text-primary);border:1px solid var(--border-default);font:500 var(--fs-4xs)/1 var(--font-label);letter-spacing:.06em;text-transform:uppercase;cursor:pointer;opacity:0;pointer-events:none;transition:opacity var(--dur-fast) var(--ease),transform var(--dur-fast) var(--ease),border-color var(--dur-fast) var(--ease),color var(--dur-fast) var(--ease)}
+.dltile__btn svg{flex:none}
+.dltile:hover .dltile__btn,.dltile:focus-within .dltile__btn{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
+.dltile__btn:hover{border-color:var(--primary);color:var(--primary)}
+.dltile__btn:focus-visible{outline:2px solid var(--primary);outline-offset:2px;opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
+@media (prefers-reduced-motion:reduce){.dltile__btn,.dltile::after{transition:none}}
 
 /* Subsection headings hug the content they introduce (more space above than below) */
 .cpal-h3.fanchor{margin-bottom:0}
@@ -423,7 +434,7 @@
 /* "Product logos" — full-logo / icon picker (Figma 168:16095). Grid lines frame
    the selected art (--plw/--plh set from JS); white fill flips the bg to Blurple. */
 .plt{position:relative;aspect-ratio:16/9;margin-top:var(--sp-4);background:var(--surface-inset);border:1px solid var(--border-default);overflow:hidden;--plt-line:var(--border-default)}
-.plt--white{background:var(--primary);--plt-line:rgba(255,255,255,.3)}
+.plt--white{background:var(--primary);--plt-line:var(--blurple-600)}
 .plt-grid{position:absolute;inset:0}
 .plt-line{position:absolute;background:var(--plt-line)}
 .plt-line--v1{top:0;bottom:0;left:calc(50% - var(--plw)/2);width:1px}

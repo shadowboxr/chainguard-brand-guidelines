@@ -1,8 +1,13 @@
 // Linky, the Chainguard mark — two provided SVGs inlined so their colors can
-// adapt to light/dark via theme tokens (see .linky in components.css).
+// adapt to light/dark via theme tokens (see .linky in components.css). Each card
+// reveals a Download SVG button on hover/focus (the original art files).
 //   variant="flat"  → the mark on solid Blurple (brand color, same in both modes)
 //   variant="space" → the clear-space diagram; background, border, guides, mark,
 //                     and labels all track the current theme.
+import DownloadTile from "../../components/DownloadTile.jsx";
+import flatRaw from "../../assets/linky-flat.svg?raw";
+import spaceRaw from "../../assets/linky-space.svg?raw";
+
 const FLAT_MARK =
   "M193.992 100.678C194.492 98.9506 194.763 97.0579 194.763 94.9991C194.763 82.1224 184.142 67.6289 173.534 67.6289C162.926 67.6289 152.305 82.1224 152.305 94.9991C152.305 97.8067 152.81 100.306 153.709 102.497L147.333 102.137C144.736 101.991 142.343 103.847 142.748 106.423C142.905 107.423 143.204 108.445 143.739 109.328C141.934 110.602 141.197 112.942 142.659 114.776C144.128 116.617 146.283 118.314 149.243 118.314C152.453 118.314 154.384 117.482 155.558 116.437C155.643 116.894 155.82 117.343 156.099 117.767C157.539 119.96 159.925 122.37 163.453 122.37C169.453 122.37 170.122 118.592 170.458 116.696C170.484 116.548 170.509 116.411 170.533 116.288L174.543 114.278L178.553 116.288C178.578 116.411 178.602 116.547 178.628 116.696C178.964 118.592 179.633 122.37 185.634 122.37C189.161 122.37 191.547 119.96 192.988 117.767C193.044 117.681 193.097 117.594 193.145 117.506C194.275 117.995 195.772 118.314 197.757 118.314C200.716 118.314 202.872 116.617 204.341 114.776C206.139 112.521 204.612 109.501 201.863 108.64L200.954 108.355C203.622 106.969 204.014 104.356 203.728 102.065C203.406 99.4773 200.593 98.3586 198.139 99.2211L193.992 100.678Z";
 
@@ -21,7 +26,7 @@ const CORNER = { fill: "var(--lk-fill)", stroke: "var(--lk-guide)", strokeWidth:
 export default function Linky({ variant = "flat", className = "" }) {
   if (variant === "space") {
     return (
-      <div className={`linky linky--space ${className}`}>
+      <DownloadTile className={`linky linky--space ${className}`} svg={spaceRaw} filename="chainguard-linky-clear-space.svg">
         <svg viewBox="0 0 347 190" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Linky with clear-space guides">
           <mask id="linky-space-inner" fill="white">
             <path d="M0 0H347V190H0V0Z" />
@@ -48,15 +53,15 @@ export default function Linky({ variant = "flat", className = "" }) {
           <path d={LABEL_H} fill="var(--lk-text)" />
           <path d={LABEL_V} fill="var(--lk-text)" />
         </svg>
-      </div>
+      </DownloadTile>
     );
   }
   return (
-    <div className={`linky linky--flat ${className}`}>
+    <DownloadTile className={`linky linky--flat ${className}`} svg={flatRaw} filename="chainguard-linky.svg">
       <svg viewBox="0 0 347 190" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Linky, the Chainguard mark">
         <rect width="347" height="190" fill="var(--blurple-500)" />
         <path d={FLAT_MARK} fill="#fff" />
       </svg>
-    </div>
+    </DownloadTile>
   );
 }
