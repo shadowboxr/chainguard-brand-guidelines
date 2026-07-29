@@ -45,7 +45,7 @@ export default function IntroSequence({ onLanded, onContent }) {
     // Fill locks onto the hero (+100ms settle) → swap it out and draw the frame.
     at(1680 + 740 + 100, () => cbRef.current.onLanded?.());
     // Frame has drawn → trigger the content cascade.
-    at(1680 + 740 + 100 + 750, () => cbRef.current.onContent?.());
+    at(1680 + 740 + 100 + 560, () => cbRef.current.onContent?.());
 
     return () => {
       timers.current.forEach(clearTimeout);

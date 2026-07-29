@@ -672,12 +672,23 @@
 /* ---- Hero (full-bleed modular grid) ---- */
 /* 2×2 grid: headline (light) over lede (blurple) on the left; a shortcuts panel
    over the internal-only notice on the right. 1px gaps read as divider lines. */
-.hub-hero{border-bottom:1px solid var(--border-default)}
+.hub-hero{border-bottom:1px solid var(--border-default);position:relative}
 .hub-hero__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,380px);grid-template-rows:minmax(0,1fr) auto;gap:1px;background:var(--border-default);height:550px;max-height:calc(100vh - var(--topbar-height))}
 .hub-hero__left{grid-column:1;grid-row:1 / span 2;background:var(--blurple-500);display:flex;flex-direction:column;justify-content:space-between;gap:var(--sp-10);padding:var(--sp-12)}
 .hub-hero__panel{grid-column:2;background:var(--surface-inset);padding:var(--sp-8);display:flex;flex-direction:column;gap:var(--sp-6)}
 .hub-hero__shortcuts{grid-row:1;justify-content:space-between}
-.hub-hero__note{grid-row:2;background:var(--surface-page)}
+.hub-hero__note{grid-row:2;background:var(--surface-page);position:relative}
+
+/* Home intro: the hero's bottom border and the Please-note panel's top divider
+   join the frame draw (Border-strong -> Border-default). Static versions are
+   removed while the intro runs so they don't double up. */
+:root[data-intro] .hub-hero{border-bottom-color:transparent}
+:root[data-intro] .hub-hero__grid{row-gap:0}
+:root:is([data-intro=frame],[data-intro=reveal]) .hub-hero::after,
+:root:is([data-intro=frame],[data-intro=reveal]) .hub-hero__note::before{content:"";position:absolute;left:0;width:100%;height:1px;background:var(--border-strong);transform:scaleX(0);transform-origin:left;transition:background-color .45s var(--ease-out)}
+:root:is([data-intro=frame],[data-intro=reveal]) .hub-hero::after{bottom:0;animation:cgDrawH .32s var(--ease-out) .12s forwards}
+:root:is([data-intro=frame],[data-intro=reveal]) .hub-hero__note::before{top:0;animation:cgDrawH .32s var(--ease-out) .18s forwards}
+:root[data-intro=reveal] .hub-hero::after,:root[data-intro=reveal] .hub-hero__note::before{background:var(--border-default)}
 /* Left-column text scales fluidly with the viewport (right rail stays fixed). */
 .hub-title{font-family:var(--font-title);font-weight:700;font-size:clamp(2rem,5.2vw,4.5rem);line-height:1.03;letter-spacing:-.03em;margin:0;text-wrap:balance;color:var(--neutral-0)}
 .hub-lede{font-family:var(--font-body);font-weight:400;font-size:clamp(1rem,1.55vw,1.375rem);line-height:1.45;color:var(--neutral-0);margin:0;max-width:52ch;text-wrap:pretty}
@@ -764,6 +775,11 @@
   .hub-nav,.hub-support{padding:var(--sp-10) var(--sp-5)}
   .hub-modules{grid-template-columns:1fr}
   .hub-support__grid{grid-template-columns:1fr}
+  /* No hero-line draw on mobile — keep the static borders. */
+  :root[data-intro] .hub-hero{border-bottom-color:var(--border-default)}
+  :root[data-intro] .hub-hero__grid{row-gap:1px}
+  :root:is([data-intro=frame],[data-intro=reveal]) .hub-hero::after,
+  :root:is([data-intro=frame],[data-intro=reveal]) .hub-hero__note::before{display:none}
 }
 @media (width<=600px){
   .hub-actions{grid-template-columns:1fr}
