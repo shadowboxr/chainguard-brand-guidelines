@@ -790,9 +790,9 @@
 /* During the morph the clip is fully open; only the box geometry animates as it
    forms the hero box. */
 .cg-intro__block.is-morphing{transition:left .6s var(--ease-out),top .6s var(--ease-out),width .6s var(--ease-out),height .6s var(--ease-out)}
-/* Lockup layer — sits above the block and tracks its box (so it morphs in step
-   with it), fades in by itself first, then fades out once the box is formed. */
-.cg-intro__logo-wrap{position:fixed;z-index:1;display:flex;align-items:center;justify-content:center;pointer-events:none;transition:left .6s var(--ease-out),top .6s var(--ease-out),width .6s var(--ease-out),height .6s var(--ease-out)}
+/* Lockup layer — sits above the block, pinned to the centred start position so
+   it never moves; fades in by itself first, then fades out in place. */
+.cg-intro__logo-wrap{position:fixed;z-index:1;display:flex;align-items:center;justify-content:center;pointer-events:none}
 .cg-intro__logo{display:flex;align-items:center;gap:12px;opacity:0;transition:opacity .5s var(--ease-out)}
 .cg-intro__logo.is-in{opacity:1}
 .cg-intro__logo.is-out{opacity:0}
