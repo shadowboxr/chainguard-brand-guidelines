@@ -1,7 +1,7 @@
 /* App shell: sidebar, nav, topbar, drawer, layout columns */
 .sidebar{width:var(--sidebar-width);min-width:var(--sidebar-width);background:var(--surface-page);border-right:1px solid var(--border-default);flex-direction:column;height:100%;display:flex;overflow-y:auto}
 .sidebar__brandrow{width:100%;height:var(--topbar-height);border-bottom:1px solid var(--border-default);flex:none}
-.sidebar__brand{width:var(--topbar-height);height:var(--topbar-height);background:var(--primary);place-items:center;display:grid}
+.sidebar__brand{width:var(--topbar-height);height:var(--topbar-height);background:var(--blurple-500);place-items:center;display:grid}
 .sidebar__brand img{display:block}
 .sidebar__sections{flex-direction:column;display:flex}
 .nav-group{border-bottom:1px solid var(--border-default)}

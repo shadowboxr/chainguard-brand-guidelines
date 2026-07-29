@@ -320,7 +320,7 @@
 .amediacard .cxph{min-height:190px}
 @media (width<=640px){.amediacards{grid-template-columns:1fr}}
 /* Linky (Chainguard mark) — inlined SVGs whose colors track the theme. */
-.linky{--lk-bg:var(--surface-inset);--lk-border:var(--border-default);--lk-mark:var(--primary);--lk-fill:var(--blurple-100);--lk-guide:var(--blurple-200);--lk-text:var(--text-tertiary)}
+.linky{--lk-bg:var(--surface-inset);--lk-border:var(--border-default);--lk-mark:var(--blurple-500);--lk-fill:var(--blurple-100);--lk-guide:var(--blurple-200);--lk-text:var(--text-tertiary)}
 :root[data-theme=dark] .linky{--lk-fill:var(--blurple-900);--lk-guide:var(--blurple-800);--lk-mark:var(--blurple-500)}
 .linky svg{display:block;width:100%;height:auto}
 .linky--flat svg{border:1px solid var(--border-default)}
@@ -674,13 +674,13 @@
    over the internal-only notice on the right. 1px gaps read as divider lines. */
 .hub-hero{border-bottom:1px solid var(--border-default)}
 .hub-hero__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,380px);grid-template-rows:minmax(0,1fr) auto;gap:1px;background:var(--border-default);height:550px;max-height:calc(100vh - var(--topbar-height))}
-.hub-hero__left{grid-column:1;grid-row:1 / span 2;background:var(--primary);display:flex;flex-direction:column;justify-content:space-between;gap:var(--sp-10);padding:var(--sp-12)}
+.hub-hero__left{grid-column:1;grid-row:1 / span 2;background:var(--blurple-500);display:flex;flex-direction:column;justify-content:space-between;gap:var(--sp-10);padding:var(--sp-12)}
 .hub-hero__panel{grid-column:2;background:var(--surface-inset);padding:var(--sp-8);display:flex;flex-direction:column;gap:var(--sp-6)}
 .hub-hero__shortcuts{grid-row:1;justify-content:space-between}
 .hub-hero__note{grid-row:2;background:var(--surface-page)}
 /* Left-column text scales fluidly with the viewport (right rail stays fixed). */
-.hub-title{font-family:var(--font-title);font-weight:700;font-size:clamp(2rem,5.2vw,4.5rem);line-height:1.03;letter-spacing:-.03em;margin:0;text-wrap:balance;color:var(--primary-contrast)}
-.hub-lede{font-family:var(--font-body);font-weight:400;font-size:clamp(1rem,1.55vw,1.375rem);line-height:1.45;color:var(--primary-contrast);margin:0;max-width:52ch;text-wrap:pretty}
+.hub-title{font-family:var(--font-title);font-weight:700;font-size:clamp(2rem,5.2vw,4.5rem);line-height:1.03;letter-spacing:-.03em;margin:0;text-wrap:balance;color:var(--neutral-0)}
+.hub-lede{font-family:var(--font-body);font-weight:400;font-size:clamp(1rem,1.55vw,1.375rem);line-height:1.45;color:var(--neutral-0);margin:0;max-width:52ch;text-wrap:pretty}
 
 /* Panel heads (icon box + eyebrow), reusing the .cpal-note asterisk box. */
 .hub-panel__head{display:flex;align-items:center;gap:var(--sp-3)}
@@ -779,7 +779,7 @@
    swapped for the real hero. No opacity fades — the shrink is purely geometric
    and the lockup is a hard cut. */
 .cg-intro{position:fixed;inset:0;z-index:9999}
-.cg-intro__fill{position:fixed;background:var(--primary)}
+.cg-intro__fill{position:fixed;background:var(--blurple-500)}
 .cg-intro__fill.is-shrinking{transition:left .74s var(--ease-out),top .74s var(--ease-out),width .74s var(--ease-out),height .74s var(--ease-out)}
 /* Lockup layer — above the fill, tracking its box so it stays centred as the
    fill shrinks; fades out gently on the full fill before the shrink. */
