@@ -3,22 +3,16 @@ import { WHITE_LOGO } from "./Sidebar.jsx";
 
 /* Homepage opening sequence (Figma 166:15129).
 
-   A Blurple block builds one axis at a time — pushing out to full width, then
-   filling in its height — to reveal the "Chainguard Design" lockup. It cycles
-   smoothly through the core
-   palette — ending on Ink second-to-last, then back to Blurple — and finally
-   morphs (FLIP) onto the live hero blurple block (.hub-hero__left). Only the
-   light backdrop clears: the block itself stays solid and locks into the hero,
-   so it reads as building into the purple rather than fading away. Home then
-   loads every item on the page in independently after it.
+   The "Chainguard Design" lockup is present from the start; a Blurple block
+   builds slowly around it — pushing out to full width, then filling in its
+   height — and then morphs (FLIP) to form the live hero blurple block
+   (.hub-hero__left). Only the light backdrop clears; the block stays solid, so
+   it reads as building into the hero. Once the hero box is formed the logo
+   fades away, the block is swapped for the real hero, and Home leads its
+   entrance with the title, then everything else.
 
-   Home skips it entirely under prefers-reduced-motion. `onReveal` fires as the
-   morph begins (Home starts its entrance), `onDone` fires once the block has
-   locked onto the hero. */
-
-// Flash order after the initial Blurple reveal: the remaining core hues, then Ink
-// (second-to-last), then back to Blurple (var(--primary)) to land on the hero.
-const FLASH = ["#FD2BF2", "#2BBAFD", "#04BD13", "#FD3964", "#F8C222", "#F85722", "#0D161C", "var(--primary)"];
+   Home skips it entirely under prefers-reduced-motion. `onReveal` starts Home's
+   entrance; `onDone` swaps the block out for the real hero. */
 
 export default function IntroSequence({ onReveal, onDone }) {
   const timers = useRef([]);
@@ -30,10 +24,9 @@ export default function IntroSequence({ onReveal, onDone }) {
   const [rect, setRect] = useState(null); // centered start geometry (px)
   const [shown, setShown] = useState(false); // builds out to full width
   const [open, setOpen] = useState(false); // then fills in the height
-  const [logoIn, setLogoIn] = useState(false);
-  const [bg, setBg] = useState("var(--primary)");
   const [morph, setMorph] = useState(null); // hero-block target rect (px)
-  const [fade, setFade] = useState(false); // backdrop + logo fade out
+  const [clearBackdrop, setClearBackdrop] = useState(false); // light backdrop clears
+  const [fadeLogo, setFadeLogo] = useState(false); // lockup fades away
 
   useEffect(() => {
     const w = window.innerWidth;
@@ -44,26 +37,23 @@ export default function IntroSequence({ onReveal, onDone }) {
     const at = (ms, fn) => timers.current.push(setTimeout(fn, ms));
 
     at(40, () => setShown(true)); // 1) build out to full width (push either side)
-    at(560, () => setOpen(true)); // 2) fill in the height
-    at(1000, () => setLogoIn(true)); // 3) reveal the lockup once the block is whole
+    at(800, () => setOpen(true)); // 2) fill in the height
 
-    const FLASH_START = 1450;
-    const STEP = 165; // slower, smoother cycle (crossfades via CSS transition)
-    FLASH.forEach((c, i) => at(FLASH_START + i * STEP, () => setBg(c))); // 4) cycle the palette
-    const flashEnd = FLASH_START + FLASH.length * STEP; // landed on Blurple
-
-    at(flashEnd + 240, () => {
-      // 5) morph onto the live hero block; clear only the backdrop + logo so the
-      //    block locks into the hero (builds into the purple), and hand off.
+    at(1650, () => {
+      // 3) morph to form the hero box, revealing the (still-empty) page frame.
       const el = document.querySelector(".hub-hero__left");
       if (el) {
         const r = el.getBoundingClientRect();
         setMorph({ left: Math.round(r.left), top: Math.round(r.top), width: Math.round(r.width), height: Math.round(r.height) });
       }
-      setFade(true);
-      cbRef.current.onReveal?.();
+      setClearBackdrop(true);
     });
-    at(flashEnd + 240 + 560, () => cbRef.current.onDone?.()); // 6) block has locked onto the hero — swap it out so the title can lead
+    at(2400, () => setFadeLogo(true)); // 4) hero box formed — the logo fades away
+    at(2760, () => {
+      // 5) swap the block for the real hero and lead Home's entrance with the title
+      cbRef.current.onReveal?.();
+      cbRef.current.onDone?.();
+    });
 
     return () => {
       timers.current.forEach(clearTimeout);
@@ -78,12 +68,12 @@ export default function IntroSequence({ onReveal, onDone }) {
   return (
     <div className="cg-intro" aria-hidden="true">
       {/* Only the light backdrop clears — the block below stays solid. */}
-      <div className={"cg-intro__backdrop" + (fade ? " is-clearing" : "")} />
+      <div className={"cg-intro__backdrop" + (clearBackdrop ? " is-clearing" : "")} />
       <div
         className={"cg-intro__block" + (shown ? " is-shown" : "") + (open ? " is-open" : "") + (morph ? " is-morphing" : "")}
-        style={{ left: box.left, top: box.top, width: box.width, height: box.height, background: bg }}
+        style={{ left: box.left, top: box.top, width: box.width, height: box.height }}
       >
-        <div className={"cg-intro__logo" + (logoIn && !fade ? " is-in" : "")}>
+        <div className={"cg-intro__logo" + (fadeLogo ? " is-out" : "")}>
           <img src={WHITE_LOGO} alt="" width={30} height={26} />
           <span>Chainguard Design</span>
         </div>
