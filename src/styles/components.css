@@ -325,16 +325,16 @@
 .linky svg{display:block;width:100%;height:auto}
 .linky--flat svg{border:1px solid var(--border-default)}
 
-/* Hover-to-download tile (logo variants, Linky) — download analog of copy-hex. */
-.dltile{position:relative}
+/* Click-anywhere-to-download tile (logo variants, Linky) — download analog of
+   click-to-copy-hex. A hint fades in on hover/focus. */
+.dltile{position:relative;cursor:pointer}
 .dltile::after{content:"";position:absolute;inset:0;background:rgba(13,22,28,.14);opacity:0;pointer-events:none;transition:opacity var(--dur-fast) var(--ease)}
-.dltile:hover::after,.dltile:focus-within::after{opacity:1}
-.dltile__btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(.96);z-index:2;display:inline-flex;align-items:center;gap:6px;padding:9px 13px;background:var(--surface-card);color:var(--text-primary);border:1px solid var(--border-default);font:500 var(--fs-4xs)/1 var(--font-label);letter-spacing:.06em;text-transform:uppercase;cursor:pointer;opacity:0;pointer-events:none;transition:opacity var(--dur-fast) var(--ease),transform var(--dur-fast) var(--ease),border-color var(--dur-fast) var(--ease),color var(--dur-fast) var(--ease)}
-.dltile__btn svg{flex:none}
-.dltile:hover .dltile__btn,.dltile:focus-within .dltile__btn{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
-.dltile__btn:hover{border-color:var(--primary);color:var(--primary)}
-.dltile__btn:focus-visible{outline:2px solid var(--primary);outline-offset:2px;opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
-@media (prefers-reduced-motion:reduce){.dltile__btn,.dltile::after{transition:none}}
+.dltile:hover::after,.dltile:focus-visible::after{opacity:1}
+.dltile:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+.dltile__hint{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(.96);z-index:2;display:inline-flex;align-items:center;gap:6px;padding:9px 13px;background:var(--surface-card);color:var(--text-primary);border:1px solid var(--border-default);font:500 var(--fs-4xs)/1 var(--font-label);letter-spacing:.06em;text-transform:uppercase;pointer-events:none;opacity:0;transition:opacity var(--dur-fast) var(--ease),transform var(--dur-fast) var(--ease)}
+.dltile__hint svg{flex:none}
+.dltile:hover .dltile__hint,.dltile:focus-visible .dltile__hint{opacity:1;transform:translate(-50%,-50%) scale(1)}
+@media (prefers-reduced-motion:reduce){.dltile__hint,.dltile::after{transition:none}}
 
 /* Subsection headings hug the content they introduce (more space above than below) */
 .cpal-h3.fanchor{margin-bottom:0}
