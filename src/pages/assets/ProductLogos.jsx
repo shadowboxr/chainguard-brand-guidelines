@@ -125,7 +125,7 @@ export default function ProductLogos() {
 
   return (
     <div
-      className={"plt" + (color.slug === "white" ? " plt--white" : "")}
+      className={"plt plt--" + color.slug}
       style={{ "--plw": frame.w + "px", "--plh": frame.h + "px" }}
     >
       <div className="plt-grid" aria-hidden="true">

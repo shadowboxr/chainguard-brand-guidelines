@@ -429,6 +429,9 @@
    the selected art (--plw/--plh set from JS); white fill flips the bg to Blurple. */
 .plt{position:relative;aspect-ratio:16/9;margin-top:var(--sp-4);background:var(--surface-inset);border:1px solid var(--border-default);overflow:hidden;--plt-line:var(--border-default)}
 .plt--white{background:var(--primary);--plt-line:var(--blurple-600)}
+/* Dark mode: the dark canvas already shows White; Ink needs a light inset bg. */
+:root[data-theme=dark] .plt--white{background:var(--surface-inset);--plt-line:var(--border-default)}
+:root[data-theme=dark] .plt--ink{background:var(--blurple-50);--plt-line:var(--neutral-100)}
 .plt-grid{position:absolute;inset:0}
 .plt-line{position:absolute;background:var(--plt-line)}
 .plt-line--v1{top:0;bottom:0;left:calc(50% - var(--plw)/2);width:1px}
