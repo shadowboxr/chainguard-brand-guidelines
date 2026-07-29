@@ -33,8 +33,8 @@ const LOGO = {
         {
           type: "mediacards",
           items: [
-            { caption: "Linky, our mascot and standalone mark." },
-            { caption: "Give Linky room to breathe with ample clear space." },
+            { variant: "flat", caption: "Linky, our mascot and standalone mark." },
+            { variant: "space", caption: "Give Linky room to breathe with ample clear space." },
           ],
         },
 

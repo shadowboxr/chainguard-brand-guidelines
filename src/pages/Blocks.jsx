@@ -8,6 +8,7 @@ import DataViz from "./visual-brand/DataViz.jsx";
 import Carousel from "./visual-brand/Carousel.jsx";
 import MisuseGrid from "./assets/MisuseGrid.jsx";
 import LogoVariants from "./assets/LogoVariants.jsx";
+import Linky from "./assets/Linky.jsx";
 import StarIcon from "../components/StarIcon.jsx";
 
 export default function Blocks({ blocks }) {
@@ -47,7 +48,7 @@ export default function Blocks({ blocks }) {
           <div className="amediacards" key={i}>
             {block.items.map((it, k) => (
               <div className="amediacard" key={k}>
-                <div className="cxph" />
+                {it.variant ? <Linky variant={it.variant} /> : <div className="cxph" />}
                 {it.caption && <p className="fsplit__desc">{it.caption}</p>}
               </div>
             ))}

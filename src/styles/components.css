@@ -318,6 +318,11 @@
 .amediacard{display:flex;flex-direction:column;gap:var(--sp-4)}
 .amediacard .cxph{min-height:190px}
 @media (width<=640px){.amediacards{grid-template-columns:1fr}}
+/* Linky (Chainguard mark) — inlined SVGs whose colors track the theme. */
+.linky{--lk-bg:var(--surface-inset);--lk-border:var(--border-default);--lk-mark:var(--primary);--lk-fill:var(--blurple-100);--lk-guide:var(--blurple-200);--lk-text:var(--text-tertiary)}
+:root[data-theme=dark] .linky{--lk-fill:var(--blurple-900);--lk-guide:var(--blurple-800)}
+.linky svg{display:block;width:100%;height:auto}
+.linky--flat svg{border:1px solid var(--border-default)}
 
 /* Subsection headings hug the content they introduce (more space above than below) */
 .cpal-h3.fanchor{margin-bottom:0}
