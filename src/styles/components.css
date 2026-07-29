@@ -326,15 +326,9 @@
 .linky--flat svg{border:1px solid var(--border-default)}
 
 /* Click-anywhere-to-download tile (logo variants, Linky) — download analog of
-   click-to-copy-hex. A hint fades in on hover/focus. */
+   click-to-copy-hex, with a cursor-following tooltip (reuses .cpal-tip). */
 .dltile{position:relative;cursor:pointer}
-.dltile::after{content:"";position:absolute;inset:0;background:rgba(13,22,28,.14);opacity:0;pointer-events:none;transition:opacity var(--dur-fast) var(--ease)}
-.dltile:hover::after,.dltile:focus-visible::after{opacity:1}
 .dltile:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
-.dltile__hint{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(.96);z-index:2;display:inline-flex;align-items:center;gap:6px;padding:9px 13px;background:var(--surface-card);color:var(--text-primary);border:1px solid var(--border-default);font:500 var(--fs-4xs)/1 var(--font-label);letter-spacing:.06em;text-transform:uppercase;pointer-events:none;opacity:0;transition:opacity var(--dur-fast) var(--ease),transform var(--dur-fast) var(--ease)}
-.dltile__hint svg{flex:none}
-.dltile:hover .dltile__hint,.dltile:focus-visible .dltile__hint{opacity:1;transform:translate(-50%,-50%) scale(1)}
-@media (prefers-reduced-motion:reduce){.dltile__hint,.dltile::after{transition:none}}
 
 /* Subsection headings hug the content they introduce (more space above than below) */
 .cpal-h3.fanchor{margin-bottom:0}
