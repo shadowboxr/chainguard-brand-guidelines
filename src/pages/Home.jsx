@@ -83,7 +83,7 @@ export default function Home() {
       <header className="hub-hero">
         <div className="hub-hero__grid">
           <div className="hub-hero__left">
-            <h1 className="hub-title">Welcome to the Chainguard Brand&nbsp;Hub</h1>
+            <h1 className="hub-title">Welcome to the Chainguard brand&nbsp;hub</h1>
             <p className="hub-lede">
               Your go-to resource for everything brand—bringing together guidelines, assets, and tools to help every
               employee represent Chainguard clearly and consistently.

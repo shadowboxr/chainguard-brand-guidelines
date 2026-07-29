@@ -3,6 +3,17 @@ import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { NAV } from "../content/nav.js";
 import Chevron from "./Chevron.jsx";
 
+// Blocky external-link icon (matches the hub external mark), tinted Blurple —
+// shown on the Media kit item, which links out.
+const ExternalIcon = () => (
+  <svg className="nav-header__ext" width="14" height="14" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+    <path
+      d="M8 4H2V16H14V10H16V18H0V2H8V4ZM8 12H6V10H8V12ZM10 10H8V8H10V10ZM12 8H10V6H12V8ZM18 8H16V4H14V2H10V0H18V8ZM14 6H12V4H14V6Z"
+      fill="currentColor"
+    />
+  </svg>
+);
+
 export const WHITE_LOGO =
   "data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20width='196.808'%20height='170.369'%20viewBox='0%200%20196.808%20170.369'%20fill='none'%3e%3cpath%20d='M%20162.181%20102.857%20C%20163.736%2097.481%20164.58%2091.591%20164.58%2085.183%20C%20164.58%2045.108%20131.525%200%2098.51%200%20C%2065.495%200%2032.438%2045.108%2032.438%2085.183%20C%2032.438%2093.921%2034.01%20101.698%2036.81%20108.518%20L%2016.964%20107.4%20C%208.881%20106.944%201.435%20112.722%202.695%20120.739%20C%203.184%20123.848%204.116%20127.031%205.78%20129.78%20C%200.162%20133.742%20-2.133%20141.026%202.419%20146.734%20C%206.989%20152.464%2013.699%20157.744%2022.909%20157.744%20C%2032.899%20157.744%2038.911%20155.156%2042.562%20151.905%20C%2042.829%20153.325%2043.378%20154.723%2044.246%20156.044%20C%2048.73%20162.868%2056.156%20170.369%2067.134%20170.369%20C%2085.809%20170.369%2087.892%20158.61%2088.937%20152.709%20C%2089.019%20152.248%2089.094%20151.821%2089.17%20151.44%20L%20101.65%20145.183%20L%20114.13%20151.44%20C%20114.207%20151.821%20114.282%20152.247%20114.364%20152.708%20C%20115.409%20158.609%20117.492%20170.369%20136.167%20170.369%20C%20147.145%20170.369%20154.571%20162.868%20159.055%20156.044%20C%20159.231%20155.776%20159.394%20155.504%20159.544%20155.229%20C%20163.063%20156.754%20167.72%20157.744%20173.898%20157.744%20C%20183.109%20157.744%20189.819%20152.464%20194.389%20146.734%20C%20199.986%20139.715%20195.231%20130.316%20186.676%20127.636%20L%20183.849%20126.751%20C%20192.15%20122.437%20193.372%20114.303%20192.483%20107.175%20C%20191.478%2099.12%20182.726%2095.639%20175.086%2098.323%20L%20162.181%20102.857%20Z'%20fill='%23FFFFFF'%20fill-rule='evenodd'%3e%3c/path%3e%3c/svg%3e";
 
@@ -98,18 +109,13 @@ export default function Sidebar({ onNavigate }) {
                 className="nav-header nav-header--cta"
               >
                 <span className="nav-header__label">{section.label}</span>
-                <span className="nav-header__chevron nav-header__chevron--closed">
-                  <Chevron />
-                </span>
+                <ExternalIcon />
               </a>
             </div>
           ) : (
             <div className="nav-group" key={section.id}>
               <NavLink to={section.path} onClick={onNavigate} className={"nav-header" + (isActiveLeaf ? " nav-header--active" : "")}>
                 <span className="nav-header__label">{section.label}</span>
-                <span className="nav-header__chevron nav-header__chevron--closed">
-                  <Chevron />
-                </span>
               </NavLink>
             </div>
           );

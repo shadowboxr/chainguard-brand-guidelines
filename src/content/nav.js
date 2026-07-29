@@ -1,5 +1,5 @@
 export const NAV = [
-  { id: "home", label: "Brand Hub", path: "/" },
+  { id: "home", label: "brand hub", path: "/" },
   {
     id: "foundations",
     label: "Foundation",
@@ -12,7 +12,7 @@ export const NAV = [
   },
   {
     id: "visual-brand",
-    label: "Visual Brand",
+    label: "Visual brand",
     path: "/visual-brand",
     children: [
       { label: "Color", path: "/visual-brand/color" },
@@ -33,5 +33,5 @@ export const NAV = [
     ],
   },
   // External CTA — links out to the marketing site for now.
-  { id: "media-kit", label: "Media Kit", href: "https://www.chainguard.dev" },
+  { id: "media-kit", label: "Media kit", href: "https://www.chainguard.dev" },
 ];

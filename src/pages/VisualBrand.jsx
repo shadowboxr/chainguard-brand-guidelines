@@ -18,7 +18,7 @@ const FONTS_BUTTON = (
 );
 
 // One page per Visual Brand topic (page = "color" | "typography" |
-// "design-elements" | "data-visualization"). Hero stays "Visual Brand".
+// "design-elements" | "data-visualization"). Hero stays "Visual brand".
 export default function VisualBrand({ page }) {
   const p = PAGES[page] || PAGES.color;
   return (
@@ -26,7 +26,7 @@ export default function VisualBrand({ page }) {
       sections={p.sections}
       toc={p.toc}
       ids={p.toc.map((t) => t.id)}
-      title="Visual Brand"
+      title="Visual brand"
       tocFooter={page === "typography" ? FONTS_BUTTON : null}
     />
   );
