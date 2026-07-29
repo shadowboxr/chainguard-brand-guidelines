@@ -774,28 +774,18 @@
 /* ============================================================
    Opening sequence (Figma 166:15129) + homepage entrance
    ============================================================ */
-/* An Ink (black) backdrop. The lockup fades in on its own first; then a Blurple
-   block builds around it (clip-path) and morphs to form the live hero block.
-   The backdrop clears as the box forms — the block stays solid, so it builds
-   into the hero. The lockup is a separate layer on top so the fill doesn't clip
-   it; it tracks the block's box, then fades away once the hero box is formed. */
+/* Full-screen Blurple fill with the lockup centred on it. The fill shrinks down
+   to the live hero block, revealing the site as it retreats; when it lands it is
+   swapped for the real hero. No opacity fades — the shrink is purely geometric
+   and the lockup is a hard cut. */
 .cg-intro{position:fixed;inset:0;z-index:9999}
-.cg-intro__backdrop{position:absolute;inset:0;background:var(--neutral-900);transition:opacity .6s var(--ease-out)}
-.cg-intro__backdrop.is-clearing{opacity:0}
-/* Grows in as a perfect square via a GPU-composited transform scale (a scaled
-   square stays square), so the colour comes in from the centre out smoothly —
-   no clip-path repaints or slow-start hitch. */
-.cg-intro__block{position:fixed;background:var(--primary);transform:scale(0);transform-origin:center;transition:transform .6s var(--ease-out);will-change:transform,left,top,width,height}
-.cg-intro__block.is-open{transform:scale(1)}
-/* During the morph the scale holds at 1; only the box geometry animates as it
-   forms the hero box. */
-.cg-intro__block.is-morphing{transition:left .6s var(--ease-out),top .6s var(--ease-out),width .6s var(--ease-out),height .6s var(--ease-out)}
-/* Lockup layer — sits above the block, pinned to the centred start position so
-   it never moves; fades in by itself first, then fades out in place. */
+.cg-intro__fill{position:fixed;background:var(--primary)}
+.cg-intro__fill.is-shrinking{transition:left .74s var(--ease-out),top .74s var(--ease-out),width .74s var(--ease-out),height .74s var(--ease-out)}
+/* Lockup layer — above the fill, tracking its box so it stays centred as the
+   fill shrinks; no opacity, hard cut in/out. */
 .cg-intro__logo-wrap{position:fixed;z-index:1;display:flex;align-items:center;justify-content:center;pointer-events:none}
-.cg-intro__logo{display:flex;align-items:center;gap:12px;opacity:0;transition:opacity .5s var(--ease-out)}
-.cg-intro__logo.is-in{opacity:1}
-.cg-intro__logo.is-out{opacity:0}
+.cg-intro__logo-wrap.is-shrinking{transition:left .74s var(--ease-out),top .74s var(--ease-out),width .74s var(--ease-out),height .74s var(--ease-out)}
+.cg-intro__logo{display:flex;align-items:center;gap:12px}
 .cg-intro__logo img{display:block}
 .cg-intro__logo span{font-family:var(--font-title);font-weight:600;font-size:22px;letter-spacing:-.01em;line-height:1;color:#fff;white-space:nowrap}
 
@@ -840,10 +830,10 @@
 :root[data-intro=reveal] .hub-support .hub-section__head,
 :root[data-intro=reveal] .hub-support__card{animation:hubItemIn .55s var(--ease-out) both}
 
-/* Main text leads — the title comes in first (and quicker) as the block is
-   swapped for the real hero, then the lede. */
-:root[data-intro=reveal] .hub-title{animation-delay:.1s;animation-duration:.4s}
-:root[data-intro=reveal] .hub-lede{animation-delay:.24s;animation-duration:.45s}
+/* Hero text comes in as the fill lands on the hero block (~.74s into the
+   shrink), title first then the lede. */
+:root[data-intro=reveal] .hub-title{animation-delay:.72s;animation-duration:.4s}
+:root[data-intro=reveal] .hub-lede{animation-delay:.86s;animation-duration:.45s}
 /* Then the nav — sidebar brand, then each item. */
 :root[data-intro=reveal] .sidebar__brand{animation-delay:.44s}
 :root[data-intro=reveal] .sidebar__sections>.nav-group:nth-child(1){animation-delay:.54s}
@@ -872,7 +862,7 @@
 :root[data-intro=reveal] .hub-support__card:nth-child(n+2){animation-delay:2.45s}
 
 @media (prefers-reduced-motion:reduce){
-  .cg-intro__block,.cg-intro__logo,.cg-intro__logo-wrap,.cg-intro__backdrop{transition:none}
+  .cg-intro__fill,.cg-intro__logo-wrap{transition:none}
   :root[data-intro=reveal] .sidebar__brand,
   :root[data-intro=reveal] .sidebar__sections>.nav-group,
   :root[data-intro=reveal] .topbar__menu,

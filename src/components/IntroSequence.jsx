@@ -3,20 +3,21 @@ import { WHITE_LOGO } from "./Sidebar.jsx";
 
 /* Homepage opening sequence (Figma 166:15129).
 
-   On an Ink (black) backdrop the "Chainguard Design" lockup fades in on its own
-   — no fill behind it. The lockup then stays fixed where it appeared while a
-   Blurple square grows in uniformly behind it and then fades away in place. Only
-   after the lockup is gone does the square morph (FLIP) to form the live hero
-   blurple block (.hub-hero__left); the backdrop clears as the box forms, and the
-   block stays solid so it reads as building into the hero. The block is then
-   swapped for the real hero, and Home leads its entrance with the title, then
-   everything else.
+   The whole screen starts Blurple with the "Chainguard Design" lockup centred on
+   it. After a brief hold the fill shrinks down to the live hero blurple block
+   (.hub-hero__left), revealing the site as it retreats. When it lands it is
+   swapped for the real hero and Home runs its entrance cascade. No opacity fades
+   anywhere — the lockup is a hard cut and everything else is geometric.
 
-   The lockup is a separate layer on top of the block (so the building fill
-   doesn't clip it), pinned to the centred start position so it never moves.
+   The lockup sits on its own layer above the fill and tracks the fill's box, so
+   it stays centred in the shrinking block.
 
    Home skips it entirely under prefers-reduced-motion. `onReveal` starts Home's
-   entrance; `onDone` swaps the block out for the real hero. */
+   entrance (as the fill retreats); `onDone` swaps the fill out for the real
+   hero. */
+
+const fullBox = () =>
+  typeof window === "undefined" ? null : { left: 0, top: 0, width: window.innerWidth, height: window.innerHeight };
 
 export default function IntroSequence({ onReveal, onDone }) {
   const timers = useRef([]);
@@ -25,39 +26,22 @@ export default function IntroSequence({ onReveal, onDone }) {
   // effect on every parent re-render and clear the pending timers mid-sequence.
   const cbRef = useRef();
   cbRef.current = { onReveal, onDone };
-  const [rect, setRect] = useState(null); // centered start geometry (px)
-  const [logoIn, setLogoIn] = useState(false); // lockup fades in by itself
-  const [open, setOpen] = useState(false); // then a perfect square grows in behind it
-  const [morph, setMorph] = useState(null); // hero-block target rect (px)
-  const [clearBackdrop, setClearBackdrop] = useState(false); // Ink backdrop clears
-  const [fadeLogo, setFadeLogo] = useState(false); // lockup fades away
+  // Start full-screen synchronously so there's no first-paint flash of the page.
+  const [box, setBox] = useState(fullBox); // current fill geometry (px)
+  const [shrinking, setShrinking] = useState(false);
 
   useEffect(() => {
-    const w = window.innerWidth;
-    const h = window.innerHeight;
-    const size = Math.round(Math.max(240, Math.min(360, Math.min(w, h) * 0.4)));
-    setRect({ left: Math.round((w - size) / 2), top: Math.round((h - size) / 2), width: size, height: size });
-
     const at = (ms, fn) => timers.current.push(setTimeout(fn, ms));
 
-    at(40, () => setLogoIn(true)); // 1) lockup appears by itself on black
-    at(760, () => setOpen(true)); // 2) a perfect square grows in uniformly behind it
-    at(1600, () => setFadeLogo(true)); // 3) lockup fades away in place (before the block moves)
-
-    at(2250, () => {
-      // 4) morph to form the hero box, revealing the (still-empty) page frame.
+    at(650, () => {
+      // Shrink the full-screen fill down to the hero block; reveal the site.
       const el = document.querySelector(".hub-hero__left");
-      if (el) {
-        const r = el.getBoundingClientRect();
-        setMorph({ left: Math.round(r.left), top: Math.round(r.top), width: Math.round(r.width), height: Math.round(r.height) });
-      }
-      setClearBackdrop(true);
-    });
-    at(2960, () => {
-      // 5) swap the block for the real hero and lead Home's entrance with the title
+      const r = el && el.getBoundingClientRect();
+      if (r) setBox({ left: Math.round(r.left), top: Math.round(r.top), width: Math.round(r.width), height: Math.round(r.height) });
+      setShrinking(true);
       cbRef.current.onReveal?.();
-      cbRef.current.onDone?.();
     });
+    at(650 + 740, () => cbRef.current.onDone?.()); // landed on the hero — swap it out
 
     return () => {
       timers.current.forEach(clearTimeout);
@@ -67,22 +51,15 @@ export default function IntroSequence({ onReveal, onDone }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (!rect) return null;
-  const box = morph || rect;
+  if (!box) return null;
   const boxStyle = { left: box.left, top: box.top, width: box.width, height: box.height };
-  const rectStyle = { left: rect.left, top: rect.top, width: rect.width, height: rect.height };
   return (
     <div className="cg-intro" aria-hidden="true">
-      {/* Ink backdrop clears as the hero box forms — the block stays solid. */}
-      <div className={"cg-intro__backdrop" + (clearBackdrop ? " is-clearing" : "")} />
-      <div
-        className={"cg-intro__block" + (open ? " is-open" : "") + (morph ? " is-morphing" : "")}
-        style={boxStyle}
-      />
-      {/* Lockup layer, pinned to the centred start position — it never moves;
-          it fades out in place before the block morphs away. */}
-      <div className="cg-intro__logo-wrap" style={rectStyle}>
-        <div className={"cg-intro__logo" + (fadeLogo ? " is-out" : logoIn ? " is-in" : "")}>
+      <div className={"cg-intro__fill" + (shrinking ? " is-shrinking" : "")} style={boxStyle} />
+      {/* Lockup layer — tracks the fill's box so it stays centred as it shrinks;
+          a hard cut in/out, no opacity fade. */}
+      <div className={"cg-intro__logo-wrap" + (shrinking ? " is-shrinking" : "")} style={boxStyle}>
+        <div className="cg-intro__logo">
           <img src={WHITE_LOGO} alt="" width={30} height={26} />
           <span>Chainguard Design</span>
         </div>
