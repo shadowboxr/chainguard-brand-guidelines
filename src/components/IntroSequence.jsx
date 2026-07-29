@@ -3,14 +3,15 @@ import { WHITE_LOGO } from "./Sidebar.jsx";
 
 /* Homepage opening sequence (Figma 166:15129).
 
-   A Blurple block loads from the center out to reveal the "Chainguard Design"
-   lockup, quickly flashes through the core palette — ending on Ink second-to-last,
-   then back to Blurple — and finally morphs (FLIP) onto the live hero blurple
-   block (.hub-hero__left) while the rest of the site animates in beneath it.
+   A small Blurple block appears, then scales up smoothly from the center to
+   reveal the "Chainguard Design" lockup. It cycles smoothly through the core
+   palette — ending on Ink second-to-last, then back to Blurple — and finally
+   morphs (FLIP) onto the live hero blurple block (.hub-hero__left). The hero
+   lands first, then Home stacks the rest of the page in after it.
 
-   Runs once per session on the home route; Home skips it entirely under
-   prefers-reduced-motion. `onReveal` fires as the morph begins (Home starts its
-   entrance), `onDone` fires once the block has landed + the overlay faded. */
+   Home skips it entirely under prefers-reduced-motion. `onReveal` fires as the
+   morph begins (Home starts its entrance), `onDone` fires once the block has
+   landed + the overlay faded. */
 
 // Flash order after the initial Blurple reveal: the remaining core hues, then Ink
 // (second-to-last), then back to Blurple (var(--primary)) to land on the hero.
@@ -19,7 +20,8 @@ const FLASH = ["#FD2BF2", "#2BBAFD", "#04BD13", "#FD3964", "#F8C222", "#F85722",
 export default function IntroSequence({ onReveal, onDone }) {
   const timers = useRef([]);
   const [rect, setRect] = useState(null); // centered start geometry (px)
-  const [open, setOpen] = useState(false); // scale 0 -> 1 (load from center)
+  const [shown, setShown] = useState(false); // small block fades in
+  const [open, setOpen] = useState(false); // scales up smoothly to full size
   const [logoIn, setLogoIn] = useState(false);
   const [bg, setBg] = useState("var(--primary)");
   const [morph, setMorph] = useState(null); // hero-block target rect (px)
@@ -33,16 +35,17 @@ export default function IntroSequence({ onReveal, onDone }) {
 
     const at = (ms, fn) => timers.current.push(setTimeout(fn, ms));
 
-    at(30, () => setOpen(true)); // 1) load from center out
-    at(430, () => setLogoIn(true)); // 2) reveal the lockup
+    at(40, () => setShown(true)); // 1) small block appears
+    at(380, () => setOpen(true)); // 2) scale up smoothly from center
+    at(780, () => setLogoIn(true)); // 3) reveal the lockup as it settles
 
-    const FLASH_START = 780;
-    const STEP = 95;
-    FLASH.forEach((c, i) => at(FLASH_START + i * STEP, () => setBg(c))); // 3) flash the palette
+    const FLASH_START = 1320;
+    const STEP = 165; // slower, smoother cycle (crossfades via CSS transition)
+    FLASH.forEach((c, i) => at(FLASH_START + i * STEP, () => setBg(c))); // 4) cycle the palette
     const flashEnd = FLASH_START + FLASH.length * STEP; // landed on Blurple
 
-    at(flashEnd + 160, () => {
-      // 4) morph onto the live hero block + hand off to the site
+    at(flashEnd + 240, () => {
+      // 5) morph onto the live hero block + hand off to the site (hero lands first)
       const el = document.querySelector(".hub-hero__left");
       if (el) {
         const r = el.getBoundingClientRect();
@@ -51,7 +54,7 @@ export default function IntroSequence({ onReveal, onDone }) {
       setFade(true);
       onReveal && onReveal();
     });
-    at(flashEnd + 160 + 680, () => onDone && onDone()); // 5) remove overlay once landed
+    at(flashEnd + 240 + 820, () => onDone && onDone()); // 6) remove overlay once landed
 
     return () => {
       timers.current.forEach(clearTimeout);
@@ -64,7 +67,7 @@ export default function IntroSequence({ onReveal, onDone }) {
   return (
     <div className={"cg-intro" + (fade ? " cg-intro--fade" : "")} aria-hidden="true">
       <div
-        className={"cg-intro__block" + (open ? " is-open" : "") + (morph ? " is-morphing" : "")}
+        className={"cg-intro__block" + (shown ? " is-shown" : "") + (open ? " is-open" : "") + (morph ? " is-morphing" : "")}
         style={{ left: box.left, top: box.top, width: box.width, height: box.height, background: bg }}
       >
         <div className={"cg-intro__logo" + (logoIn && !fade ? " is-in" : "")}>
