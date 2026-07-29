@@ -403,6 +403,22 @@
 /* the bottom-left animation dropdown opens upward */
 .cur-bl .cc-drop-menu{top:auto;bottom:calc(100% + 4px)}
 
+/* "The icon (Linky, in a container)" — icon builder (Figma 165:10324) */
+.iconc{position:relative;--ic:118px;aspect-ratio:16/9;margin-top:var(--sp-4);background:var(--surface-inset);border:1px solid var(--border-default);overflow:hidden}
+.iconc-grid{position:absolute;inset:0}
+.iconc-line{position:absolute;background:var(--border-default)}
+.iconc-line--v1{top:0;bottom:0;left:calc(50% - var(--ic)/2);width:1px}
+.iconc-line--v2{top:0;bottom:0;left:calc(50% + var(--ic)/2);width:1px}
+.iconc-line--h1{left:0;right:0;top:calc(50% - var(--ic)/2);height:1px}
+.iconc-line--h2{left:0;right:0;top:calc(50% + var(--ic)/2);height:1px}
+.iconc-box{position:absolute;left:50%;top:50%;width:var(--ic);height:var(--ic);transform:translate(-50%,-50%);display:grid;place-items:center;background:var(--iconc-bg);border-radius:var(--iconc-r);border:1px solid var(--border-default);transition:background var(--dur-med) var(--ease),border-radius var(--dur-med) var(--ease)}
+.iconc-box svg{width:58%;height:auto;display:block;color:var(--iconc-mark);transition:color var(--dur-med) var(--ease)}
+.iconc-tl{position:absolute;top:var(--sp-6);left:var(--sp-6);z-index:5}
+.iconc-tr{position:absolute;top:var(--sp-6);right:var(--sp-6);z-index:5}
+.iconc-bl{position:absolute;bottom:var(--sp-6);left:var(--sp-6);z-index:5}
+.iconc-br{position:absolute;bottom:var(--sp-6);right:var(--sp-6);z-index:5}
+.iconc-bl .cc-drop-menu{top:auto;bottom:calc(100% + 4px)}
+
 /* Design elements — "The visible grid" */
 .vgrid{position:relative;aspect-ratio:1/1;margin-top:var(--sp-4);background-color:var(--surface-inset);border:1px solid var(--border-default);overflow:hidden;background-image:linear-gradient(to right,var(--border-default) 1px,transparent 1px),linear-gradient(to bottom,var(--border-default) 1px,transparent 1px);background-size:var(--vg-cell) var(--vg-cell);background-origin:border-box;background-position:0 0;transition:background-size 2s cubic-bezier(.16,1,.3,1)}
 .vgrid__top{position:absolute;top:var(--sp-6);left:var(--sp-6);right:var(--sp-6);z-index:5;display:flex;align-items:center;justify-content:space-between;gap:var(--sp-4)}
@@ -559,8 +575,8 @@
 }
 
 /* Scale the cursor diagram down on small cards so the corner controls have room */
-@media (width<=600px){.cur{--cu:15px}}
-@media (width<=400px){.cur{--cu:11px}}
+@media (width<=600px){.cur{--cu:15px}.iconc{--ic:96px}}
+@media (width<=400px){.cur{--cu:11px}.iconc{--ic:78px}}
 
 /* ---- Mobile "Options"/"Details" bottom sheet (Building blocks, Patterns,
    The Cursor, and the Typography specimen rows) ---- */
@@ -571,6 +587,7 @@
   /* Hide the scattered inline controls — the sheet takes over. */
   .bblocks .bblocks__top,.bblocks .bblocks__bottom,
   .cur .cur-tl,.cur .cur-tr,.cur .cur-bl,.cur .cur-br,
+  .iconc .iconc-tl,.iconc .iconc-tr,.iconc .iconc-bl,.iconc .iconc-br,
   .tspec__ctrl{display:none}
 
   /* Typography rows show a compact header (label + Details trigger) instead. */
@@ -579,7 +596,7 @@
 
   /* Trigger: inline by default; pinned to the card for the demo blocks. */
   .osheet__trigger{display:inline-flex;align-items:center;gap:6px;padding:9px 11px;background:var(--surface-card);border:1px solid var(--border-default);font:500 10px/1 var(--font-label);letter-spacing:.06em;text-transform:uppercase;color:var(--text-primary);cursor:pointer}
-  .bblocks .osheet__trigger,.cur .osheet__trigger{position:absolute;bottom:var(--sp-4);right:var(--sp-4);z-index:6}
+  .bblocks .osheet__trigger,.cur .osheet__trigger,.iconc .osheet__trigger{position:absolute;bottom:var(--sp-4);right:var(--sp-4);z-index:6}
   .osheet__gear{display:inline-flex;color:var(--text-tertiary)}
   .osheet__gear svg{display:block}
 

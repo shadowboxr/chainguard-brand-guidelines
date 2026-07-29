@@ -9,6 +9,7 @@ import Carousel from "./visual-brand/Carousel.jsx";
 import MisuseGrid from "./assets/MisuseGrid.jsx";
 import LogoVariants from "./assets/LogoVariants.jsx";
 import Linky from "./assets/Linky.jsx";
+import IconContainer from "./assets/IconContainer.jsx";
 import StarIcon from "../components/StarIcon.jsx";
 
 export default function Blocks({ blocks }) {
@@ -42,6 +43,8 @@ export default function Blocks({ blocks }) {
             <span className="cpal-note__icon"><StarIcon /></span>
             <p>{block.text}</p>
           </div>
+        ) : block.type === "iconcontainer" ? (
+          <IconContainer key={i} />
         ) : block.type === "media" ? (
           <div className="cxph" key={i} />
         ) : block.type === "mediacards" ? (

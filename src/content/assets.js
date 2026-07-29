@@ -43,7 +43,7 @@ const LOGO = {
           type: "p",
           text: "For app icons, avatars, and favicons, Linky sits inside a container. Use the containerized icon only where a square or rounded app mark is required.",
         },
-        { type: "media" },
+        { type: "iconcontainer" },
 
         { type: "subhead", id: "product-logos", label: "Product logos" },
         {
