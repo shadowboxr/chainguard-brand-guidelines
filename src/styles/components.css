@@ -291,7 +291,7 @@
 
 /* Assets page — logo variants */
 .alogo{display:flex;flex-direction:column;gap:var(--sp-4)}
-.alogo__main{height:400px;display:grid;place-items:center;padding:29px 23px;background:var(--surface-card);border:1px solid var(--border-default)}
+.alogo__main{height:400px;display:grid;place-items:center;padding:29px 23px;background:var(--neutral-0);border:1px solid var(--border-default)}
 .alogo__lockup{width:482px;max-width:80%;height:auto;color:var(--blurple-500)}
 .alogo__variants{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--sp-4)}
 .alogo__variant{aspect-ratio:355/199.5;display:grid;place-items:center;border:1px solid var(--border-default)}
