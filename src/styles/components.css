@@ -774,25 +774,28 @@
 /* ============================================================
    Opening sequence (Figma 166:15129) + homepage entrance
    ============================================================ */
-/* A centered Blurple block over a light backdrop layer. The lockup is present
-   from the start; the block builds slowly around it (clip-path), then morphs to
-   form the live hero block. Only the backdrop layer clears — the block stays
-   solid and locks onto the hero (identical Blurple), so it builds into it. */
+/* An Ink (black) backdrop. The lockup fades in on its own first; then a Blurple
+   block builds around it (clip-path) and morphs to form the live hero block.
+   The backdrop clears as the box forms — the block stays solid, so it builds
+   into the hero. The lockup is a separate layer on top so the fill doesn't clip
+   it; it tracks the block's box, then fades away once the hero box is formed. */
 .cg-intro{position:fixed;inset:0;z-index:9999}
-.cg-intro__backdrop{position:absolute;inset:0;background:var(--surface-page);transition:opacity .6s var(--ease-out)}
+.cg-intro__backdrop{position:absolute;inset:0;background:var(--neutral-900);transition:opacity .6s var(--ease-out)}
 .cg-intro__backdrop.is-clearing{opacity:0}
-/* Builds one axis at a time via clip-path: from a center nub it pushes out to
-   full width (is-shown), then fills in its height (is-open) — so it reads as
-   being built from either side rather than scaled. Slow + deliberate. */
-.cg-intro__block{position:fixed;display:flex;align-items:center;justify-content:center;background:var(--primary);clip-path:inset(47% 47% 47% 47%);transition:clip-path .7s cubic-bezier(.5,0,.15,1);will-change:clip-path,left,top,width,height}
+/* Builds one axis at a time via clip-path: from nothing it pushes out to full
+   width (is-shown), then fills in its height (is-open) — so it reads as being
+   built from either side rather than scaled. Slow + deliberate. */
+.cg-intro__block{position:fixed;background:var(--primary);clip-path:inset(50% 50% 50% 50%);transition:clip-path .6s cubic-bezier(.5,0,.15,1);will-change:clip-path,left,top,width,height}
 .cg-intro__block.is-shown{clip-path:inset(47% 0% 47% 0%)}
 .cg-intro__block.is-open{clip-path:inset(0% 0% 0% 0%)}
 /* During the morph the clip is fully open; only the box geometry animates as it
    forms the hero box. */
-.cg-intro__block.is-morphing{transition:left .7s var(--ease-out),top .7s var(--ease-out),width .7s var(--ease-out),height .7s var(--ease-out)}
-/* Lockup is there from the beginning (revealed by the build) and fades away
-   only once the hero box is formed. */
-.cg-intro__logo{display:flex;align-items:center;gap:12px;opacity:1;transition:opacity .4s var(--ease-out)}
+.cg-intro__block.is-morphing{transition:left .6s var(--ease-out),top .6s var(--ease-out),width .6s var(--ease-out),height .6s var(--ease-out)}
+/* Lockup layer — sits above the block and tracks its box (so it morphs in step
+   with it), fades in by itself first, then fades out once the box is formed. */
+.cg-intro__logo-wrap{position:fixed;z-index:1;display:flex;align-items:center;justify-content:center;pointer-events:none;transition:left .6s var(--ease-out),top .6s var(--ease-out),width .6s var(--ease-out),height .6s var(--ease-out)}
+.cg-intro__logo{display:flex;align-items:center;gap:12px;opacity:0;transition:opacity .5s var(--ease-out)}
+.cg-intro__logo.is-in{opacity:1}
 .cg-intro__logo.is-out{opacity:0}
 .cg-intro__logo img{display:block}
 .cg-intro__logo span{font-family:var(--font-title);font-weight:600;font-size:22px;letter-spacing:-.01em;line-height:1;color:#fff;white-space:nowrap}
@@ -870,7 +873,7 @@
 :root[data-intro=reveal] .hub-support__card:nth-child(n+2){animation-delay:2.45s}
 
 @media (prefers-reduced-motion:reduce){
-  .cg-intro__block,.cg-intro__logo,.cg-intro__backdrop{transition:none}
+  .cg-intro__block,.cg-intro__logo,.cg-intro__logo-wrap,.cg-intro__backdrop{transition:none}
   :root[data-intro=reveal] .sidebar__brand,
   :root[data-intro=reveal] .sidebar__sections>.nav-group,
   :root[data-intro=reveal] .topbar__menu,
