@@ -27,10 +27,10 @@
 /* Three-way theme toggle (System / Light / Dark). A blurple indicator slides
    between the 30px segments; the active icon flips to the contrast color. */
 .ttoggle{position:relative;display:inline-flex;gap:3px;border:1px solid var(--border-default);background:0 0}
-.ttoggle__slider{position:absolute;top:0;left:0;width:24px;height:24px;background:var(--primary);transform:translateX(calc(27px * var(--i)));transition:transform .4s cubic-bezier(.34,1.35,.5,1)}
+.ttoggle__slider{position:absolute;top:0;left:0;width:24px;height:24px;background:var(--blurple-500);transform:translateX(calc(27px * var(--i)));transition:transform .4s cubic-bezier(.34,1.35,.5,1)}
 .ttoggle__seg{position:relative;z-index:1;width:24px;height:24px;display:grid;place-items:center;padding:0;border:0;background:0 0;color:var(--text-tertiary);cursor:pointer;transition:color var(--dur-med) var(--ease)}
 .ttoggle__seg:hover{color:var(--text-secondary)}
-.ttoggle__seg.is-on{color:var(--primary-contrast)}
+.ttoggle__seg.is-on{color:var(--neutral-0)}
 .ttoggle__seg:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
 .ttoggle__ic{display:block;width:20px;height:20px}
 .ttoggle__tip{position:absolute;top:calc(100% + 8px);left:50%;padding:5px 8px;background:var(--text-primary);color:var(--text-inverse);font:500 11px/1 var(--font-label);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;opacity:0;pointer-events:none;transform:translate(-50%,-3px);transition:opacity var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);z-index:5}
