@@ -21,14 +21,6 @@
 .card:hover .card__arrow{transform:translate(4px)}
 @media (width<=640px){.card-grid{grid-template-columns:1fr}}
 .fpage{color:var(--text-primary)}
-/* First-visit entrance: the hero title stays put; the main content fades in
-   first, then the scrollspy. Applied via .fpage--enter (see entrance.js). */
-@keyframes fpageIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
-.fpage--enter .fmain{animation:fpageIn .55s var(--ease-out) both}
-.fpage--enter .toc{animation:fpageIn .55s var(--ease-out) .35s both}
-@media (prefers-reduced-motion:reduce){
-  .fpage--enter .fmain,.fpage--enter .toc{animation:none}
-}
 .fhero{background:var(--surface-inset);padding:var(--sp-10) var(--sp-12) var(--sp-12);align-items:center;min-height:184px;display:flex}
 .fhero__inner{width:100%;max-width:1024px;margin:0 auto}
 .fhero__title{font:700 var(--fs-xl) / 1 var(--font-title);letter-spacing:-.03em;color:var(--text-primary);margin:0}

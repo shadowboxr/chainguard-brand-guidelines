@@ -66,7 +66,7 @@ export default function Home() {
   // no intro). It is published as a `data-intro` attribute on <html> so the shell
   // (sidebar, topbar) reveals in step with the page. `overlay` mounts the
   // IntroSequence.
-  const { isBoot, reduce } = useEntrance("home");
+  const { isBoot, reduce } = useEntrance();
   const [phase, setPhase] = useState(() => (isBoot && !reduce ? "hold" : "off"));
   const [overlay, setOverlay] = useState(() => phase !== "off");
 
