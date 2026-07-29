@@ -53,7 +53,7 @@ const LOGO = {
           text: "Each Chainguard product pairs the logo with its product name in a consistent lockup. Use the approved product logos rather than setting the names yourself.",
         },
         { type: "note", text: "The product logos should only be used in Blurple, white, or Ink." },
-        { type: "carousel" },
+        { type: "productlogos" },
 
         { type: "subhead", id: "co-branded", label: "Co-branded logos" },
         {

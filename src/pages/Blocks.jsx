@@ -10,6 +10,7 @@ import MisuseGrid from "./assets/MisuseGrid.jsx";
 import LogoVariants from "./assets/LogoVariants.jsx";
 import Linky from "./assets/Linky.jsx";
 import IconContainer from "./assets/IconContainer.jsx";
+import ProductLogos from "./assets/ProductLogos.jsx";
 import StarIcon from "../components/StarIcon.jsx";
 
 export default function Blocks({ blocks }) {
@@ -32,6 +33,8 @@ export default function Blocks({ blocks }) {
           <LogoVariants key={i} />
         ) : block.type === "misuses" ? (
           <MisuseGrid key={i} />
+        ) : block.type === "productlogos" ? (
+          <ProductLogos key={i} />
         ) : block.type === "carousel" ? (
           <Carousel key={i} />
         ) : block.type === "subhead" ? (

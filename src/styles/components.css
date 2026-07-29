@@ -420,6 +420,25 @@
 .iconc-br{position:absolute;bottom:var(--sp-6);right:var(--sp-6);z-index:5}
 .iconc-bl .cc-drop-menu{top:auto;bottom:calc(100% + 4px)}
 
+/* "Product logos" — full-logo / icon picker (Figma 168:16095). Grid lines frame
+   the selected art (--plw/--plh set from JS); white fill flips the bg to Blurple. */
+.plt{position:relative;aspect-ratio:16/9;margin-top:var(--sp-4);background:var(--surface-inset);border:1px solid var(--border-default);overflow:hidden;--plt-line:var(--border-default)}
+.plt--white{background:var(--primary);--plt-line:rgba(255,255,255,.3)}
+.plt-grid{position:absolute;inset:0}
+.plt-line{position:absolute;background:var(--plt-line)}
+.plt-line--v1{top:0;bottom:0;left:calc(50% - var(--plw)/2);width:1px}
+.plt-line--v2{top:0;bottom:0;left:calc(50% + var(--plw)/2);width:1px}
+.plt-line--h1{left:0;right:0;top:calc(50% - var(--plh)/2);height:1px}
+.plt-line--h2{left:0;right:0;top:calc(50% + var(--plh)/2);height:1px}
+.plt-art{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:block}
+.plt-art--full{max-height:44px;max-width:78%;width:auto;height:auto}
+.plt-art--icon{width:118px;height:118px}
+.plt-tl{position:absolute;top:var(--sp-6);left:var(--sp-6);z-index:5}
+.plt-tr{position:absolute;top:var(--sp-6);right:var(--sp-6);z-index:5}
+.plt-bl{position:absolute;bottom:var(--sp-6);left:var(--sp-6);z-index:5}
+.plt-br{position:absolute;bottom:var(--sp-6);right:var(--sp-6);z-index:5}
+.plt-bl .cc-drop-menu{top:auto;bottom:calc(100% + 4px)}
+
 /* Design elements — "The visible grid" */
 .vgrid{position:relative;aspect-ratio:1/1;margin-top:var(--sp-4);background-color:var(--surface-inset);border:1px solid var(--border-default);overflow:hidden;background-image:linear-gradient(to right,var(--border-default) 1px,transparent 1px),linear-gradient(to bottom,var(--border-default) 1px,transparent 1px);background-size:var(--vg-cell) var(--vg-cell);background-origin:border-box;background-position:0 0;transition:background-size 2s cubic-bezier(.16,1,.3,1)}
 .vgrid__top{position:absolute;top:var(--sp-6);left:var(--sp-6);right:var(--sp-6);z-index:5;display:flex;align-items:center;justify-content:space-between;gap:var(--sp-4)}
@@ -589,6 +608,7 @@
   .bblocks .bblocks__top,.bblocks .bblocks__bottom,
   .cur .cur-tl,.cur .cur-tr,.cur .cur-bl,.cur .cur-br,
   .iconc .iconc-tl,.iconc .iconc-tr,.iconc .iconc-bl,.iconc .iconc-br,
+  .plt .plt-tl,.plt .plt-tr,.plt .plt-bl,.plt .plt-br,
   .tspec__ctrl{display:none}
 
   /* Typography rows show a compact header (label + Details trigger) instead. */
@@ -597,7 +617,7 @@
 
   /* Trigger: inline by default; pinned to the card for the demo blocks. */
   .osheet__trigger{display:inline-flex;align-items:center;gap:6px;padding:9px 11px;background:var(--surface-card);border:1px solid var(--border-default);font:500 10px/1 var(--font-label);letter-spacing:.06em;text-transform:uppercase;color:var(--text-primary);cursor:pointer}
-  .bblocks .osheet__trigger,.cur .osheet__trigger,.iconc .osheet__trigger{position:absolute;bottom:var(--sp-4);right:var(--sp-4);z-index:6}
+  .bblocks .osheet__trigger,.cur .osheet__trigger,.iconc .osheet__trigger,.plt .osheet__trigger{position:absolute;bottom:var(--sp-4);right:var(--sp-4);z-index:6}
   .osheet__gear{display:inline-flex;color:var(--text-tertiary)}
   .osheet__gear svg{display:block}
 
