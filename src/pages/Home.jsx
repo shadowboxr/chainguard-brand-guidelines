@@ -169,7 +169,7 @@ export default function Home() {
               Reach out to <strong>Andrea Carrillo</strong> on Slack.
             </p>
             <a className="hub-btn hub-btn--primary" href={HUB_LINKS.slackAndrea} target="_blank" rel="noopener noreferrer">
-              Message Andrea on Slack<ExternalIcon />
+              <ExternalIcon /><span>Message Andrea on Slack</span>
             </a>
           </div>
 
@@ -182,12 +182,12 @@ export default function Home() {
             <div className="hub-actions">
               <a className="hub-action" href={HUB_LINKS.asanaForm} target="_blank" rel="noopener noreferrer">
                 <span className="hub-action__audience t-label">Marketing team</span>
-                <span className="hub-action__label">Asana request form<ExternalIcon /></span>
+                <span className="hub-action__label">Asana request form</span>
                 <span className="hub-action__desc t-body-sm">For members of the marketing team.</span>
               </a>
               <a className="hub-action hub-action--primary" href={HUB_LINKS.creativeForm} target="_blank" rel="noopener noreferrer">
                 <span className="hub-action__audience t-label">Everyone else</span>
-                <span className="hub-action__label">Company creative request<ExternalIcon /></span>
+                <span className="hub-action__label">Company creative request</span>
                 <span className="hub-action__desc t-body-sm">For everyone else at Chainguard.</span>
               </a>
             </div>
