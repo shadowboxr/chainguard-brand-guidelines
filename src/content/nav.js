@@ -1,4 +1,5 @@
 export const NAV = [
+  { id: "home", label: "Brand Hub", path: "/" },
   {
     id: "foundations",
     label: "Foundation",

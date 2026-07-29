@@ -24,9 +24,9 @@ export default function Sidebar({ onNavigate }) {
   return (
     <nav className="sidebar" aria-label="Brand guidelines">
       <div className="sidebar__brandrow">
-        <a className="sidebar__brand" href="/" aria-label="Chainguard — home">
+        <Link className="sidebar__brand" to="/" onClick={onNavigate} aria-label="Chainguard — Brand Hub home">
           <img src={WHITE_LOGO} alt="" width={28} height={24} />
-        </a>
+        </Link>
       </div>
       <div className="sidebar__sections">
         {NAV.map((section) => {

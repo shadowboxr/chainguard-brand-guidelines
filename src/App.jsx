@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/Layout.jsx";
+import Home from "./pages/Home.jsx";
 import Foundations from "./pages/Foundations.jsx";
 import VisualBrand from "./pages/VisualBrand.jsx";
 import Assets from "./pages/Assets.jsx";
@@ -13,7 +14,7 @@ export default function App() {
   return (
     <Routes>
       <Route element={<Layout />}>
-        <Route index element={<Navigate to="/foundations" replace />} />
+        <Route index element={<Home />} />
 
         {/* Foundations: single page with in-page (hash) sub-nav */}
         <Route path="/foundations" element={<Foundations />} />
