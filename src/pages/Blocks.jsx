@@ -46,7 +46,11 @@ export default function Blocks({ blocks }) {
         ) : block.type === "iconcontainer" ? (
           <IconContainer key={i} />
         ) : block.type === "media" ? (
-          <div className="cxph" key={i} />
+          block.src ? (
+            <img className="cxmedia" src={block.src} alt={block.alt || ""} key={i} />
+          ) : (
+            <div className="cxph" key={i} />
+          )
         ) : block.type === "mediacards" ? (
           <div className="amediacards" key={i}>
             {block.items.map((it, k) => (

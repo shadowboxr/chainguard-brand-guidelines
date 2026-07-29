@@ -177,6 +177,7 @@
 .fanchor{scroll-margin-top:calc(var(--topbar-height) + var(--sp-6))}
 .cxph{display:grid;place-items:center;min-height:360px;background:var(--surface-inset);border:1px solid var(--border-default)}
 .cxph__label{color:var(--text-tertiary)}
+.cxmedia{display:block;width:100%;height:auto;border:1px solid var(--border-default)}
 @media(max-width:640px){.fsplit__row{flex-direction:column;gap:var(--sp-4)}.fsplit__side{width:auto}}
 
 /* Color themes — Light mode palette strip (Figma 54:3415). Same hover behavior

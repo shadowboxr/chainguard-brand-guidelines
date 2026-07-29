@@ -4,6 +4,8 @@
 // copy is used where the design provides it; other body copy is on-topic
 // placeholder while the page is filled in.
 
+import partnerLogos from "../assets/partner-logos.svg";
+
 const LOGO = {
   sections: [
     {
@@ -58,7 +60,7 @@ const LOGO = {
           type: "p",
           text: "When partnering with another brand, use the co-branded lockup with balanced spacing and a clear divider between the two logos.",
         },
-        { type: "media" },
+        { type: "media", src: partnerLogos, alt: "Chainguard co-branded partner lockup" },
       ],
     },
   ],
