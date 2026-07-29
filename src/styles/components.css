@@ -782,14 +782,15 @@
 .cg-intro{position:fixed;inset:0;z-index:9999}
 .cg-intro__backdrop{position:absolute;inset:0;background:var(--surface-page);transition:opacity .6s var(--ease-out)}
 .cg-intro__backdrop.is-clearing{opacity:0}
-/* Starts small + invisible, fades in (is-shown), then scales up extremely
-   smoothly from the center (is-open). Background transitions so the palette
-   cycle crossfades rather than hard-cuts. The block never fades out. */
-.cg-intro__block{position:fixed;display:flex;align-items:center;justify-content:center;transform:scale(.26);transform-origin:center;opacity:0;transition:opacity .26s var(--ease-out),transform .95s cubic-bezier(.5,0,.15,1),background-color .3s ease-in-out;will-change:transform,left,top,width,height,opacity}
-.cg-intro__block.is-shown{opacity:1}
-.cg-intro__block.is-open{transform:scale(1)}
-/* During the morph the block keeps its scale; only the box geometry animates. */
-.cg-intro__block.is-morphing{transition:left .68s var(--ease-out),top .68s var(--ease-out),width .68s var(--ease-out),height .68s var(--ease-out)}
+/* Builds one axis at a time via clip-path: from a center nub it pushes out to
+   full width (is-shown), then fills in its height (is-open) — so it reads as
+   being built from either side rather than scaled. Background transitions so
+   the palette cycle crossfades rather than hard-cuts. The block never fades. */
+.cg-intro__block{position:fixed;display:flex;align-items:center;justify-content:center;clip-path:inset(47% 47% 47% 47%);transition:clip-path .5s cubic-bezier(.5,0,.15,1),background-color .3s ease-in-out;will-change:clip-path,left,top,width,height}
+.cg-intro__block.is-shown{clip-path:inset(47% 0% 47% 0%)}
+.cg-intro__block.is-open{clip-path:inset(0% 0% 0% 0%)}
+/* During the morph the clip is fully open; only the box geometry animates. */
+.cg-intro__block.is-morphing{transition:left .5s var(--ease-out),top .5s var(--ease-out),width .5s var(--ease-out),height .5s var(--ease-out)}
 .cg-intro__logo{display:flex;align-items:center;gap:12px;opacity:0;transition:opacity .4s var(--ease-out)}
 .cg-intro__logo.is-in{opacity:1}
 .cg-intro__logo img{display:block}
@@ -836,36 +837,35 @@
 :root[data-intro=reveal] .hub-support .hub-section__head,
 :root[data-intro=reveal] .hub-support__card{animation:hubItemIn .55s var(--ease-out) both}
 
-/* Shell first — sidebar brand, then each nav item, plus the topbar. */
-:root[data-intro=reveal] .sidebar__brand{animation-delay:.05s}
-:root[data-intro=reveal] .sidebar__sections>.nav-group:nth-child(1){animation-delay:.15s}
-:root[data-intro=reveal] .sidebar__sections>.nav-group:nth-child(2){animation-delay:.25s}
-:root[data-intro=reveal] .sidebar__sections>.nav-group:nth-child(3){animation-delay:.35s}
-:root[data-intro=reveal] .sidebar__sections>.nav-group:nth-child(4){animation-delay:.45s}
-:root[data-intro=reveal] .sidebar__sections>.nav-group:nth-child(5){animation-delay:.55s}
-:root[data-intro=reveal] .sidebar__sections>.nav-group:nth-child(n+6){animation-delay:.65s}
-:root[data-intro=reveal] .topbar__menu{animation-delay:.1s}
-:root[data-intro=reveal] .topbar .ttoggle{animation-delay:.2s}
-:root[data-intro=reveal] .topbar__label{animation-delay:.3s}
-/* Hero text emerges as the intro block is swapped for the real hero. */
-:root[data-intro=reveal] .hub-title{animation-delay:.75s}
-:root[data-intro=reveal] .hub-lede{animation-delay:.9s}
-/* Right rail — shortcuts head, each button, then the note. */
-:root[data-intro=reveal] .hub-hero__shortcuts .hub-panel__head{animation-delay:1.05s}
-:root[data-intro=reveal] .hub-hero__shortcuts .hub-scut:nth-child(1){animation-delay:1.15s}
-:root[data-intro=reveal] .hub-hero__shortcuts .hub-scut:nth-child(2){animation-delay:1.25s}
-:root[data-intro=reveal] .hub-hero__shortcuts .hub-scut:nth-child(3){animation-delay:1.35s}
-:root[data-intro=reveal] .hub-hero__note .hub-panel__head{animation-delay:1.45s}
-:root[data-intro=reveal] .hub-hero__note .hub-panel__body{animation-delay:1.55s}
-/* Sections below — heading, then each module, then support cards. */
-:root[data-intro=reveal] .hub-nav .hub-section__head{animation-delay:1.7s}
-:root[data-intro=reveal] .hub-modules .hub-module:nth-child(1)>*{animation-delay:1.85s}
-:root[data-intro=reveal] .hub-modules .hub-module:nth-child(2)>*{animation-delay:1.97s}
-:root[data-intro=reveal] .hub-modules .hub-module:nth-child(3)>*{animation-delay:2.09s}
-:root[data-intro=reveal] .hub-modules .hub-module:nth-child(n+4)>*{animation-delay:2.21s}
-:root[data-intro=reveal] .hub-support .hub-section__head{animation-delay:2.35s}
-:root[data-intro=reveal] .hub-support__card:nth-child(1){animation-delay:2.5s}
-:root[data-intro=reveal] .hub-support__card:nth-child(n+2){animation-delay:2.62s}
+/* Hero title leads — first and quicker — as the intro block is swapped out. */
+:root[data-intro=reveal] .hub-title{animation-delay:.62s;animation-duration:.4s}
+:root[data-intro=reveal] .hub-lede{animation-delay:.76s;animation-duration:.45s}
+/* Then the nav — sidebar brand, then each item. */
+:root[data-intro=reveal] .sidebar__brand{animation-delay:.9s}
+:root[data-intro=reveal] .sidebar__sections>.nav-group:nth-child(1){animation-delay:1s}
+:root[data-intro=reveal] .sidebar__sections>.nav-group:nth-child(2){animation-delay:1.1s}
+:root[data-intro=reveal] .sidebar__sections>.nav-group:nth-child(3){animation-delay:1.2s}
+:root[data-intro=reveal] .sidebar__sections>.nav-group:nth-child(4){animation-delay:1.3s}
+:root[data-intro=reveal] .sidebar__sections>.nav-group:nth-child(5){animation-delay:1.4s}
+:root[data-intro=reveal] .sidebar__sections>.nav-group:nth-child(n+6){animation-delay:1.5s}
+/* Then everything else — topbar, right rail, then the sections below. */
+:root[data-intro=reveal] .topbar__menu{animation-delay:1.15s}
+:root[data-intro=reveal] .topbar .ttoggle{animation-delay:1.23s}
+:root[data-intro=reveal] .topbar__label{animation-delay:1.31s}
+:root[data-intro=reveal] .hub-hero__shortcuts .hub-panel__head{animation-delay:1.55s}
+:root[data-intro=reveal] .hub-hero__shortcuts .hub-scut:nth-child(1){animation-delay:1.63s}
+:root[data-intro=reveal] .hub-hero__shortcuts .hub-scut:nth-child(2){animation-delay:1.71s}
+:root[data-intro=reveal] .hub-hero__shortcuts .hub-scut:nth-child(3){animation-delay:1.79s}
+:root[data-intro=reveal] .hub-hero__note .hub-panel__head{animation-delay:1.9s}
+:root[data-intro=reveal] .hub-hero__note .hub-panel__body{animation-delay:1.98s}
+:root[data-intro=reveal] .hub-nav .hub-section__head{animation-delay:2.1s}
+:root[data-intro=reveal] .hub-modules .hub-module:nth-child(1)>*{animation-delay:2.22s}
+:root[data-intro=reveal] .hub-modules .hub-module:nth-child(2)>*{animation-delay:2.32s}
+:root[data-intro=reveal] .hub-modules .hub-module:nth-child(3)>*{animation-delay:2.42s}
+:root[data-intro=reveal] .hub-modules .hub-module:nth-child(n+4)>*{animation-delay:2.52s}
+:root[data-intro=reveal] .hub-support .hub-section__head{animation-delay:2.65s}
+:root[data-intro=reveal] .hub-support__card:nth-child(1){animation-delay:2.75s}
+:root[data-intro=reveal] .hub-support__card:nth-child(n+2){animation-delay:2.85s}
 
 @media (prefers-reduced-motion:reduce){
   .cg-intro__block,.cg-intro__logo,.cg-intro__backdrop{transition:none}
