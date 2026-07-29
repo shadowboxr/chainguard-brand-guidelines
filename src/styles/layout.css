@@ -28,6 +28,13 @@
 .topbar__brand{position:fixed;top:0;left:0;z-index:20;width:var(--topbar-height);height:var(--topbar-height);background:var(--primary);display:grid;place-items:center;transition:opacity var(--dur-med) var(--ease)}
 .topbar__brand.is-hidden{opacity:0;pointer-events:none}
 .topbar__brand img{display:block}
+/* Home page frame: a centered column — 1512px full-bleed, 1200px once the nav is
+   in (matching the sections) — with side borders. The topbar matches its width. */
+.layout--home{--home-frame:1200px}
+.layout--home.layout--fullbleed{--home-frame:1512px}
+.layout--home .topbar{max-width:var(--home-frame);margin-inline:auto;border-left:1px solid var(--border-default);border-right:1px solid var(--border-default);transition:max-width .5s var(--ease-out)}
+.layout--home.layout--fullbleed .topbar__brand{left:max(0px,calc((100vw - var(--home-frame)) / 2))}
+@media (prefers-reduced-motion:reduce){.layout--home .topbar{transition:none}}
 .layout__main{background:var(--surface-page);flex:auto;min-width:0;height:100%;overflow:hidden auto}
 .topbar{z-index:10;height:var(--topbar-height);align-items:center;gap:var(--sp-4);padding:0 var(--sp-6);background:color-mix(in srgb, var(--surface-page) 88%, transparent);-webkit-backdrop-filter:saturate(180%)blur(8px);backdrop-filter:saturate(180%)blur(8px);border-bottom:1px solid var(--border-default);display:flex;position:sticky;top:0}
 .topbar__spacer{flex:auto}
@@ -56,5 +63,5 @@
 .drawer__panel .sidebar{width:100%;min-width:0}
 .drawer__close{z-index:1;width:var(--topbar-height);height:var(--topbar-height);color:var(--text-primary);background:0 0;border:0;place-items:center;display:grid;position:absolute;top:0;right:0}
 .drawer--open .drawer__panel{transform:translate(0)}
-@media (width<=900px){.layout__sidebar{display:none}.topbar__menu{display:flex}}
+@media (width<=900px){.layout__sidebar{display:none}.topbar__menu{display:flex}.layout--home .topbar{max-width:none;margin-inline:0;border-left:0;border-right:0}}
 @media (width<=480px){.topbar{padding:0 var(--sp-4)}.ttoggle{display:none}}

@@ -639,6 +639,10 @@
    Brand Hub homepage
    ============================================================ */
 .hub{color:var(--text-primary)}
+/* Home frame: centered column with side borders (width set by --home-frame on
+   .layout--home / .layout--fullbleed; see layout.css). */
+.layout--home .hub{max-width:var(--home-frame);margin-inline:auto;border-left:1px solid var(--border-default);border-right:1px solid var(--border-default);transition:max-width .5s var(--ease-out)}
+@media (prefers-reduced-motion:reduce){.layout--home .hub{transition:none}}
 
 /* ---- Hero (full-bleed modular grid) ---- */
 /* 2×2 grid: headline (light) over lede (blurple) on the left; a shortcuts panel
@@ -669,7 +673,7 @@
 .hub-scut svg{flex:none}
 
 /* ---- Shared section scaffolding ---- */
-.hub-nav,.hub-support{max-width:1200px;margin:0 auto;padding:var(--sp-16) var(--sp-12)}
+.hub-nav,.hub-support{padding:var(--sp-16) var(--sp-12)}
 .hub-support{padding-bottom:var(--sp-24)}
 .hub-section__head{margin-bottom:var(--sp-10)}
 .hub-section__title{font:700 var(--fs-lg)/1.1 var(--font-title);letter-spacing:-.03em;margin:0}
@@ -734,6 +738,7 @@
   .hub-nav,.hub-support{padding:var(--sp-10) var(--sp-5)}
   .hub-modules{grid-template-columns:1fr}
   .hub-support__grid{grid-template-columns:1fr}
+  .layout--home .hub{max-width:none;margin-inline:0;border-left:0;border-right:0}
 }
 @media (width<=600px){
   .hub-actions{grid-template-columns:1fr}

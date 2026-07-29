@@ -64,7 +64,7 @@ export default function Layout() {
     };
   }, [open]);
   return (
-    <div className="layout">
+    <div className={"layout" + (isHome ? " layout--home" : "") + (collapsed ? " layout--fullbleed" : "")}>
       {!isMobile && (
         <aside className={"layout__sidebar" + (collapsed ? " is-collapsed" : "")}>
           <Sidebar />
