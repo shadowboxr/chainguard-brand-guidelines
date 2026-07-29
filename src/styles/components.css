@@ -650,8 +650,9 @@
 .hub-hero__panel{grid-column:2;background:var(--surface-inset);padding:var(--sp-8);display:flex;flex-direction:column;gap:var(--sp-6)}
 .hub-hero__shortcuts{grid-row:1;justify-content:space-between}
 .hub-hero__note{grid-row:2}
-.hub-title{font:700 var(--fs-2xl)/1.02 var(--font-title);letter-spacing:-.03em;margin:0;text-wrap:balance;color:var(--text-primary)}
-.hub-lede{font:400 var(--fs-2xs)/1.45 var(--font-body);color:var(--primary-contrast);margin:0;max-width:52ch;text-wrap:pretty}
+/* Left-column text scales fluidly with the viewport (right rail stays fixed). */
+.hub-title{font-family:var(--font-title);font-weight:700;font-size:clamp(2rem,5.2vw,4.5rem);line-height:1.03;letter-spacing:-.03em;margin:0;text-wrap:balance;color:var(--text-primary)}
+.hub-lede{font-family:var(--font-body);font-weight:400;font-size:clamp(1rem,1.55vw,1.375rem);line-height:1.45;color:var(--primary-contrast);margin:0;max-width:52ch;text-wrap:pretty}
 
 /* Panel heads (icon box + eyebrow), reusing the .cpal-note asterisk box. */
 .hub-panel__head{display:flex;align-items:center;gap:var(--sp-3)}

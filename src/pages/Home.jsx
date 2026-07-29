@@ -9,10 +9,8 @@ import StarIcon from "../components/StarIcon.jsx";
    accompanies this entrance lives in Layout.jsx. */
 
 const ExternalIcon = () => (
-  <svg className="hub-ext__ic" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-    <path d="M4.5 1.5H10.5V7.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="square" />
-    <path d="M10 2L4.5 7.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="square" />
-    <path d="M9 7.5V10.5H1.5V3H4.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="square" />
+  <svg className="hub-ext__ic" width="12" height="12" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+    <path d="M8 4H2V16H14V10H16V18H0V2H8V4ZM8 12H6V10H8V12ZM10 10H8V8H10V10ZM12 8H10V6H12V8ZM18 8H16V4H14V2H10V0H18V8ZM14 6H12V4H14V6Z" fill="currentColor" />
   </svg>
 );
 
