@@ -648,7 +648,7 @@
 .hub-hero__head{grid-area:1 / 1;background:var(--surface-page);display:flex;align-items:flex-end;padding:var(--sp-12)}
 .hub-hero__lede{grid-area:2 / 1;background:var(--primary);display:flex;align-items:center;padding:var(--sp-12)}
 .hub-hero__panel{grid-column:2;background:var(--surface-inset);padding:var(--sp-8);display:flex;flex-direction:column;gap:var(--sp-6)}
-.hub-hero__shortcuts{grid-row:1;justify-content:space-between}
+.hub-hero__shortcuts{grid-row:1;justify-content:space-between;padding-bottom:var(--sp-12)}
 .hub-hero__note{grid-row:2;background:var(--surface-page)}
 /* Left-column text scales fluidly with the viewport (right rail stays fixed). */
 .hub-title{font-family:var(--font-title);font-weight:700;font-size:clamp(2rem,5.2vw,4.5rem);line-height:1.03;letter-spacing:-.03em;margin:0;text-wrap:balance;color:var(--text-primary)}
