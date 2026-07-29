@@ -1,6 +1,8 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { HUB_NAV, HUB_LINKS } from "../content/hub.js";
 import StarIcon from "../components/StarIcon.jsx";
+import IntroSequence from "../components/IntroSequence.jsx";
 
 /* Brand Hub homepage — the elevated front door into the brand system. Reuses
    the existing shell, tokens, and terminal/block visual language. The hero is a
@@ -56,8 +58,36 @@ function HubLink({ item, index }) {
 }
 
 export default function Home() {
+  // Opening sequence: plays once per browser session on the home route, and is
+  // skipped entirely under prefers-reduced-motion. `phase` gates the site's
+  // entrance ("hold" = content held invisible under the overlay, "reveal" =
+  // animate in, "off" = no intro); `overlay` mounts the IntroSequence itself.
+  const [phase, setPhase] = useState(() => {
+    if (typeof window === "undefined") return "off";
+    const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let seen = false;
+    try {
+      seen = sessionStorage.getItem("cg-hub-intro") === "1";
+    } catch {
+      /* private mode / storage disabled — just play it */
+    }
+    return reduce || seen ? "off" : "hold";
+  });
+  const [overlay, setOverlay] = useState(() => phase !== "off");
+
+  useEffect(() => {
+    if (phase !== "off") {
+      try {
+        sessionStorage.setItem("cg-hub-intro", "1");
+      } catch {
+        /* ignore */
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
-    <div className="hub">
+    <div className={"hub" + (phase === "hold" ? " hub--hold" : "") + (phase === "reveal" ? " hub--reveal" : "")}>
       {/* ---- Hero: full-bleed modular grid ---- */}
       <header className="hub-hero">
         <div className="hub-hero__grid">
@@ -172,6 +202,10 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {overlay && (
+        <IntroSequence onReveal={() => setPhase("reveal")} onDone={() => setOverlay(false)} />
+      )}
     </div>
   );
 }
