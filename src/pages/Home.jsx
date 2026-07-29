@@ -1,33 +1,11 @@
 import { Link } from "react-router-dom";
 import { HUB_NAV, HUB_LINKS } from "../content/hub.js";
+import StarIcon from "../components/StarIcon.jsx";
 
 /* Brand Hub homepage — the elevated front door into the brand system. Reuses
-   the existing shell, tokens, and terminal/block visual language, but breaks
-   the doc column for a more editorial composition. Signature moment: a field
-   of blocks that assembles on load (see .hub-field / @keyframes hub-assemble),
-   then settles. Respects prefers-reduced-motion (blocks appear in place). */
-
-// Decorative block field behind the hero. A blurple-weighted grid with a few
-// accent cells and a couple of gaps for texture. Deterministic so it's stable
-// across renders; aria-hidden because it carries no information.
-const FIELD_COLS = 7;
-const FIELD_ROWS = 7;
-const ACCENTS = { "1-5": "f0", "4-1": "a0", "5-5": "f0", "2-3": "a0" };
-const GAPS = new Set(["0-6", "6-0", "0-5", "6-1"]);
-
-function fieldCells() {
-  const cells = [];
-  const span = FIELD_ROWS + FIELD_COLS - 2;
-  for (let r = 0; r < FIELD_ROWS; r++) {
-    for (let c = 0; c < FIELD_COLS; c++) {
-      const key = `${r}-${c}`;
-      const token = GAPS.has(key) ? null : ACCENTS[key] || "b" + Math.round(((r + c) / span) * 4);
-      cells.push({ key, token, delay: ((r + c) * 0.05).toFixed(2) });
-    }
-  }
-  return cells;
-}
-const FIELD = fieldCells();
+   the existing shell, tokens, and terminal/block visual language. Hero is a
+   centered editorial opening; the internal-only notice reuses the shared
+   asterisk call-out style (.cpal-note) used across the other pages. */
 
 const ExternalIcon = () => (
   <svg className="hub-ext__ic" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
@@ -78,45 +56,26 @@ export default function Home() {
       {/* ---- Hero + introduction ---- */}
       <header className="hub-hero">
         <div className="hub-hero__inner">
-          <div className="hub-hero__text">
-            <p className="hub-eyebrow t-label">Chainguard <span className="hub-eyebrow__sep">//</span> Brand Hub</p>
-            <h1 className="hub-title">
-              Welcome to the<br />
-              Chainguard Brand&nbsp;Hub<span className="hub-caret" aria-hidden="true" />
-            </h1>
-            <p className="hub-lede t-body-lg">
-              Your go-to resource for everything brand—bringing together{" "}
-              <span className="hub-em">guidelines</span>, <span className="hub-em">assets</span>, and{" "}
-              <span className="hub-em">tools</span> to help every employee represent Chainguard clearly and
-              consistently.
+          <h1 className="hub-title">
+            Welcome to the<br />
+            Chainguard Brand&nbsp;Hub
+          </h1>
+          <p className="hub-lede t-body-lg">
+            Your go-to resource for everything brand—bringing together guidelines, assets, and tools to help every
+            employee represent Chainguard clearly and consistently.
+          </p>
+
+          {/* Internal-only notice — shared asterisk call-out style */}
+          <div className="cpal-note hub-note" role="note">
+            <span className="cpal-note__icon"><StarIcon /></span>
+            <p>
+              Please note, this is an internal-only resource. If you are looking for an external guide to share with
+              partners, press, or other third parties, please visit the{" "}
+              <a className="hub-note__link" href={HUB_LINKS.mediaKit} target="_blank" rel="noopener noreferrer">
+                Media Kit<ExternalIcon />
+              </a>
+              .
             </p>
-
-            {/* Internal-only notice as a terminal-style status bar */}
-            <div className="hub-notice" role="note">
-              <span className="hub-notice__status">
-                <span className="hub-notice__dot" aria-hidden="true" />
-                Internal only
-              </span>
-              <p className="hub-notice__body">
-                This is an internal-only resource. Looking for an external guide to share with partners, press, or
-                other third parties? Visit the{" "}
-                <a className="hub-notice__link" href={HUB_LINKS.mediaKit} target="_blank" rel="noopener noreferrer">
-                  Media Kit<ExternalIcon />
-                </a>
-                .
-              </p>
-            </div>
-          </div>
-
-          {/* Signature: block field assembling on load */}
-          <div className="hub-field" aria-hidden="true" style={{ "--fcols": FIELD_COLS }}>
-            {FIELD.map((cell) => (
-              <span
-                key={cell.key}
-                className="hub-blk"
-                style={{ "--d": cell.delay + "s", background: cell.token ? `var(--bb-${cell.token})` : "transparent" }}
-              />
-            ))}
           </div>
         </div>
       </header>
