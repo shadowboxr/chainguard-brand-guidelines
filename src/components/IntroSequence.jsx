@@ -4,10 +4,10 @@ import { WHITE_LOGO } from "./Sidebar.jsx";
 /* Homepage opening sequence (Figma 166:15129).
 
    The whole screen starts Blurple with the "Chainguard Design" lockup centred on
-   it. After a brief hold the fill shrinks down to the live hero blurple block
-   (.hub-hero__left), revealing the site as it retreats. When it lands it is
-   swapped for the real hero and Home runs its entrance cascade. No opacity fades
-   anywhere — the lockup is a hard cut and everything else is geometric.
+   it. It holds, the lockup fades out gently, then the fill shrinks down to the
+   live hero blurple block (.hub-hero__left), revealing the site as it retreats.
+   When it lands it is swapped for the real hero and Home runs its entrance
+   cascade.
 
    The lockup sits on its own layer above the fill and tracks the fill's box, so
    it stays centred in the shrinking block.
@@ -28,12 +28,14 @@ export default function IntroSequence({ onReveal, onDone }) {
   cbRef.current = { onReveal, onDone };
   // Start full-screen synchronously so there's no first-paint flash of the page.
   const [box, setBox] = useState(fullBox); // current fill geometry (px)
+  const [fadeLogo, setFadeLogo] = useState(false); // lockup fades out on the full fill
   const [shrinking, setShrinking] = useState(false);
 
   useEffect(() => {
     const at = (ms, fn) => timers.current.push(setTimeout(fn, ms));
 
-    at(650, () => {
+    at(1000, () => setFadeLogo(true)); // hold the full fill, then fade the lockup out (.6s)
+    at(1680, () => {
       // Shrink the full-screen fill down to the hero block; reveal the site.
       const el = document.querySelector(".hub-hero__left");
       const r = el && el.getBoundingClientRect();
@@ -41,7 +43,7 @@ export default function IntroSequence({ onReveal, onDone }) {
       setShrinking(true);
       cbRef.current.onReveal?.();
     });
-    at(650 + 740, () => cbRef.current.onDone?.()); // landed on the hero — swap it out
+    at(1680 + 740, () => cbRef.current.onDone?.()); // landed on the hero — swap it out
 
     return () => {
       timers.current.forEach(clearTimeout);
@@ -56,10 +58,10 @@ export default function IntroSequence({ onReveal, onDone }) {
   return (
     <div className="cg-intro" aria-hidden="true">
       <div className={"cg-intro__fill" + (shrinking ? " is-shrinking" : "")} style={boxStyle} />
-      {/* Lockup layer — tracks the fill's box so it stays centred as it shrinks;
-          a hard cut in/out, no opacity fade. */}
+      {/* Lockup layer — tracks the fill's box so it stays centred; fades out
+          gently before the shrink. */}
       <div className={"cg-intro__logo-wrap" + (shrinking ? " is-shrinking" : "")} style={boxStyle}>
-        <div className="cg-intro__logo">
+        <div className={"cg-intro__logo" + (fadeLogo ? " is-out" : "")}>
           <img src={WHITE_LOGO} alt="" width={30} height={26} />
           <span>Chainguard Design</span>
         </div>
