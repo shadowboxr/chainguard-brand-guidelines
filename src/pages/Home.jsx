@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { HUB_NAV, HUB_LINKS } from "../content/hub.js";
 import StarIcon from "../components/StarIcon.jsx";
 import IntroSequence from "../components/IntroSequence.jsx";
+import { useEntrance } from "../entrance.js";
 
 /* Brand Hub homepage — the elevated front door into the brand system. Reuses
    the existing shell, tokens, and terminal/block visual language. The hero is a
@@ -58,17 +59,15 @@ function HubLink({ item, index }) {
 }
 
 export default function Home() {
-  // Opening sequence: plays every time the Brand Hub home mounts (each load /
-  // navigation to "/"), and is skipped entirely under prefers-reduced-motion.
-  // `phase` gates the entrance ("hold" = everything held invisible under the
-  // overlay, "reveal" = items load in independently, "off" = no intro). It is
-  // published as a `data-intro` attribute on <html> so the shell (sidebar,
-  // topbar) reveals in step with the page. `overlay` mounts the IntroSequence.
-  const [phase, setPhase] = useState(() => {
-    if (typeof window === "undefined") return "off";
-    const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    return reduce ? "off" : "hold";
-  });
+  // Opening sequence: plays only on a fresh load of "/" (first visit or reload),
+  // not when navigating to home from another page, and never under
+  // prefers-reduced-motion. `phase` gates the entrance ("hold" = everything held
+  // invisible under the overlay, "reveal" = items load in independently, "off" =
+  // no intro). It is published as a `data-intro` attribute on <html> so the shell
+  // (sidebar, topbar) reveals in step with the page. `overlay` mounts the
+  // IntroSequence.
+  const { isBoot, reduce } = useEntrance("home");
+  const [phase, setPhase] = useState(() => (isBoot && !reduce ? "hold" : "off"));
   const [overlay, setOverlay] = useState(() => phase !== "off");
 
   useEffect(() => {

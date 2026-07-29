@@ -2,12 +2,17 @@ import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import CopyButton from "../components/CopyButton.jsx";
 import Blocks from "./Blocks.jsx";
+import { useEntrance } from "../entrance.js";
 
 export default function DocPage({ sections: S, toc: P, ids: M, title: H, tocFooter }) {
   const [active, setActive] = useState(M[0]);
   const listRef = useRef(null);
   const [indicatorTop, setIndicatorTop] = useState(4);
   const location = useLocation();
+  // Fade the page in the first time it's visited this load (not on back-nav).
+  // The hero title stays put; the main content leads, then the scrollspy.
+  const { firstVisit, reduce } = useEntrance(location.pathname);
+  const enter = firstVisit && !reduce;
 
   useEffect(() => {
     if (location.hash) document.getElementById(location.hash.slice(1))?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -46,7 +51,7 @@ export default function DocPage({ sections: S, toc: P, ids: M, title: H, tocFoot
   };
 
   return (
-    <div className="fpage">
+    <div className={"fpage" + (enter ? " fpage--enter" : "")}>
       <header className="fhero">
         <div className="fhero__inner">
           <h1 className="fhero__title">{H}</h1>
