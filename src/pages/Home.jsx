@@ -61,14 +61,18 @@ function HubLink({ item, index }) {
 export default function Home() {
   // Opening sequence: plays only on a fresh load of "/" (first visit or reload),
   // not when navigating to home from another page, and never under
-  // prefers-reduced-motion. `phase` gates the entrance ("hold" = everything held
-  // invisible under the overlay, "reveal" = items load in independently, "off" =
-  // no intro). It is published as a `data-intro` attribute on <html> so the shell
-  // (sidebar, topbar) reveals in step with the page. `overlay` mounts the
-  // IntroSequence.
+  // prefers-reduced-motion. `phase` gates the entrance and is published as a
+  // `data-intro` attribute on <html> so the shell reveals in step:
+  //   "hold"   — everything hidden under the full-screen fill
+  //   "frame"  — fill has locked onto the hero; the frame lines draw in
+  //   "reveal" — the content loads in independently
+  //   "off"    — no intro
+  // `overlay` mounts the IntroSequence.
   const { isBoot, reduce } = useEntrance();
   const [phase, setPhase] = useState(() => (isBoot && !reduce ? "hold" : "off"));
   const [overlay, setOverlay] = useState(() => phase !== "off");
+
+  const isMobile = typeof window !== "undefined" && window.innerWidth <= 900;
 
   useEffect(() => {
     if (phase === "off") return undefined;
@@ -195,7 +199,24 @@ export default function Home() {
       </section>
 
       {overlay && (
-        <IntroSequence onReveal={() => setPhase("reveal")} onDone={() => setOverlay(false)} />
+        <IntroSequence
+          onLanded={() => {
+            // Fill locked onto the hero. Desktop: draw the frame (keep the
+            // shrunken fill — it sits on the hero, identical blurple). Mobile:
+            // no frame lines, so drop the fill and go straight to content.
+            if (isMobile) {
+              setOverlay(false);
+              setPhase("reveal");
+            } else {
+              setPhase("frame");
+            }
+          }}
+          onContent={() => {
+            // Frame drawn: drop the fill and file the content in.
+            setOverlay(false);
+            setPhase("reveal");
+          }}
+        />
       )}
     </div>
   );

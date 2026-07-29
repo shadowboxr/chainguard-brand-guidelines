@@ -22,17 +22,18 @@
 .layout{height:100%;display:flex;max-width:1512px;margin:0 auto;border-left:1px solid var(--border-default);border-right:1px solid var(--border-default);position:relative}
 
 /* ---- Home intro: the main frame lines draw themselves in ----
-   Only active while the Home intro is running (data-intro on <html>). The static
-   frame borders are hidden and replaced by 1px line elements that scale in — the
-   verticals draw top->bottom, the horizontal draws left->right — as the first
-   layer before the content files in. Desktop only (that's where the frame
-   borders exist). */
+   The static frame borders are hidden for the whole intro (any data-intro) and
+   replaced by 1px line elements. Once the fill locks onto the hero (phase
+   "frame"), the lines scale in — verticals top->bottom, horizontal left->right —
+   as the first layer, then the content files in (phase "reveal"). The draw
+   selector matches both "frame" and "reveal" so the lines stay put once drawn.
+   Desktop only (that's where the frame borders exist). */
 .cg-frame{display:none}
-:root[data-intro=reveal] .layout{border-left-color:transparent;border-right-color:transparent}
-:root[data-intro=reveal] .sidebar{border-right-color:transparent}
-:root[data-intro=reveal] .sidebar__brandrow{border-bottom-color:transparent}
-:root[data-intro=reveal] .topbar{border-bottom-color:transparent}
-:root[data-intro=reveal] .cg-frame{display:block;position:absolute;inset:0;z-index:20;pointer-events:none}
+:root[data-intro] .layout{border-left-color:transparent;border-right-color:transparent}
+:root[data-intro] .sidebar{border-right-color:transparent}
+:root[data-intro] .sidebar__brandrow{border-bottom-color:transparent}
+:root[data-intro] .topbar{border-bottom-color:transparent}
+:root:is([data-intro=frame],[data-intro=reveal]) .cg-frame{display:block;position:absolute;inset:0;z-index:20;pointer-events:none}
 .cg-frame__line{position:absolute;background:var(--border-default)}
 .cg-frame__l{left:0;top:0;width:1px;height:100%;transform:scaleY(0);transform-origin:top}
 .cg-frame__r{right:0;top:0;width:1px;height:100%;transform:scaleY(0);transform-origin:top}
@@ -40,12 +41,12 @@
 .cg-frame__top{left:0;top:var(--topbar-height);width:100%;height:1px;transform:scaleX(0);transform-origin:left}
 @keyframes cgDrawV{to{transform:scaleY(1)}}
 @keyframes cgDrawH{to{transform:scaleX(1)}}
-:root[data-intro=reveal] .cg-frame__l{animation:cgDrawV .55s var(--ease-out) 0s forwards}
-:root[data-intro=reveal] .cg-frame__r{animation:cgDrawV .55s var(--ease-out) .1s forwards}
-:root[data-intro=reveal] .cg-frame__top{animation:cgDrawH .55s var(--ease-out) .15s forwards}
-:root[data-intro=reveal] .cg-frame__nav{animation:cgDrawV .55s var(--ease-out) .28s forwards}
+:root:is([data-intro=frame],[data-intro=reveal]) .cg-frame__l{animation:cgDrawV .5s var(--ease-out) 0s forwards}
+:root:is([data-intro=frame],[data-intro=reveal]) .cg-frame__r{animation:cgDrawV .5s var(--ease-out) .06s forwards}
+:root:is([data-intro=frame],[data-intro=reveal]) .cg-frame__top{animation:cgDrawH .5s var(--ease-out) .1s forwards}
+:root:is([data-intro=frame],[data-intro=reveal]) .cg-frame__nav{animation:cgDrawV .5s var(--ease-out) .2s forwards}
 @media (prefers-reduced-motion:reduce){
-  :root[data-intro=reveal] .cg-frame__line{animation:none;transform:none}
+  :root:is([data-intro=frame],[data-intro=reveal]) .cg-frame__line{animation:none;transform:none}
 }
 .layout__sidebar{flex:0 0 var(--sidebar-width);height:100%;position:sticky;top:0}
 .layout__main{background:var(--surface-page);flex:auto;min-width:0;height:100%;overflow:hidden auto}
@@ -78,6 +79,6 @@
 .drawer--open .drawer__panel{transform:translate(0)}
 @media (width<=900px){.layout__sidebar{display:none}.topbar__menu{display:flex}.layout{border-left:0;border-right:0}
   /* No frame-draw on mobile — keep the topbar border static, hide the lines. */
-  :root[data-intro=reveal] .cg-frame{display:none}
-  :root[data-intro=reveal] .topbar{border-bottom-color:var(--border-default)}}
+  :root[data-intro] .cg-frame{display:none}
+  :root[data-intro] .topbar{border-bottom-color:var(--border-default)}}
 @media (width<=480px){.topbar{padding:0 var(--sp-4)}.ttoggle{display:none}}

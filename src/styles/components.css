@@ -802,20 +802,20 @@
    The hero panels and nav modules sit in grid cells whose gaps show a grey
    divider background, so we keep those *cells* painted and stagger their
    contents — otherwise the empty cells would flash grey. */
-:root[data-intro=hold] .sidebar__brand,
-:root[data-intro=hold] .sidebar__sections>.nav-group,
-:root[data-intro=hold] .topbar__menu,
-:root[data-intro=hold] .topbar .ttoggle,
-:root[data-intro=hold] .topbar__label,
-:root[data-intro=hold] .hub-title,
-:root[data-intro=hold] .hub-lede,
-:root[data-intro=hold] .hub-hero__panel .hub-panel__head,
-:root[data-intro=hold] .hub-hero__shortcuts .hub-scut,
-:root[data-intro=hold] .hub-hero__note .hub-panel__body,
-:root[data-intro=hold] .hub-nav .hub-section__head,
-:root[data-intro=hold] .hub-modules .hub-module>*,
-:root[data-intro=hold] .hub-support .hub-section__head,
-:root[data-intro=hold] .hub-support__card{opacity:0}
+:root:is([data-intro=hold],[data-intro=frame]) .sidebar__brand,
+:root:is([data-intro=hold],[data-intro=frame]) .sidebar__sections>.nav-group,
+:root:is([data-intro=hold],[data-intro=frame]) .topbar__menu,
+:root:is([data-intro=hold],[data-intro=frame]) .topbar .ttoggle,
+:root:is([data-intro=hold],[data-intro=frame]) .topbar__label,
+:root:is([data-intro=hold],[data-intro=frame]) .hub-title,
+:root:is([data-intro=hold],[data-intro=frame]) .hub-lede,
+:root:is([data-intro=hold],[data-intro=frame]) .hub-hero__panel .hub-panel__head,
+:root:is([data-intro=hold],[data-intro=frame]) .hub-hero__shortcuts .hub-scut,
+:root:is([data-intro=hold],[data-intro=frame]) .hub-hero__note .hub-panel__body,
+:root:is([data-intro=hold],[data-intro=frame]) .hub-nav .hub-section__head,
+:root:is([data-intro=hold],[data-intro=frame]) .hub-modules .hub-module>*,
+:root:is([data-intro=hold],[data-intro=frame]) .hub-support .hub-section__head,
+:root:is([data-intro=hold],[data-intro=frame]) .hub-support__card{opacity:0}
 
 @keyframes hubItemIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
 :root[data-intro=reveal] .sidebar__brand,
