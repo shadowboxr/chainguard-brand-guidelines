@@ -93,10 +93,16 @@ const ICONS = {
 
         { type: "subhead", id: "custom-icons", label: "Custom icons" },
         {
-          type: "p",
-          text: "When the library doesn’t cover a concept, custom icons follow the same stroke weight, corner radius, and grid so they sit naturally alongside the core set.",
+          type: "split",
+          rows: [
+            {
+              label: "Claude design",
+              desc: "When the library doesn’t cover a concept, custom icons follow the same stroke weight, corner radius, and grid so they sit naturally alongside the core set.",
+              button: { label: "Open design", icon: claudeMark, href: "https://claude.ai/design" },
+              media: true,
+            },
+          ],
         },
-        { type: "media" },
       ],
     },
   ],
