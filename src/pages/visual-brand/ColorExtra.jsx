@@ -4,9 +4,9 @@ import ContrastChecker from "./ContrastChecker.jsx";
 import ColorThemeBars from "./ColorThemeBars.jsx";
 import ColorThemeMono from "./ColorThemeMono.jsx";
 import ColorThemeBlurple from "./ColorThemeBlurple.jsx";
-import boothAvoid1 from "../../assets/booth/booth-avoid-1.png";
-import boothAvoid2 from "../../assets/booth/booth-avoid-2.png";
-import boothAvoid3 from "../../assets/booth/booth-avoid-3.png";
+import boothAvoid1 from "../../assets/booth/booth-avoid-1.jpg";
+import boothAvoid2 from "../../assets/booth/booth-avoid-2.jpg";
+import boothAvoid3 from "../../assets/booth/booth-avoid-3.jpg";
 
 // Booth examples to avoid — off-brand third-party booths (non-Chainguard).
 const AVOID_BOOTHS = [

@@ -289,7 +289,7 @@
 .cxph::after,.fsplit__media::after,.tirl__slide::after{content:"In progress";font:500 10px/1.5 var(--font-label);letter-spacing:.6px;text-transform:uppercase;color:var(--text-tertiary)}
 /* Real image slides (e.g. booth "avoid" examples): same height as the
    placeholders, natural width, no placeholder chrome/label. */
-.tirl__slide--img{flex:0 0 auto;max-width:none;width:auto;aspect-ratio:auto;height:258.75px;background:none;overflow:hidden}
+.tirl__slide--img{display:block;flex:0 0 auto;max-width:none;width:auto;aspect-ratio:auto;height:258.75px;background:none;overflow:hidden}
 .tirl__slide--img::after{content:none}
 .tirl__slide--img .tirl__img{display:block;height:100%;width:auto;user-select:none;-webkit-user-drag:none}
 @media(max-width:640px){.tirl__slide--img{height:190px}}
