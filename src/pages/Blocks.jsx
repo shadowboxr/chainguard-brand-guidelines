@@ -5,6 +5,7 @@ import ColorExtra from "./visual-brand/ColorExtra.jsx";
 import Typography from "./visual-brand/Typography.jsx";
 import DesignElements from "./visual-brand/DesignElements.jsx";
 import DataViz from "./visual-brand/DataViz.jsx";
+import DataVizTool from "./visual-brand/DataVizTool.jsx";
 import Carousel from "./visual-brand/Carousel.jsx";
 import MisuseGrid from "./assets/MisuseGrid.jsx";
 import LogoVariants from "./assets/LogoVariants.jsx";
@@ -36,7 +37,7 @@ export default function Blocks({ blocks }) {
         ) : block.type === "productlogos" ? (
           <ProductLogos key={i} />
         ) : block.type === "carousel" ? (
-          <Carousel key={i} />
+          block.tool === "dataviz" ? <DataVizTool key={i} /> : <Carousel key={i} />
         ) : block.type === "subhead" ? (
           <h3 className="cpal-h3 fanchor" id={block.id} key={i}>
             {block.label}

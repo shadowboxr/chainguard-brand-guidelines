@@ -117,7 +117,7 @@ const ILLUSTRATIONS = {
           type: "note",
           text: "Product screens should have a soft rounded corner to create contrast against our geometric components.",
         },
-        { type: "carousel" },
+        { type: "carousel", tool: "dataviz" },
 
         { type: "subhead", id: "simplified", label: "Simplified" },
         {
