@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import { WHITE_LOGO } from "./Sidebar.jsx";
+import ChainguardLogo from "../pages/assets/ChainguardLogo.jsx";
 
 /* Homepage opening sequence (Figma 166:15129).
 
-   The whole screen starts Blurple with the "Chainguard Design" lockup centred on
+   The whole screen starts Blurple with the white Chainguard logo centred on
    it. It holds, the lockup fades out gently, then the fill shrinks down to the
    live hero blurple block (.hub-hero__left), revealing the site as it retreats.
    When it lands it is swapped for the real hero and Home runs its entrance
@@ -64,12 +64,11 @@ export default function IntroSequence({ onLanded, onContent }) {
   return (
     <div className="cg-intro" aria-hidden="true">
       <div className={"cg-intro__fill" + (shrinking ? " is-shrinking" : "")} style={boxStyle} />
-      {/* Lockup layer — tracks the fill's box so it stays centred; fades out
+      {/* Logo layer — tracks the fill's box so it stays centred; fades out
           gently before the shrink. */}
       <div className={"cg-intro__logo-wrap" + (shrinking ? " is-shrinking" : "")} style={boxStyle}>
         <div className={"cg-intro__logo" + (fadeLogo ? " is-out" : "")}>
-          <img src={WHITE_LOGO} alt="" width={30} height={26} />
-          <span>Chainguard Design</span>
+          <ChainguardLogo className="cg-intro__wordmark" title="Chainguard" />
         </div>
       </div>
     </div>

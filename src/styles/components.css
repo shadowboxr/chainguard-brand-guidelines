@@ -803,10 +803,9 @@
    fill shrinks; fades out gently on the full fill before the shrink. */
 .cg-intro__logo-wrap{position:fixed;z-index:1;display:flex;align-items:center;justify-content:center;pointer-events:none}
 .cg-intro__logo-wrap.is-shrinking{transition:left .74s var(--ease-out),top .74s var(--ease-out),width .74s var(--ease-out),height .74s var(--ease-out)}
-.cg-intro__logo{display:flex;align-items:center;gap:12px;opacity:1;transition:opacity .6s ease-in-out}
+.cg-intro__logo{line-height:0;color:#fff;opacity:1;transition:opacity .6s ease-in-out}
 .cg-intro__logo.is-out{opacity:0}
-.cg-intro__logo img{display:block}
-.cg-intro__logo span{font-family:var(--font-title);font-weight:600;font-size:22px;letter-spacing:-.01em;line-height:1;color:#fff;white-space:nowrap}
+.cg-intro__wordmark{display:block;width:min(240px,56vw);height:auto}
 
 /* ---- Entrance: every item loads in independently ----
    Driven by a `data-intro` attribute on <html> so the shell (sidebar/topbar)
