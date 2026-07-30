@@ -16,7 +16,7 @@ export const SECTIONS = [
     layout: "columns",
     rows: [
       { id: "who-we-are", label: "Who we are", text: "The trusted source for open source." },
-      { id: "company-mission", label: "Company mission", text: "Make all open source software trustworthy so engineers can build safely with AI." },
+      { id: "company-mission", label: "Company mission", text: "Make all open source software trustworthy." },
       { id: "company-vision", label: "Company vision", text: "We believe in a world where engineering teams can build at machine speed, confident that every line of code is hardened, trusted, and ready for production." },
       { id: "product-vision", label: "Product vision", text: "We make open source better in every way that matters to engineering teams – trusted, secure, and effortless to use." },
     ],
