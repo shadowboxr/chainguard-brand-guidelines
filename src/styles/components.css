@@ -296,7 +296,7 @@
 .tirl__strike{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none}
 @media(max-width:640px){.tirl__slide--img{height:240px}}
 /* Full-width slides (Data viz tool): one example per view, 718:413 card. */
-.tirl__slide--full{display:block;flex:0 0 100%;max-width:100%;width:100%;aspect-ratio:718/413;background:none;overflow:hidden;border-radius:var(--radius-md);border:1px solid var(--border-default)}
+.tirl__slide--full{display:block;flex:0 0 100%;max-width:100%;width:100%;aspect-ratio:718/413;background:none;overflow:hidden;border:1px solid var(--border-default)}
 .tirl__slide--full::after{content:none}
 .tirl__img--full{display:block;width:100%;height:100%;object-fit:cover}
 
@@ -304,7 +304,13 @@
    sits inside the card at the top-right. Its own surface keeps it legible over
    both the light and dark example cards. */
 .dvtool{position:relative;display:flex;flex-direction:column;gap:var(--sp-4);width:100%}
-.dvtool__toggle{position:absolute;top:var(--sp-3);right:var(--sp-3);z-index:5;background:var(--surface-card);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.dvtool__toggle{position:absolute;top:var(--sp-3);right:var(--sp-3);z-index:5;box-shadow:0 1px 3px rgba(0,0,0,.12)}
+/* Toggle colours follow the preview mode (not the site theme) so it reads on
+   whichever card version is shown. */
+.dvtool__toggle[data-mode=light]{background:var(--neutral-0);border-color:var(--neutral-200)}
+.dvtool__toggle[data-mode=light] .ttoggle__seg:not(.is-on){color:var(--neutral-500)}
+.dvtool__toggle[data-mode=dark]{background:var(--neutral-800);border-color:var(--neutral-700)}
+.dvtool__toggle[data-mode=dark] .ttoggle__seg:not(.is-on){color:var(--neutral-400)}
 .fcard__img,.fvalue__img{display:grid;place-items:center}
 .fcard__img::after,.fvalue__img::after{content:"In progress";font:500 10px/1.5 var(--font-label);letter-spacing:.6px;text-transform:uppercase;color:var(--text-tertiary)}
 

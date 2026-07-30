@@ -60,7 +60,7 @@ export default function DataVizTool() {
 
   return (
     <div className="dvtool">
-      <div className="ttoggle dvtool__toggle" role="radiogroup" aria-label="Preview theme">
+      <div className="ttoggle dvtool__toggle" data-mode={mode} role="radiogroup" aria-label="Preview theme">
         <span className="ttoggle__slider" style={{ "--i": idx }} aria-hidden="true" />
           {MODES.map((m) => (
             <button
