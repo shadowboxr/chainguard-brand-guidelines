@@ -920,8 +920,8 @@ img.fsplit__media--dark{display:none}
 
 /* Hero text leads the reveal — it comes in first, well ahead of the sidebar,
    nav and panels, title then lede (original entrance durations kept). */
-:root[data-intro=reveal] .hub-title{animation-delay:.06s;animation-duration:.4s}
-:root[data-intro=reveal] .hub-lede{animation-delay:.16s;animation-duration:.45s}
+:root[data-intro=reveal] .hub-title{animation-delay:0s;animation-duration:.7s}
+:root[data-intro=reveal] .hub-lede{animation-delay:.1s;animation-duration:.8s}
 /* Then the nav — sidebar brand, then each item. */
 :root[data-intro=reveal] .sidebar__brand{animation-delay:.44s}
 :root[data-intro=reveal] .sidebar__sections>.nav-group:nth-child(1){animation-delay:.54s}
