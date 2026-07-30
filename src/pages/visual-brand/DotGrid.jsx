@@ -58,6 +58,35 @@ export default function DotGrid() {
   const count = cols * cols;
   const color = COLORS.find((c) => c.key === colorKey);
 
+  const fieldRef = useRef(null);
+  const [copied, setCopied] = useState(false);
+  // Serialize the field to a standalone SVG: one centered square per cell, sized
+  // by the dot slider, in the active core color read off the rendered element.
+  const copyGrid = () => {
+    const el = fieldRef.current;
+    if (!el) return;
+    const cs = getComputedStyle(el);
+    const fill = cs.getPropertyValue(`--bb-${color.token}`).trim() || color.dot;
+    const bg = cs.backgroundColor;
+    const CELL = 24;
+    const size = cols * CELL;
+    const d = CELL * (dotSize / 100);
+    const off = (CELL - d) / 2;
+    let rects = "";
+    for (let i = 0; i < count; i++) {
+      const x = ((i % cols) * CELL + off).toFixed(2);
+      const y = (Math.floor(i / cols) * CELL + off).toFixed(2);
+      rects += `<rect x="${x}" y="${y}" width="${d.toFixed(2)}" height="${d.toFixed(2)}" fill="${fill}"/>`;
+    }
+    const svg =
+      `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" fill="none" xmlns="http://www.w3.org/2000/svg">` +
+      `<rect width="${size}" height="${size}" fill="${bg}"/>${rects}</svg>`;
+    navigator.clipboard?.writeText(svg);
+    setCopied(true);
+    window.setTimeout(() => setCopied(false), 1400);
+  };
+  const copyBtn = <button type="button" className="bb-btn" onClick={copyGrid}>{copied ? "Copied" : "Copy SVG"}</button>;
+
   const sizeDrop = <Dropdown value={SIZES[sizeIdx]} options={SIZES} onPick={setSizeIdx} />;
   const dotSizeCtrl = (
     <label className="bb-density">
@@ -76,7 +105,7 @@ export default function DotGrid() {
   });
 
   return (
-    <div className="bblocks bblocks--dots" style={{ "--dg-c": `var(--bb-${color.token})`, "--dg-size": dotSize + "%" }}>
+    <div ref={fieldRef} className="bblocks bblocks--dots" style={{ "--dg-c": `var(--bb-${color.token})`, "--dg-size": dotSize + "%" }}>
       <div className="bblocks__grid" style={{ gridTemplateColumns: `repeat(${cols},1fr)`, gridTemplateRows: `repeat(${cols},1fr)` }}>
         {Array.from({ length: count }, (_, i) => (
           <div key={i} className="dg-cell"><span className="dg-dot" /></div>
@@ -89,6 +118,7 @@ export default function DotGrid() {
           {sizeDrop}
           {dotSizeCtrl}
         </div>
+        <div className="bblocks__topright">{copyBtn}</div>
       </div>
       <div className="bblocks__bottom">
         <div className="bblocks__hues">{colorToggles}</div>
@@ -105,6 +135,7 @@ export default function DotGrid() {
           <span className="osheet__lbl">Color</span>
           <div className="osheet__toggles">{colorToggles}</div>
         </div>
+        <div className="osheet__field osheet__field--wide">{copyBtn}</div>
       </OptionsSheet>
     </div>
   );
