@@ -5,6 +5,7 @@ import sim1Dark from "../../assets/simplified/sim-1-dark.svg";
 import sim2Light from "../../assets/simplified/sim-2-light.svg";
 import sim2Dark from "../../assets/simplified/sim-2-dark.svg";
 import sim3Light from "../../assets/simplified/sim-3-light.svg";
+import sim3Dark from "../../assets/simplified/sim-3-dark.svg";
 import dia1Light from "../../assets/diagram/dia-1-light.svg";
 import dia1Dark from "../../assets/diagram/dia-1-dark.svg";
 import dia2Light from "../../assets/diagram/dia-2-light.svg";
@@ -15,8 +16,7 @@ import dia3Dark from "../../assets/diagram/dia-3-dark.svg";
 export const SIMPLIFIED = [
   { light: sim1Light, dark: sim1Dark, alt: "Simplified illustration example 1" },
   { light: sim2Light, dark: sim2Dark, alt: "Simplified illustration example 2" },
-  // No distinct dark export was provided for #3, so it falls back to light.
-  { light: sim3Light, dark: sim3Light, alt: "Simplified illustration example 3" },
+  { light: sim3Light, dark: sim3Dark, alt: "Simplified illustration example 3" },
 ];
 
 export const DIAGRAMS = [
