@@ -7,8 +7,17 @@ import ColorThemeBlurple from "./ColorThemeBlurple.jsx";
 import boothAvoid1 from "../../assets/booth/booth-avoid-1.jpg";
 import boothAvoid2 from "../../assets/booth/booth-avoid-2.jpg";
 import boothAvoid3 from "../../assets/booth/booth-avoid-3.jpg";
+import boothGood1 from "../../assets/booth/booth-good-1.jpg";
+import boothGood2 from "../../assets/booth/booth-good-2.jpg";
+import boothGood3 from "../../assets/booth/booth-good-3.jpg";
 
-// Booth examples to avoid — off-brand third-party booths (non-Chainguard).
+// On-brand environments to emulate (Chainguard-owned booth, print, OOH).
+const GOOD_BOOTHS = [
+  { src: boothGood1, alt: "Chainguard booth graphic in production" },
+  { src: boothGood2, alt: "Chainguard event booth on the show floor" },
+  { src: boothGood3, alt: "Chainguard out-of-home billboard" },
+];
+// Off-brand third-party booths to avoid (non-Chainguard).
 const AVOID_BOOTHS = [
   { src: boothAvoid1, alt: "Cluttered booth with heavy text and low contrast" },
   { src: boothAvoid2, alt: "Generic booth with weak brand presence" },
@@ -29,7 +38,7 @@ function TRow({ label, desc, media }) {
   );
 }
 
-function PRow({ label, items, images }) {
+function PRow({ label, items, images, strike }) {
   return (
     <div className="fsplit__row fsplit__row--print">
       <div className="fsplit__side">
@@ -42,7 +51,7 @@ function PRow({ label, items, images }) {
           ))}
         </ul>
       </div>
-      <Carousel images={images} />
+      <Carousel images={images} strike={strike} />
     </div>
   );
 }
@@ -80,8 +89,8 @@ export default function ColorExtra() {
         <h3 id="print" className="cpal-h3 fanchor">Print</h3>
         <p className="cxintro">Our colors are optimized for digital, so please use the following guidelines to ensure consistency in print applications.</p>
         <div className="fsplit">
-          <PRow label="Recommended" items={["Use Pantone colors whenever possible. If Pantone printing is not available, use the approved CMYK values.", "Print on black or dark backgrounds whenever possible to help the brand colors appear more vibrant.", "For vinyl applications, prioritize Pantone printing. This has produced the most consistent color results with vendors."]} />
-          <PRow label="Avoid" images={AVOID_BOOTHS} items={["Avoid printing on fabric when possible, as color reproduction can be less consistent.", "Do not combine fabric and vinyl graphics within the same space unless the colors can be closely matched, as differences will be more noticeable side by side.", "For swag, use a black or white base when the item color cannot be accurately matched to an approved Pantone."]} />
+          <PRow label="Recommended" images={GOOD_BOOTHS} items={["Use Pantone colors whenever possible. If Pantone printing is not available, use the approved CMYK values.", "Print on black or dark backgrounds whenever possible to help the brand colors appear more vibrant.", "For vinyl applications, prioritize Pantone printing. This has produced the most consistent color results with vendors."]} />
+          <PRow label="Avoid" images={AVOID_BOOTHS} strike items={["Avoid printing on fabric when possible, as color reproduction can be less consistent.", "Do not combine fabric and vinyl graphics within the same space unless the colors can be closely matched, as differences will be more noticeable side by side.", "For swag, use a black or white base when the item color cannot be accurately matched to an approved Pantone."]} />
         </div>
       </section>
       <section className="cxsec">

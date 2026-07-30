@@ -11,7 +11,8 @@ const PLACEHOLDERS = [0, 1, 2, 3, 4, 5];
 
 // `images` (optional): array of { src, alt } — renders real image slides at the
 // same height as the placeholders (natural width). Omit for placeholder slides.
-export default function Carousel({ images }) {
+// `strike` (optional): draw the red misuse slash over each image (avoid examples).
+export default function Carousel({ images, strike }) {
   const SLIDES = images && images.length ? images : PLACEHOLDERS;
   const viewRef = useRef(null);
   const trackRef = useRef(null);
@@ -112,6 +113,11 @@ export default function Carousel({ images }) {
           {SLIDES.map((s, i) => (
             <div className={"tirl__slide" + (images ? " tirl__slide--img" : "")} key={i}>
               {images ? <img className="tirl__img" src={s.src} alt={s.alt || ""} draggable="false" /> : null}
+              {images && strike ? (
+                <svg className="tirl__strike" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+                  <line x1="0" y1="0" x2="100" y2="100" stroke="var(--solar-500)" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
+                </svg>
+              ) : null}
             </div>
           ))}
         </div>
