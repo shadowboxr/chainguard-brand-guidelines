@@ -9,7 +9,8 @@ import googleSlides from "../assets/templates/google-slides.png";
 import googleDocs from "../assets/templates/google-docs.png";
 import driveIcon from "../assets/templates/google-drive.svg";
 import claudeMark from "../assets/templates/claude-mark.svg";
-import customIconsVideo from "../assets/custom-icons.mp4";
+import customIconsLight from "../assets/custom-icons-light.svg";
+import customIconsDark from "../assets/custom-icons-dark.svg";
 
 const LOGO = {
   sections: [
@@ -101,7 +102,8 @@ const ICONS = {
               desc: "When the library doesn’t cover a concept, custom icons follow the same stroke weight, corner radius, and grid so they sit naturally alongside the core set.",
               button: { label: "Open design", icon: claudeMark, href: "https://claude.ai/design" },
               media: true,
-              video: customIconsVideo,
+              lightDark: { light: customIconsLight, dark: customIconsDark },
+              alt: "Custom icon designed in Claude, following the core icon grid",
             },
           ],
         },
