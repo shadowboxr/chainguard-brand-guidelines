@@ -585,7 +585,7 @@ img.fsplit__media--dark{display:none}
 .thier__lines{grid-column:1/-1;grid-row:1/-1;pointer-events:none;background-image:linear-gradient(var(--border-default),var(--border-default)),linear-gradient(var(--border-default),var(--border-default)),linear-gradient(var(--border-default),var(--border-default)),linear-gradient(var(--border-default),var(--border-default));background-repeat:no-repeat;background-size:100% 1px;background-position:0 15.72%,0 23.54%,0 55.8%,0 84.27%}
 .thier__eyebrow{grid-column:1;grid-row:2;align-self:center;display:flex;align-items:center;gap:.42em;padding:0 4.9cqi 0 8.3cqi;font:500 1.4cqi/1 var(--font-label);letter-spacing:.08em;text-transform:uppercase;color:var(--primary)}
 .thier__cursor{flex:none;width:.546em;height:1.144em;background:var(--primary)}
-.thier__heading{grid-column:1;grid-row:3;align-self:center;margin:0;padding:0 4.9cqi 0 8.3cqi;font:700 5.4cqi/1.06 var(--font-title);letter-spacing:-.03em;color:var(--text-primary)}
+.thier__heading{grid-column:1;grid-row:3;align-self:center;margin:0;padding:0 4.9cqi 0 8.3cqi;font:700 6cqi/1.0 var(--font-title);letter-spacing:-.03em;color:var(--text-primary)}
 .thier__body{grid-column:1;grid-row:4;align-self:center;margin:0;padding:0 4.9cqi 0 8.3cqi;font:400 1.95cqi/1.5 var(--font-body);color:var(--text-primary)}
 .thier__lbl{grid-column:2;align-self:center;padding-left:1.95cqi;font:500 1.15cqi/1.4 var(--font-label);letter-spacing:.05em;text-transform:uppercase;color:var(--text-primary);white-space:nowrap}
 .thier__lbl--e{grid-row:2}
@@ -611,13 +611,13 @@ img.fsplit__media--dark{display:none}
 .talign__eyebrow{display:inline-flex;align-items:center;gap:.48cqi}
 .talign__brand{font:500 1.68cqi/1 var(--font-label);letter-spacing:.06em;text-transform:uppercase;color:var(--primary)}
 .talign__cursor{flex:none;width:.72cqi;height:1.44cqi;background:var(--primary)}
-.talign__heading{margin:0;font:700 5.4cqi/1.06 var(--font-title);letter-spacing:-.03em;color:var(--text-primary);white-space:nowrap}
+.talign__heading{margin:0;font:700 6cqi/1.0 var(--font-title);letter-spacing:-.03em;color:var(--text-primary);white-space:nowrap}
 .talign__body{margin:0;font:400 1.92cqi/1.5 var(--font-body);color:var(--text-secondary)}
-.talign__block--left .talign__body{width:44cqi}
+.talign__block--left .talign__body{width:49cqi}
 .talign__block--center .talign__body{width:100%}
 .talign__block--left{animation:talign-fade-l var(--talign-dur) ease-in-out infinite}
 .talign__block--center{animation:talign-fade-c var(--talign-dur) ease-in-out infinite}
-@keyframes talign-guide{0%,42%{left:8cqi;width:44cqi}52%,90%{left:17.215cqi;width:65.57cqi}100%{left:8cqi;width:44cqi}}
+@keyframes talign-guide{0%,42%{left:8cqi;width:49cqi}52%,90%{left:17.215cqi;width:65.57cqi}100%{left:8cqi;width:49cqi}}
 /* Sequential handoff: the outgoing alignment fades out while the dashed frame
    starts gliding, the incoming one fades in as it arrives — layers never
    overlap, so the frame reads as carrying the text to its new position. */
@@ -625,7 +625,7 @@ img.fsplit__media--dark{display:none}
 @keyframes talign-fade-c{0%,47%{opacity:0}52%,90%{opacity:1}95%,100%{opacity:0}}
 @media (prefers-reduced-motion:reduce){
   .talign__guide,.talign__block--left,.talign__block--center{animation:none}
-  .talign__guide{left:8cqi;width:44cqi}
+  .talign__guide{left:8cqi;width:49cqi}
   .talign__block--center{opacity:0}
   .talign__block--left{opacity:1}
 }
@@ -640,7 +640,7 @@ img.fsplit__media--dark{display:none}
 .tcap__labels{position:absolute;top:3.67cqi;left:3.62cqi;right:3.9cqi;display:flex;justify-content:space-between;font:500 1.67cqi/1 var(--font-label);letter-spacing:.06em;text-transform:uppercase;color:var(--text-tertiary);white-space:nowrap}
 .tcap__specimen{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center}
 .tcap__hl{color:var(--primary)}
-.tcap__heading{margin:0;font:700 5.4cqi/1.06 var(--font-title);letter-spacing:-.03em;color:var(--text-primary);white-space:nowrap}
+.tcap__heading{margin:0;font:700 6cqi/1.0 var(--font-title);letter-spacing:-.03em;color:var(--text-primary);white-space:nowrap}
 .tcap__body{margin:0;width:61.43cqi;font:400 1.92cqi/1.5 var(--font-body);color:var(--text-secondary)}
 .tcap__eyebrow{font:500 2.95cqi/1 var(--font-label);letter-spacing:.06em;text-transform:uppercase;color:var(--primary)}
 .tcap__proper{margin:0;font:700 4.45cqi/1.2 var(--font-title);letter-spacing:-.03em;color:var(--text-primary);white-space:nowrap}
