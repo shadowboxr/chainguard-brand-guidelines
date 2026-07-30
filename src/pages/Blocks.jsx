@@ -6,7 +6,10 @@ import Typography from "./visual-brand/Typography.jsx";
 import DesignElements from "./visual-brand/DesignElements.jsx";
 import DataViz from "./visual-brand/DataViz.jsx";
 import DataVizTool from "./visual-brand/DataVizTool.jsx";
+import { SIMPLIFIED, DIAGRAMS } from "./visual-brand/previewSets.js";
 import Carousel from "./visual-brand/Carousel.jsx";
+
+const DV_SETS = { simplified: SIMPLIFIED, diagrams: DIAGRAMS };
 import MisuseGrid from "./assets/MisuseGrid.jsx";
 import LogoVariants from "./assets/LogoVariants.jsx";
 import Linky from "./assets/Linky.jsx";
@@ -37,7 +40,7 @@ export default function Blocks({ blocks }) {
         ) : block.type === "productlogos" ? (
           <ProductLogos key={i} />
         ) : block.type === "carousel" ? (
-          block.tool === "dataviz" ? <DataVizTool key={i} /> : <Carousel key={i} />
+          block.tool === "dataviz" ? <DataVizTool key={i} examples={DV_SETS[block.set]} /> : <Carousel key={i} />
         ) : block.type === "subhead" ? (
           <h3 className="cpal-h3 fanchor" id={block.id} key={i}>
             {block.label}

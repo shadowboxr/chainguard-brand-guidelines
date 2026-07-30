@@ -128,7 +128,7 @@ const ILLUSTRATIONS = {
           type: "note",
           text: "Simplified product illustrations are often framed within a rounded rectangle to create some contrast between the illustration and surrounding content.",
         },
-        { type: "carousel" },
+        { type: "carousel", tool: "dataviz", set: "simplified" },
 
         { type: "subhead", id: "terminal", label: "The terminal" },
         {
@@ -142,7 +142,7 @@ const ILLUSTRATIONS = {
           type: "p",
           text: "Diagrams explain systems and flows using the grid, building blocks, and our core colors — always with intent.",
         },
-        { type: "media" },
+        { type: "carousel", tool: "dataviz", set: "diagrams" },
       ],
     },
   ],

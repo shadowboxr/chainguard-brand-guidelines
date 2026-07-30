@@ -44,7 +44,7 @@ function effectiveTheme() {
     : "light";
 }
 
-export default function DataVizTool() {
+export default function DataVizTool({ examples = EXAMPLES }) {
   const [mode, setMode] = useState(effectiveTheme);
 
   // Follow the site theme when it changes; a manual toggle overrides until then.
@@ -56,7 +56,7 @@ export default function DataVizTool() {
   }, []);
 
   const idx = MODES.findIndex((m) => m.id === mode);
-  const images = EXAMPLES.map((e) => ({ src: mode === "dark" ? e.dark : e.light, alt: e.alt }));
+  const images = examples.map((e) => ({ src: mode === "dark" ? e.dark : e.light, alt: e.alt }));
 
   return (
     <div className="dvtool">
