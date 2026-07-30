@@ -164,6 +164,7 @@
 .fsplit__label{margin:0;font:500 16px/1.4 var(--font-title);color:var(--text-primary)}
 .fsplit__desc{margin:0;font:400 14px/1.5 var(--font-body);color:var(--text-secondary);text-wrap:pretty}
 .fsplit__media{aspect-ratio:16/9;background:var(--surface-inset);border:1px solid var(--border-default);display:grid;place-items:center}
+img.fsplit__media{width:100%;height:auto;object-fit:cover;display:block}
 .fsplit__list{margin:0;padding-left:1.15em;display:flex;flex-direction:column;gap:var(--sp-2);font:400 16px/1.6 var(--font-body);color:var(--text-secondary)}
 .fsplit__list li{text-wrap:pretty}
 /* Print rows: the example slider wraps to its own line spanning the full main

@@ -76,7 +76,15 @@ export default function Blocks({ blocks }) {
                   {r.desc && <p className="fsplit__desc">{r.desc}</p>}
                 </div>
                 <div className="fsplit__main">
-                  {r.media ? <div className="fsplit__media" /> : <p className="fsplit__body">{r.body}</p>}
+                  {r.media ? (
+                    r.src ? (
+                      <img className="fsplit__media" src={r.src} alt={r.alt || ""} />
+                    ) : (
+                      <div className="fsplit__media" />
+                    )
+                  ) : (
+                    <p className="fsplit__body">{r.body}</p>
+                  )}
                 </div>
               </div>
             ))}

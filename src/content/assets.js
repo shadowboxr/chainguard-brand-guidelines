@@ -5,6 +5,8 @@
 // placeholder while the page is filled in.
 
 import partnerLogos from "../assets/partner-logos.svg";
+import googleSlides from "../assets/templates/google-slides.png";
+import googleDocs from "../assets/templates/google-docs.png";
 
 const LOGO = {
   sections: [
@@ -175,11 +177,15 @@ const TEMPLATES = {
               label: "Google Slides",
               desc: "If you are creating a deck for a keynote, event or other high-visibility public presentation, please work with Creative and Product Marketing. We reserve the use of the dark mode template for these custom use cases.",
               media: true,
+              src: googleSlides,
+              alt: "Chainguard Google Slides template overview",
             },
             {
               label: "Google Docs",
               desc: "Select the template named Chainguard Google Doc Template for pre-created paragraph styles, and footer.",
               media: true,
+              src: googleDocs,
+              alt: "Chainguard Google Docs template",
             },
           ],
         },
