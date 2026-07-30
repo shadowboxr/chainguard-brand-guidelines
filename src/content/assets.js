@@ -91,7 +91,7 @@ const ICONS = {
           type: "p",
           text: "Our icon system is clear, geometric, and built on the same grid as the rest of the brand. Icons add meaning and wayfinding without competing with the content around them.",
         },
-        { type: "media" },
+        { type: "icongrid" },
 
         { type: "subhead", id: "custom-icons", label: "Custom icons" },
         {

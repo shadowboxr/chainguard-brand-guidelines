@@ -170,6 +170,18 @@ img.fsplit__media{width:100%;height:auto;object-fit:cover;display:block}
 img.fsplit__media--dark{display:none}
 :root[data-theme=dark] img.fsplit__media--light{display:none}
 :root[data-theme=dark] img.fsplit__media--dark{display:block}
+/* Icons hero: lavender grid of copy-to-clipboard icons + View library link (Figma 197:7773) */
+.cgig{--cgig-line:#e7e8e8;position:relative;display:flex;align-items:center;justify-content:center;min-height:340px;padding:72px 32px;background-color:#f8f6fe;background-image:linear-gradient(var(--cgig-line) 1px,transparent 1px),linear-gradient(90deg,var(--cgig-line) 1px,transparent 1px);background-size:88px 88px;background-position:center;border:1px solid var(--border-default);border-radius:16px;overflow:hidden}
+:root[data-theme=dark] .cgig{--cgig-line:var(--neutral-800);background-color:var(--surface-inset)}
+.cgig__grid{position:relative;display:grid;grid-template-columns:repeat(3,88px);grid-auto-rows:88px;color:var(--primary)}
+.cgig__cell{position:relative;display:grid;place-items:center;width:88px;height:88px;padding:0;border:0;background:transparent;color:var(--primary);cursor:pointer;transition:background var(--dur-fast) var(--ease)}
+.cgig__cell:hover{background:rgba(98,38,251,.06)}
+:root[data-theme=dark] .cgig__cell:hover{background:rgba(139,124,246,.12)}
+.cgig__icon{display:block}
+.cgig__icon svg{display:block;width:44px;height:44px}
+.cgig__hint{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);font:500 9px/1 var(--font-label);letter-spacing:.6px;text-transform:uppercase;color:var(--primary);white-space:nowrap;opacity:0;transition:opacity var(--dur-fast) var(--ease);pointer-events:none}
+.cgig__cell:hover .cgig__hint,.cgig__cell:focus-visible .cgig__hint,.cgig__cell--copied .cgig__hint{opacity:1}
+.cgig__cta{position:absolute;top:16px;right:16px}
 /* Template card: image + ink scrim + centered "Open template" button (Figma 195:7208) */
 .fsplit__medialink{position:relative;display:block;border:1px solid var(--border-default);text-decoration:none}
 .fsplit__medialink>img{display:block;width:100%;height:auto;object-fit:cover}

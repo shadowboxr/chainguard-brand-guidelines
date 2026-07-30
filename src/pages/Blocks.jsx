@@ -15,6 +15,7 @@ import MisuseGrid from "./assets/MisuseGrid.jsx";
 import LogoVariants from "./assets/LogoVariants.jsx";
 import Linky from "./assets/Linky.jsx";
 import IconContainer from "./assets/IconContainer.jsx";
+import IconGrid from "./assets/IconGrid.jsx";
 import ProductLogos from "./assets/ProductLogos.jsx";
 import StarIcon from "../components/StarIcon.jsx";
 import TemplateButton from "./assets/TemplateButton.jsx";
@@ -58,6 +59,8 @@ export default function Blocks({ blocks }) {
           </div>
         ) : block.type === "iconcontainer" ? (
           <IconContainer key={i} />
+        ) : block.type === "icongrid" ? (
+          <IconGrid key={i} />
         ) : block.type === "media" ? (
           block.src ? (
             <img className="cxmedia" src={block.src} alt={block.alt || ""} key={i} />
