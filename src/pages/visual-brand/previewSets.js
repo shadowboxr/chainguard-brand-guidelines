@@ -14,8 +14,8 @@ import dia3Light from "../../assets/diagram/dia-3-light.svg";
 import dia3Dark from "../../assets/diagram/dia-3-dark.svg";
 
 export const SIMPLIFIED = [
-  { light: sim1Light, dark: sim1Dark, alt: "Simplified illustration example 1" },
   { light: sim2Light, dark: sim2Dark, alt: "Simplified illustration example 2" },
+  { light: sim1Light, dark: sim1Dark, alt: "Simplified illustration example 1" },
   { light: sim3Light, dark: sim3Dark, alt: "Simplified illustration example 3" },
 ];
 
