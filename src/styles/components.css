@@ -167,9 +167,9 @@
 .fsplit__desc{margin:0;font:400 14px/1.5 var(--font-body);color:var(--text-secondary);text-wrap:pretty}
 .fsplit__media{aspect-ratio:16/9;background:var(--surface-inset);border:1px solid var(--border-default);display:grid;place-items:center}
 img.fsplit__media{width:100%;height:auto;object-fit:cover;display:block}
-.fsplit__media--dark{display:none}
-:root[data-theme=dark] .fsplit__media--light{display:none}
-:root[data-theme=dark] .fsplit__media--dark{display:block}
+img.fsplit__media--dark{display:none}
+:root[data-theme=dark] img.fsplit__media--light{display:none}
+:root[data-theme=dark] img.fsplit__media--dark{display:block}
 /* Template card: image + ink scrim + centered "Open template" button (Figma 195:7208) */
 .fsplit__medialink{position:relative;display:block;border:1px solid var(--border-default);text-decoration:none}
 .fsplit__medialink>img{display:block;width:100%;height:auto;object-fit:cover}
