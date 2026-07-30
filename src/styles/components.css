@@ -168,7 +168,8 @@ img.fsplit__media{width:100%;height:auto;object-fit:cover;display:block}
 /* Template card: image + ink scrim + centered "Open template" button (Figma 195:7208) */
 .fsplit__medialink{position:relative;display:block;border:1px solid var(--border-default);text-decoration:none}
 .fsplit__medialink>img{display:block;width:100%;height:auto;object-fit:cover}
-.fsplit__scrim{position:absolute;inset:0;background:rgba(13,22,28,.4)}
+.fsplit__scrim{position:absolute;inset:0;background:rgba(13,22,28,.2);transition:background var(--dur-med) var(--ease)}
+.fsplit__medialink:hover .fsplit__scrim{background:rgba(13,22,28,.4)}
 .tmplbtn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);display:inline-flex;align-items:center}
 .tmplbtn__icon{display:grid;place-items:center;width:26px;height:26px;background:var(--surface-card);border:1px solid var(--border-default)}
 .tmplbtn__icon>img{display:block;width:15px;height:15px}
