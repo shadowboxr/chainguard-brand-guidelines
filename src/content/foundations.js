@@ -1,3 +1,10 @@
+import builders1 from "../assets/foundation/builders-1.png";
+import builders2 from "../assets/foundation/builders-2.png";
+import clarity1 from "../assets/foundation/clarity-1.png";
+import clarity2 from "../assets/foundation/clarity-2.png";
+import intent1 from "../assets/foundation/intent-1.png";
+import intent2 from "../assets/foundation/intent-2.png";
+
 export const SECTIONS = [
   {
     id: "about-chainguard",
@@ -63,9 +70,30 @@ export const SECTIONS = [
       {
         type: "valuecards",
         items: [
-          { term: "For builders", desc: "Our visual brand and many of our design elements are inspired by the idea of building, and our audience of builders. From our colorful building blocks and visible grid system, to our cursor element and terminal-inspired designs." },
-          { term: "Clarity > everything", desc: "We serve a very technical audience, who value clarity over “fluff”. We approach all of our brand creative work with clarity, hierarchy, and technical accuracy." },
-          { term: "With intent", desc: "Our brand system allows for some flexibility and expression, but we always use color and elements with intent. We use restraint with our colors and building blocks, always sure our message remains clear." },
+          {
+            term: "For builders",
+            desc: "Our visual brand and many of our design elements are inspired by the idea of building, and our audience of builders. From our colorful building blocks and visible grid system, to our cursor element and terminal-inspired designs.",
+            imgs: [
+              { src: builders1, alt: "Announcing Chainguard’s Series D" },
+              { src: builders2, alt: "286 malicious versions" },
+            ],
+          },
+          {
+            term: "Clarity > everything",
+            desc: "We serve a very technical audience, who value clarity over “fluff”. We approach all of our brand creative work with clarity, hierarchy, and technical accuracy.",
+            imgs: [
+              { src: clarity1, alt: "This sh*t is hard — vulnerability scanner integration" },
+              { src: clarity2, alt: "Growing up the hard way" },
+            ],
+          },
+          {
+            term: "With intent",
+            desc: "Our brand system allows for some flexibility and expression, but we always use color and elements with intent. We use restraint with our colors and building blocks, always sure our message remains clear.",
+            imgs: [
+              { src: intent1, alt: "Pixelated Pantheon illustration" },
+              { src: intent2, alt: "Available in open beta" },
+            ],
+          },
         ],
       },
     ],

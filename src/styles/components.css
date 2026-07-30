@@ -52,6 +52,7 @@
 .fvalue__desc{font:400 var(--fs-3xs) / 1.6 var(--font-body);color:var(--text-secondary);text-wrap:pretty;margin:0}
 .fvalue__media{gap:var(--sp-6);grid-template-columns:repeat(2,minmax(0,1fr));display:grid}
 .fvalue__img{aspect-ratio:16/9;background:var(--surface-inset);border:1px solid var(--border-default)}
+img.fvalue__img{aspect-ratio:auto;width:100%;height:auto;object-fit:cover;display:block}
 .fcards{gap:var(--sp-8);grid-template-columns:repeat(2,minmax(0,1fr));display:grid}
 .fcard{gap:var(--sp-4);flex-direction:column;display:flex}
 .fcard__img{aspect-ratio:16/9;background:var(--surface-inset);border:1px solid var(--border-default)}

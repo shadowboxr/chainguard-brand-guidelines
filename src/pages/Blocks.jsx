@@ -201,8 +201,13 @@ export default function Blocks({ blocks }) {
                   <p className="fvalue__desc">{item.desc}</p>
                 </div>
                 <div className="fvalue__media">
-                  <div className="fvalue__img" />
-                  <div className="fvalue__img" />
+                  {(item.imgs || [null, null]).map((img, m) =>
+                    img ? (
+                      <img className="fvalue__img" src={img.src} alt={img.alt || ""} key={m} />
+                    ) : (
+                      <div className="fvalue__img" key={m} />
+                    )
+                  )}
                 </div>
               </div>
             ))}
