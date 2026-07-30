@@ -165,6 +165,15 @@
 .fsplit__desc{margin:0;font:400 14px/1.5 var(--font-body);color:var(--text-secondary);text-wrap:pretty}
 .fsplit__media{aspect-ratio:16/9;background:var(--surface-inset);border:1px solid var(--border-default);display:grid;place-items:center}
 img.fsplit__media{width:100%;height:auto;object-fit:cover;display:block}
+/* Template card: image + ink scrim + centered "Open template" button (Figma 195:7208) */
+.fsplit__medialink{position:relative;display:block;border:1px solid var(--border-default);text-decoration:none}
+.fsplit__medialink>img{display:block;width:100%;height:auto;object-fit:cover}
+.fsplit__scrim{position:absolute;inset:0;background:rgba(13,22,28,.4)}
+.tmplbtn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);display:inline-flex;align-items:center}
+.tmplbtn__icon{display:grid;place-items:center;width:26px;height:26px;background:var(--surface-card);border:1px solid var(--border-default)}
+.tmplbtn__icon>img{display:block;width:15px;height:15px}
+.tmplbtn__label{display:inline-flex;align-items:center;height:26px;margin-left:-1px;padding:0 8.5px;background:var(--surface-card);border:1px solid var(--border-default);font:500 14px/1 var(--font-label);letter-spacing:.84px;text-transform:uppercase;color:var(--text-primary);white-space:nowrap}
+.fsplit__medialink:hover .tmplbtn__label,.fsplit__medialink:hover .tmplbtn__icon{background:var(--surface-inset)}
 .fsplit__list{margin:0;padding-left:1.15em;display:flex;flex-direction:column;gap:var(--sp-2);font:400 16px/1.6 var(--font-body);color:var(--text-secondary)}
 .fsplit__list li{text-wrap:pretty}
 /* Print rows: the example slider wraps to its own line spanning the full main

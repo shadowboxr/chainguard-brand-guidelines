@@ -179,6 +179,7 @@ const TEMPLATES = {
               media: true,
               src: googleSlides,
               alt: "Chainguard Google Slides template overview",
+              href: "https://docs.google.com/presentation/d/1msFvkxP443RnwrJA1YwafwXLI1CQSdCK9PRf8_bahlA/edit",
             },
             {
               label: "Google Docs",
@@ -186,6 +187,7 @@ const TEMPLATES = {
               media: true,
               src: googleDocs,
               alt: "Chainguard Google Docs template",
+              href: "https://docs.google.com/document/d/1dAEdP6BiHHMPNAln-vf61LR1L7adzOykWCMujhB9X7s/edit?tab=t.0#heading=h.6ujswrkefrxa",
             },
           ],
         },

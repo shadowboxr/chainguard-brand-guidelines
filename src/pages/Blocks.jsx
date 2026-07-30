@@ -16,6 +16,7 @@ import Linky from "./assets/Linky.jsx";
 import IconContainer from "./assets/IconContainer.jsx";
 import ProductLogos from "./assets/ProductLogos.jsx";
 import StarIcon from "../components/StarIcon.jsx";
+import driveIcon from "../assets/templates/google-drive.svg";
 
 export default function Blocks({ blocks }) {
   return (
@@ -78,7 +79,25 @@ export default function Blocks({ blocks }) {
                 <div className="fsplit__main">
                   {r.media ? (
                     r.src ? (
-                      <img className="fsplit__media" src={r.src} alt={r.alt || ""} />
+                      r.href ? (
+                        <a
+                          className="fsplit__medialink"
+                          href={r.href}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          <img src={r.src} alt={r.alt || ""} />
+                          <span className="fsplit__scrim" aria-hidden="true" />
+                          <span className="tmplbtn">
+                            <span className="tmplbtn__icon">
+                              <img src={driveIcon} alt="" />
+                            </span>
+                            <span className="tmplbtn__label">Open template</span>
+                          </span>
+                        </a>
+                      ) : (
+                        <img className="fsplit__media" src={r.src} alt={r.alt || ""} />
+                      )
                     ) : (
                       <div className="fsplit__media" />
                     )
