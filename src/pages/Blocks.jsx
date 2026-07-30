@@ -148,7 +148,11 @@ export default function Blocks({ blocks }) {
             <div className="fcards">
               {block.items.map((item) => (
                 <div className="fcard" key={item.term}>
-                  <div className="fcard__img" />
+                  {item.img ? (
+                    <img className="fcard__img" src={item.img.src} alt={item.img.alt || ""} />
+                  ) : (
+                    <div className="fcard__img" />
+                  )}
                   <div className="fcard__text">
                     <span className="fcard__term">{item.term}</span>
                     <p className="fcard__desc">{item.desc}</p>

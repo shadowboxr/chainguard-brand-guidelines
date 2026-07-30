@@ -4,6 +4,10 @@ import clarity1 from "../assets/foundation/clarity-1.png";
 import clarity2 from "../assets/foundation/clarity-2.png";
 import intent1 from "../assets/foundation/intent-1.png";
 import intent2 from "../assets/foundation/intent-2.png";
+import voiceConfident from "../assets/foundation/voice-confident.png";
+import voiceQuirky from "../assets/foundation/voice-quirky.png";
+import voiceEmpowering from "../assets/foundation/voice-empowering.png";
+import voiceBuiltByEngineers from "../assets/foundation/voice-built-by-engineers.png";
 
 export const SECTIONS = [
   {
@@ -31,10 +35,10 @@ export const SECTIONS = [
             type: "cards",
             lead: "We consider our voice to be:",
             items: [
-              { term: "Confident", desc: "We write with clarity and authority, grounded in our deep expertise – never boastful, but always sure of the value we provide." },
-              { term: "Quirky", desc: "We let our individuality show with wit, humor, and not taking ourselves too seriously, keeping our content fresh and human." },
-              { term: "Empowering", desc: "We focus on lifting up engineering and security teams, giving them the knowledge and resources to build faster and better, so they can do their most meaningful work." },
-              { term: "Built by engineers, for engineers", desc: "Our voice reflects real-world experience. We are practical and straightforward, a trusted peer who’s been there with you before." },
+              { term: "Confident", desc: "We write with clarity and authority, grounded in our deep expertise – never boastful, but always sure of the value we provide.", img: { src: voiceConfident, alt: "Confident" } },
+              { term: "Quirky", desc: "We let our individuality show with wit, humor, and not taking ourselves too seriously, keeping our content fresh and human.", img: { src: voiceQuirky, alt: "Quirky" } },
+              { term: "Empowering", desc: "We focus on lifting up engineering and security teams, giving them the knowledge and resources to build faster and better, so they can do their most meaningful work.", img: { src: voiceEmpowering, alt: "Empowering" } },
+              { term: "Built by engineers, for engineers", desc: "Our voice reflects real-world experience. We are practical and straightforward, a trusted peer who’s been there with you before.", img: { src: voiceBuiltByEngineers, alt: "Built by engineers, for engineers" } },
             ],
           },
         ],
