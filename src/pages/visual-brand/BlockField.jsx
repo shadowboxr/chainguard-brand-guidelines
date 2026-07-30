@@ -106,12 +106,56 @@ function Dropdown({ value, options, onPick, onOpen }) {
   );
 }
 
-export default function BlockField({ autoCycle = false, grid = false, densitySlider = false }) {
+// Serialize the live field into a standalone SVG string. Reads the resolved
+// swatch/background/gridline colors off the rendered element so the export
+// matches whatever theme is on screen. Blocks are drawn over the gridlines,
+// so filled cells hide the grid beneath them just like the on-screen demo.
+const CELL = 24;
+function fieldToSvg(el, cells, cols, grid) {
+  const cs = getComputedStyle(el);
+  const swatch = (tok) => cs.getPropertyValue(`--bb-${tok}`).trim() || "#000";
+  const bg = cs.backgroundColor;
+  let line = "transparent";
+  if (grid) {
+    const probe = document.createElement("div");
+    probe.style.color = "var(--border-default)";
+    el.appendChild(probe);
+    line = getComputedStyle(probe).color;
+    probe.remove();
+  }
+  const size = cols * CELL;
+  let lines = "";
+  if (grid) {
+    for (let k = 1; k < cols; k++) {
+      const p = k * CELL;
+      lines += `<line x1="${p}" y1="0" x2="${p}" y2="${size}" stroke="${line}"/>`;
+      lines += `<line x1="0" y1="${p}" x2="${size}" y2="${p}" stroke="${line}"/>`;
+    }
+  }
+  let rects = "";
+  cells.forEach((t, i) => {
+    if (!t) return;
+    const x = (i % cols) * CELL;
+    const y = Math.floor(i / cols) * CELL;
+    rects += `<rect x="${x}" y="${y}" width="${CELL}" height="${CELL}" fill="${swatch(t)}"/>`;
+  });
+  return (
+    `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" fill="none" xmlns="http://www.w3.org/2000/svg">` +
+    `<rect width="${size}" height="${size}" fill="${bg}"/>` +
+    (grid ? `<g stroke-width="1">${lines}</g>` : "") +
+    rects +
+    `</svg>`
+  );
+}
+
+export default function BlockField({ autoCycle = false, grid = false, densitySlider = false, copySvg = false }) {
   const [sizeIdx, setSizeIdx] = useState(0);
   const [active, setActive] = useState({ blurple: true, fuchsia: false, aqua: false });
   const [coreOnly, setCoreOnly] = useState(false);
   const [density, setDensity] = useState(50);
   const [base, setBase] = useState({ tokens: [], rank: [] });
+  const [copied, setCopied] = useState(false);
+  const fieldRef = useRef(null);
   const cols = SIZES[sizeIdx].cols;
   const count = cols * cols;
 
@@ -173,6 +217,12 @@ export default function BlockField({ autoCycle = false, grid = false, densitySli
 
   const toggle = (key) => { interact(); setActive((a) => ({ ...a, [key]: !a[key] })); };
   const shuffle = () => { interact(); regenBase(); };
+  const copyField = () => {
+    if (!fieldRef.current) return;
+    navigator.clipboard?.writeText(fieldToSvg(fieldRef.current, cells, cols, grid));
+    setCopied(true);
+    window.setTimeout(() => setCopied(false), 1400);
+  };
 
   // Controls are defined once and rendered twice: in the desktop overlay bars
   // and in the mobile OptionsSheet. Each usage renders its own instance, but the
@@ -185,6 +235,9 @@ export default function BlockField({ autoCycle = false, grid = false, densitySli
     </label>
   ) : null;
   const shuffleBtn = <button type="button" className="bb-btn" onClick={shuffle}>Shuffle</button>;
+  const copyBtn = copySvg ? (
+    <button type="button" className="bb-btn" onClick={copyField}>{copied ? "Copied" : "Copy SVG"}</button>
+  ) : null;
   const hueToggles = HUES.map((h) => {
     const on = active[h.key];
     return (
@@ -202,7 +255,7 @@ export default function BlockField({ autoCycle = false, grid = false, densitySli
   );
 
   return (
-    <div className={"bblocks" + (grid ? " bblocks--grid" : "")} style={grid ? { "--bb-cell": 100 / cols + "%" } : undefined}>
+    <div ref={fieldRef} className={"bblocks" + (grid ? " bblocks--grid" : "")} style={grid ? { "--bb-cell": 100 / cols + "%" } : undefined}>
       <div className="bblocks__grid" style={{ gridTemplateColumns: `repeat(${cols},1fr)`, gridTemplateRows: `repeat(${cols},1fr)` }}>
         {cells.map((t, i) => (
           <div key={i} className="bb-cell" style={{ background: t ? `var(--bb-${t})` : "transparent" }} />
@@ -215,7 +268,10 @@ export default function BlockField({ autoCycle = false, grid = false, densitySli
           {sizeDrop}
           {densityCtrl}
         </div>
-        {shuffleBtn}
+        <div className="bblocks__topright">
+          {copyBtn}
+          {shuffleBtn}
+        </div>
       </div>
 
       <div className="bblocks__bottom">
@@ -237,7 +293,7 @@ export default function BlockField({ autoCycle = false, grid = false, densitySli
             {coreToggle}
           </div>
         </div>
-        <div className="osheet__field osheet__field--wide">{shuffleBtn}</div>
+        <div className="osheet__field osheet__field--wide">{copyBtn}{shuffleBtn}</div>
       </OptionsSheet>
     </div>
   );
