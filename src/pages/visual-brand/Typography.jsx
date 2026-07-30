@@ -8,6 +8,24 @@ import Alignment from "./Alignment.jsx";
 import Capitalization from "./Capitalization.jsx";
 import OptionsSheet from "./OptionsSheet.jsx";
 import StarIcon from "../../components/StarIcon.jsx";
+import gellixIrl1 from "../../assets/type/gellix-1.jpg";
+import gellixIrl2 from "../../assets/type/gellix-2.jpg";
+import gellixIrl3 from "../../assets/type/gellix-3.jpg";
+import roobertIrl1 from "../../assets/type/roobert-1.jpg";
+import roobertIrl2 from "../../assets/type/roobert-2.jpg";
+import roobertIrl3 from "../../assets/type/roobert-3.jpg";
+
+// Gellix / Roobert "in real life" examples (ordered per the file names).
+const GELLIX_IRL = [
+  { src: gellixIrl1, alt: "Gellix on Chainguard wheatpaste posters" },
+  { src: gellixIrl2, alt: "Gellix on a Chainguard magazine ad" },
+  { src: gellixIrl3, alt: "Gellix on a Chainguard billboard" },
+];
+const ROOBERT_IRL = [
+  { src: roobertIrl1, alt: "Roobert SemiMono on a Chainguard billboard" },
+  { src: roobertIrl2, alt: "Roobert SemiMono in a Chainguard newspaper ad" },
+  { src: roobertIrl3, alt: "Roobert SemiMono on a Chainguard tote" },
+];
 
 const FN = { gellix: "Gellix", poppins: "Poppins", roobert: "Roobert SemiMono", robotomono: "Roboto Mono" };
 
@@ -310,7 +328,7 @@ export default function Typography() {
           </div>
         </div>
         <h4 className="tirl__title">Gellix IRL</h4>
-        <Carousel />
+        <Carousel images={GELLIX_IRL} />
 
         {/* Roobert SemiMono — 64px break separates it from the Gellix group */}
         <div className="tcard tcard--group">
@@ -328,7 +346,7 @@ export default function Typography() {
           </div>
         </div>
         <h4 className="tirl__title">Roobert SemiMono IRL</h4>
-        <Carousel />
+        <Carousel images={ROOBERT_IRL} />
       </section>
       <XSec id="hierarchy" title="Hierarchy" intro="Our bold, modern primary typeface is an important and recognizable element of our brand system. We use Gellix Bold at scale to display headlines with impact and personality, supported by smaller Gellix Regular for body copy.">
         <div className="cpal-note">
