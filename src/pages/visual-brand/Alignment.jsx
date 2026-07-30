@@ -14,9 +14,9 @@ const SPECIMEN = (
         <span className="talign__cursor" />
       </div>
       <h4 className="talign__heading">
-        Build safely
+        The trusted source
         <br />
-        with AI
+        for open source
       </h4>
     </div>
     <p className="talign__body">

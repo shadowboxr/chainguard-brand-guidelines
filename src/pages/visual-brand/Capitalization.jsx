@@ -22,7 +22,7 @@ export default function Capitalization() {
     <div className="tcap" aria-hidden="true">
       <Screen n="1" cat="Headings" rule="Sentence case">
         <h4 className="tcap__heading">
-          <span className="tcap__hl">B</span>uild safely with AI
+          <span className="tcap__hl">T</span>he trusted source<br />for open source
         </h4>
       </Screen>
       <Screen n="2" cat="Body" rule="Sentence case">

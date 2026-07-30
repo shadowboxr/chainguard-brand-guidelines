@@ -14,7 +14,7 @@ export default function Hierarchy() {
         <span className="thier__brand">Chainguard</span>
         <span className="thier__cursor" aria-hidden="true" />
       </div>
-      <h4 className="thier__heading">Build safely with AI</h4>
+      <h4 className="thier__heading">The trusted source<br />for open source</h4>
       <p className="thier__body">We believe in a world where engineering teams can build at machine speed, confident that every line of code is hardened, trusted, and ready for production.</p>
 
       <div className="thier__lbl thier__lbl--e"><span className="thier__lbl-k">Eyebrow:</span> Roobert Semimono</div>
