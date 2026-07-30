@@ -90,7 +90,7 @@ export default function Blocks({ blocks }) {
             ))}
           </div>
         ) : block.type === "p" ? (
-          <p className="ftext" key={i}>
+          <p className={"ftext" + (block.lead ? " ftext--lead" : "")} key={i}>
             {block.text}
           </p>
         ) : block.type === "cards" ? (

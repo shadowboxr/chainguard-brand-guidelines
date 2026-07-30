@@ -169,7 +169,7 @@ const TEMPLATES = {
         },
 
         { type: "subhead", id: "google-workspace", label: "Google Workspace" },
-        { type: "p", text: "Branded templates for the documents and decks we create every day." },
+        { type: "p", text: "Branded templates for the documents and decks we create every day.", lead: true },
         {
           type: "split",
           rows: [
@@ -191,7 +191,7 @@ const TEMPLATES = {
         },
 
         { type: "subhead", id: "claude", label: "Claude" },
-        { type: "p", text: "Generative tools to speed up on-brand work in Claude." },
+        { type: "p", text: "Generative tools to speed up on-brand work in Claude.", lead: true },
         {
           type: "split",
           rows: [

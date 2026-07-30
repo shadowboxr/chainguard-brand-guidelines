@@ -359,6 +359,7 @@ img.fsplit__media{width:100%;height:auto;object-fit:cover;display:block}
 .cpal-h3.fanchor{margin-bottom:0}
 .fblocks>.cpal-h3.fanchor{margin-top:var(--sp-6)}
 .fblocks>.cpal-h3.fanchor:first-child{margin-top:0}
+.ftext--lead{padding-bottom:var(--sp-4)}
 
 /* Accessibility contrast checker */
 .cc{display:flex;flex-direction:column;gap:var(--sp-8);margin-top:var(--sp-4);padding:var(--sp-6) var(--sp-6) 0;background:var(--surface-inset);border:1px solid var(--border-default)}
