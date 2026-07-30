@@ -60,9 +60,8 @@ export default function DataVizTool() {
 
   return (
     <div className="dvtool">
-      <div className="dvtool__bar">
-        <div className="ttoggle dvtool__toggle" role="radiogroup" aria-label="Preview theme">
-          <span className="ttoggle__slider" style={{ "--i": idx }} aria-hidden="true" />
+      <div className="ttoggle dvtool__toggle" role="radiogroup" aria-label="Preview theme">
+        <span className="ttoggle__slider" style={{ "--i": idx }} aria-hidden="true" />
           {MODES.map((m) => (
             <button
               key={m.id}
@@ -78,7 +77,6 @@ export default function DataVizTool() {
               <span className="ttoggle__tip" role="tooltip">{m.label}</span>
             </button>
           ))}
-        </div>
       </div>
       <Carousel images={images} full />
     </div>
