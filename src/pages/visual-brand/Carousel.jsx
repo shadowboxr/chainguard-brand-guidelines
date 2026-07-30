@@ -7,9 +7,12 @@ const NAV = (
   </svg>
 );
 
-const SLIDES = [0, 1, 2, 3, 4, 5];
+const PLACEHOLDERS = [0, 1, 2, 3, 4, 5];
 
-export default function Carousel() {
+// `images` (optional): array of { src, alt } — renders real image slides at the
+// same height as the placeholders (natural width). Omit for placeholder slides.
+export default function Carousel({ images }) {
+  const SLIDES = images && images.length ? images : PLACEHOLDERS;
   const viewRef = useRef(null);
   const trackRef = useRef(null);
   const [idx, setIdx] = useState(0);
@@ -106,8 +109,10 @@ export default function Carousel() {
         onPointerCancel={onPointerUp}
       >
         <div className="tirl__track" ref={trackRef}>
-          {SLIDES.map((i) => (
-            <div className="tirl__slide" key={i} />
+          {SLIDES.map((s, i) => (
+            <div className={"tirl__slide" + (images ? " tirl__slide--img" : "")} key={i}>
+              {images ? <img className="tirl__img" src={s.src} alt={s.alt || ""} draggable="false" /> : null}
+            </div>
           ))}
         </div>
       </div>
@@ -122,7 +127,7 @@ export default function Carousel() {
           {NAV}
         </button>
         <div className="tirl__dots">
-          {SLIDES.map((i) => (
+          {SLIDES.map((s, i) => (
             <button
               type="button"
               className={"tirl__dot" + (i === idx ? " is-on" : "")}

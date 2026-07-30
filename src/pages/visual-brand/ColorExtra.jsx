@@ -4,6 +4,16 @@ import ContrastChecker from "./ContrastChecker.jsx";
 import ColorThemeBars from "./ColorThemeBars.jsx";
 import ColorThemeMono from "./ColorThemeMono.jsx";
 import ColorThemeBlurple from "./ColorThemeBlurple.jsx";
+import boothAvoid1 from "../../assets/booth/booth-avoid-1.png";
+import boothAvoid2 from "../../assets/booth/booth-avoid-2.png";
+import boothAvoid3 from "../../assets/booth/booth-avoid-3.png";
+
+// Booth examples to avoid — off-brand third-party booths (non-Chainguard).
+const AVOID_BOOTHS = [
+  { src: boothAvoid1, alt: "Cluttered booth with heavy text and low contrast" },
+  { src: boothAvoid2, alt: "Generic booth with weak brand presence" },
+  { src: boothAvoid3, alt: "Off-brand booth with mismatched styling" },
+];
 
 function TRow({ label, desc, media }) {
   return (
@@ -19,7 +29,7 @@ function TRow({ label, desc, media }) {
   );
 }
 
-function PRow({ label, items }) {
+function PRow({ label, items, images }) {
   return (
     <div className="fsplit__row fsplit__row--print">
       <div className="fsplit__side">
@@ -32,7 +42,7 @@ function PRow({ label, items }) {
           ))}
         </ul>
       </div>
-      <Carousel />
+      <Carousel images={images} />
     </div>
   );
 }
@@ -71,7 +81,7 @@ export default function ColorExtra() {
         <p className="cxintro">Our colors are optimized for digital, so please use the following guidelines to ensure consistency in print applications.</p>
         <div className="fsplit">
           <PRow label="Recommended" items={["Use Pantone colors whenever possible. If Pantone printing is not available, use the approved CMYK values.", "Print on black or dark backgrounds whenever possible to help the brand colors appear more vibrant.", "For vinyl applications, prioritize Pantone printing. This has produced the most consistent color results with vendors."]} />
-          <PRow label="Avoid" items={["Avoid printing on fabric when possible, as color reproduction can be less consistent.", "Do not combine fabric and vinyl graphics within the same space unless the colors can be closely matched, as differences will be more noticeable side by side.", "For swag, use a black or white base when the item color cannot be accurately matched to an approved Pantone."]} />
+          <PRow label="Avoid" images={AVOID_BOOTHS} items={["Avoid printing on fabric when possible, as color reproduction can be less consistent.", "Do not combine fabric and vinyl graphics within the same space unless the colors can be closely matched, as differences will be more noticeable side by side.", "For swag, use a black or white base when the item color cannot be accurately matched to an approved Pantone."]} />
         </div>
       </section>
       <section className="cxsec">
