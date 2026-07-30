@@ -46,8 +46,10 @@ export default function IntroSequence({ onLanded, onContent }) {
     });
     // Fill locks onto the hero → swap it out and draw the frame.
     at(1500 + 740, () => cbRef.current.onLanded?.());
-    // Frame has drawn → trigger the content cascade.
-    at(1500 + 740 + 560, () => cbRef.current.onContent?.());
+    // Trigger the content cascade right after lock (a hair after onLanded). Its
+    // own leading ramp means the first item lands as the horizontal frame line
+    // finishes — no need to wait for the whole frame to paint.
+    at(1500 + 740 + 40, () => cbRef.current.onContent?.());
 
     return () => {
       timers.current.forEach(clearTimeout);
