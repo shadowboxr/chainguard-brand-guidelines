@@ -115,7 +115,7 @@ export default function Carousel({ images, strike }) {
               {images ? <img className="tirl__img" src={s.src} alt={s.alt || ""} draggable="false" /> : null}
               {images && strike ? (
                 <svg className="tirl__strike" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-                  <line x1="0" y1="0" x2="100" y2="100" stroke="var(--solar-500)" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
+                  <line x1="0" y1="0" x2="100" y2="100" stroke="var(--solar-500)" strokeWidth="3.5" vectorEffect="non-scaling-stroke" />
                 </svg>
               ) : null}
             </div>
