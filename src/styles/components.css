@@ -918,10 +918,10 @@ img.fsplit__media--dark{display:none}
 :root[data-intro=reveal] .hub-support .hub-section__head,
 :root[data-intro=reveal] .hub-support__card{animation:hubItemIn .55s var(--ease-out) both}
 
-/* Hero text comes in as the fill lands on the hero block (~.74s into the
-   shrink), title first then the lede. */
-:root[data-intro=reveal] .hub-title{animation-delay:.72s;animation-duration:.4s}
-:root[data-intro=reveal] .hub-lede{animation-delay:.86s;animation-duration:.45s}
+/* Hero text comes in as the fill lands on the hero block, title first then the
+   lede — kept snappy so the blurple-box copy lands fast. */
+:root[data-intro=reveal] .hub-title{animation-delay:.3s;animation-duration:.24s}
+:root[data-intro=reveal] .hub-lede{animation-delay:.4s;animation-duration:.26s}
 /* Then the nav — sidebar brand, then each item. */
 :root[data-intro=reveal] .sidebar__brand{animation-delay:.44s}
 :root[data-intro=reveal] .sidebar__sections>.nav-group:nth-child(1){animation-delay:.54s}
