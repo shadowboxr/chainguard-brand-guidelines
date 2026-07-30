@@ -139,7 +139,7 @@ const ILLUSTRATIONS = {
           type: "p",
           text: "The terminal is a signature Chainguard motif — a direct nod to the engineers we build for. Use it to ground technical stories.",
         },
-        { type: "media" },
+        { type: "terminal" },
 
         { type: "subhead", id: "diagrams", label: "Diagrams" },
         {

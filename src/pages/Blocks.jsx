@@ -8,6 +8,7 @@ import DataViz from "./visual-brand/DataViz.jsx";
 import DataVizTool from "./visual-brand/DataVizTool.jsx";
 import { SIMPLIFIED, DIAGRAMS } from "./visual-brand/previewSets.js";
 import Carousel from "./visual-brand/Carousel.jsx";
+import Terminal from "./visual-brand/Terminal.jsx";
 
 const DV_SETS = { simplified: SIMPLIFIED, diagrams: DIAGRAMS };
 import MisuseGrid from "./assets/MisuseGrid.jsx";
@@ -43,6 +44,8 @@ export default function Blocks({ blocks }) {
           <ProductLogos key={i} />
         ) : block.type === "carousel" ? (
           block.tool === "dataviz" ? <DataVizTool key={i} examples={DV_SETS[block.set]} /> : <Carousel key={i} />
+        ) : block.type === "terminal" ? (
+          <Terminal key={i} />
         ) : block.type === "subhead" ? (
           <h3 className={"cpal-h3 fanchor" + (block.icon ? " cpal-h3--icon" : "")} id={block.id} key={i}>
             {block.icon && <img className="cpal-h3__icon" src={block.icon} alt="" />}
