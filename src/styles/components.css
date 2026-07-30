@@ -104,6 +104,8 @@
 .cpal-sw.is-dark .cpal-row:hover{background:rgba(0,0,0,.1)}
 .cpal-body{display:flex;flex-direction:column}
 .cpal-h3{margin:0 0 var(--sp-8);font:700 32px/1.2 var(--font-title);letter-spacing:-.96px;color:var(--text-primary)}
+.cpal-h3--icon{display:flex;align-items:center;gap:var(--sp-4)}
+.cpal-h3__icon{flex:none;height:32px;width:auto;display:block}
 .cpal-cats{display:flex;flex-direction:column;gap:var(--sp-5)}
 .cpal-cat{display:flex;flex-direction:column;gap:var(--sp-6);padding:var(--sp-6);background:var(--surface-card);border:1px solid var(--border-default)}
 .cpal-cat__head{display:flex;align-items:center;justify-content:space-between;gap:var(--sp-4)}
@@ -170,10 +172,13 @@ img.fsplit__media{width:100%;height:auto;object-fit:cover;display:block}
 .fsplit__medialink>img{display:block;width:100%;height:auto;object-fit:cover}
 .fsplit__scrim{position:absolute;inset:0;background:rgba(13,22,28,.1);transition:background var(--dur-med) var(--ease)}
 .fsplit__medialink:hover .fsplit__scrim{background:rgba(13,22,28,.4)}
-.tmplbtn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);display:inline-flex;align-items:center}
+.tmplbtn{display:inline-flex;align-items:center;padding:0;border:0;background:none;font:inherit;text-decoration:none;cursor:pointer}
 .tmplbtn__icon{display:grid;place-items:center;width:26px;height:26px;background:var(--surface-card);border:1px solid var(--border-default)}
 .tmplbtn__icon>img{display:block;width:15px;height:15px}
-.tmplbtn__label{display:inline-flex;align-items:center;height:26px;margin-left:-1px;padding:0 8.5px;background:var(--surface-card);border:1px solid var(--border-default);font:500 14px/1 var(--font-label);letter-spacing:.84px;text-transform:uppercase;color:var(--text-primary);white-space:nowrap}
+.tmplbtn__label{display:inline-flex;align-items:center;height:26px;margin-left:-1px;padding:0 8.5px;background:var(--surface-card);border:1px solid var(--border-default);font:500 14px/1 var(--font-label);letter-spacing:.84px;text-transform:uppercase;color:var(--text-primary);white-space:nowrap;transition:background var(--dur-fast) var(--ease)}
+.tmplbtn:hover .tmplbtn__label,.tmplbtn:hover .tmplbtn__icon{background:var(--surface-inset)}
+/* Overlay variant: centered on the template image, follows the card's hover */
+.fsplit__medialink .tmplbtn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
 .fsplit__medialink:hover .tmplbtn__label,.fsplit__medialink:hover .tmplbtn__icon{background:var(--surface-inset)}
 .fsplit__list{margin:0;padding-left:1.15em;display:flex;flex-direction:column;gap:var(--sp-2);font:400 16px/1.6 var(--font-body);color:var(--text-secondary)}
 .fsplit__list li{text-wrap:pretty}

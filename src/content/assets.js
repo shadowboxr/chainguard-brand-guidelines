@@ -7,6 +7,8 @@
 import partnerLogos from "../assets/partner-logos.svg";
 import googleSlides from "../assets/templates/google-slides.png";
 import googleDocs from "../assets/templates/google-docs.png";
+import driveIcon from "../assets/templates/google-drive.svg";
+import claudeMark from "../assets/templates/claude-mark.svg";
 
 const LOGO = {
   sections: [
@@ -168,7 +170,7 @@ const TEMPLATES = {
           text: "Start from an approved template so everything you make stays on-brand. These cover the tools we reach for most.",
         },
 
-        { type: "subhead", id: "google-workspace", label: "Google Workspace" },
+        { type: "subhead", id: "google-workspace", label: "Google Workspace", icon: driveIcon },
         { type: "p", text: "Branded templates for the documents and decks we create every day.", lead: true },
         {
           type: "split",
@@ -192,7 +194,7 @@ const TEMPLATES = {
           ],
         },
 
-        { type: "subhead", id: "claude", label: "Claude" },
+        { type: "subhead", id: "claude", label: "Claude", icon: claudeMark },
         { type: "p", text: "Generative tools to speed up on-brand work in Claude.", lead: true },
         {
           type: "split",
@@ -200,10 +202,12 @@ const TEMPLATES = {
             {
               label: "/chainguard-slides Skill",
               body: "Use this skill to export directly to Google as Google Slides. Use this as a starting point, always making sure that the slides are built on our template, and logo placement is consistent. Available to the whole org, under “Customize”.",
+              button: { label: "Copy skill", icon: claudeMark, copy: "/chainguard-slides" },
             },
             {
               label: "Claude Design",
               body: "For slide imagery: try the Chainguard Brand Design System (WEB) in Claude Design to create diagrams, workflows, and other imagery aligned to the visual brand. For icons: use go/icons to visit the library and download icons for slides. If an icon you need is not in our library, use the Chainguard Iconography design system in Claude Design.",
+              button: { label: "Open design", icon: claudeMark, href: "https://claude.ai/design" },
             },
           ],
         },

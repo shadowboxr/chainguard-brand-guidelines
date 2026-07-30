@@ -16,6 +16,7 @@ import Linky from "./assets/Linky.jsx";
 import IconContainer from "./assets/IconContainer.jsx";
 import ProductLogos from "./assets/ProductLogos.jsx";
 import StarIcon from "../components/StarIcon.jsx";
+import TemplateButton from "./assets/TemplateButton.jsx";
 import driveIcon from "../assets/templates/google-drive.svg";
 
 export default function Blocks({ blocks }) {
@@ -43,7 +44,8 @@ export default function Blocks({ blocks }) {
         ) : block.type === "carousel" ? (
           block.tool === "dataviz" ? <DataVizTool key={i} examples={DV_SETS[block.set]} /> : <Carousel key={i} />
         ) : block.type === "subhead" ? (
-          <h3 className="cpal-h3 fanchor" id={block.id} key={i}>
+          <h3 className={"cpal-h3 fanchor" + (block.icon ? " cpal-h3--icon" : "")} id={block.id} key={i}>
+            {block.icon && <img className="cpal-h3__icon" src={block.icon} alt="" />}
             {block.label}
           </h3>
         ) : block.type === "note" ? (
@@ -72,9 +74,17 @@ export default function Blocks({ blocks }) {
           <div className="fsplit" key={i}>
             {block.rows.map((r, k) => (
               <div className="fsplit__row" key={k}>
-                <div className={"fsplit__side" + (r.desc ? " fsplit__side--tall" : "")}>
+                <div className={"fsplit__side" + (r.desc || r.button ? " fsplit__side--tall" : "")}>
                   <h4 className="fsplit__label">{r.label}</h4>
                   {r.desc && <p className="fsplit__desc">{r.desc}</p>}
+                  {r.button && (
+                    <TemplateButton
+                      icon={r.button.icon}
+                      label={r.button.label}
+                      href={r.button.href}
+                      copy={r.button.copy}
+                    />
+                  )}
                 </div>
                 <div className="fsplit__main">
                   {r.media ? (
