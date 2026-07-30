@@ -34,18 +34,20 @@ export default function IntroSequence({ onLanded, onContent }) {
   useEffect(() => {
     const at = (ms, fn) => timers.current.push(setTimeout(fn, ms));
 
-    at(1000, () => setFadeLogo(true)); // hold the full fill, then fade the lockup out (.6s)
-    at(1680, () => {
-      // Shrink the full-screen fill down to the hero block.
+    at(850, () => setFadeLogo(true)); // hold the full fill, then fade the lockup out (.6s)
+    at(1500, () => {
+      // Shrink the full-screen fill down to the hero block. Use the exact
+      // (unrounded) rect so the fill matches the real hero — no sub-pixel jump
+      // when it's swapped out.
       const el = document.querySelector(".hub-hero__left");
       const r = el && el.getBoundingClientRect();
-      if (r) setBox({ left: Math.round(r.left), top: Math.round(r.top), width: Math.round(r.width), height: Math.round(r.height) });
+      if (r) setBox({ left: r.left, top: r.top, width: r.width, height: r.height });
       setShrinking(true);
     });
-    // Fill locks onto the hero (+100ms settle) → swap it out and draw the frame.
-    at(1680 + 740 + 100, () => cbRef.current.onLanded?.());
+    // Fill locks onto the hero → swap it out and draw the frame.
+    at(1500 + 740, () => cbRef.current.onLanded?.());
     // Frame has drawn → trigger the content cascade.
-    at(1680 + 740 + 100 + 560, () => cbRef.current.onContent?.());
+    at(1500 + 740 + 560, () => cbRef.current.onContent?.());
 
     return () => {
       timers.current.forEach(clearTimeout);

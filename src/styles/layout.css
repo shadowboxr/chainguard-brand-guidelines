@@ -33,7 +33,7 @@
 :root[data-intro] .sidebar{border-right-color:transparent}
 :root[data-intro] .sidebar__brandrow{border-bottom-color:transparent}
 :root[data-intro] .topbar{border-bottom-color:transparent}
-:root:is([data-intro=frame],[data-intro=reveal]) .cg-frame{display:block;position:absolute;inset:0;z-index:20;pointer-events:none}
+:root:is([data-intro=frame],[data-intro=reveal]) .cg-frame{display:block;position:absolute;inset:0;z-index:2;pointer-events:none}
 /* Lines draw in Border-strong, then settle to Border-default as content reveals. */
 .cg-frame__line{position:absolute;background:var(--border-strong);transition:background-color .45s var(--ease-out)}
 :root[data-intro=reveal] .cg-frame__line{background:var(--border-default)}
@@ -52,7 +52,7 @@
 }
 .layout__sidebar{flex:0 0 var(--sidebar-width);height:100%;position:sticky;top:0}
 .layout__main{background:var(--surface-page);flex:auto;min-width:0;height:100%;overflow:hidden auto}
-.topbar{z-index:10;height:var(--topbar-height);align-items:center;gap:var(--sp-4);padding:0 var(--sp-6);background:color-mix(in srgb, var(--surface-page) 88%, transparent);-webkit-backdrop-filter:saturate(180%)blur(8px);backdrop-filter:saturate(180%)blur(8px);border-bottom:1px solid var(--border-default);display:flex;position:sticky;top:0}
+.topbar{z-index:30;height:var(--topbar-height);align-items:center;gap:var(--sp-4);padding:0 var(--sp-6);background:color-mix(in srgb, var(--surface-page) 88%, transparent);-webkit-backdrop-filter:saturate(180%)blur(8px);backdrop-filter:saturate(180%)blur(8px);border-bottom:1px solid var(--border-default);display:flex;position:sticky;top:0}
 .topbar__spacer{flex:auto}
 .topbar__label{color:var(--text-tertiary);white-space:nowrap;margin-left:var(--sp-2)}
 /* Three-way theme toggle (System / Light / Dark). A blurple indicator slides
