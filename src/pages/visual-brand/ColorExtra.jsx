@@ -14,7 +14,7 @@ import boothGood3 from "../../assets/booth/booth-good-3.jpg";
 // On-brand environments to emulate (Chainguard-owned booth, print, OOH).
 const GOOD_BOOTHS = [
   { src: boothGood3, alt: "Chainguard out-of-home billboard" },
-  { src: boothGood1, alt: "Chainguard booth graphic in production" },
+  { src: boothGood1, alt: "Chainguard “Malwhere? Not here” t-shirt" },
   { src: boothGood2, alt: "Chainguard event booth on the show floor" },
 ];
 // Off-brand third-party booths to avoid (non-Chainguard).
