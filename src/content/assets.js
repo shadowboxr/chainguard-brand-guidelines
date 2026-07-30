@@ -93,7 +93,7 @@ const ICONS = {
         },
         { type: "media" },
 
-        { type: "subhead", id: "custom-icons", label: "Custom icons", icon: claudeMark },
+        { type: "subhead", id: "custom-icons", label: "Custom icons" },
         {
           type: "split",
           rows: [
