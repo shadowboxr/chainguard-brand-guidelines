@@ -90,7 +90,16 @@ export default function Blocks({ blocks }) {
                   )}
                 </div>
                 <div className="fsplit__main">
-                  {r.media ? (
+                  {r.video ? (
+                    <video
+                      className="fsplit__media"
+                      src={r.video}
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                    />
+                  ) : r.media ? (
                     r.src ? (
                       r.href ? (
                         <a
